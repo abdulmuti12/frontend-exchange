@@ -22,6 +22,7 @@ interface UploadedImage {
 interface FormState {
   name: string;
   description: string;
+  price: string;
   category_id: string;
   brand_id: string;
   status: ProductStatus;
@@ -33,6 +34,7 @@ interface FormState {
 const emptyForm: FormState = {
   name: "",
   description: "",
+  price: "",
   category_id: "",
   brand_id: "",
   status: "available",
@@ -123,6 +125,7 @@ export default function AdminProductsPage() {
     setForm({
       name: p.name,
       description: p.description ?? "",
+      price: p.price ? String(p.price) : "",
       category_id: p.category_id ?? p.category?.id ?? "",
       brand_id: p.brand_id ?? p.brand?.id ?? "",
       status: p.status,
@@ -143,6 +146,7 @@ export default function AdminProductsPage() {
         fd.append("_method", "PUT");
         fd.append("name", form.name);
         if (form.description) fd.append("description", form.description);
+        if (form.price) fd.append("price", form.price);
         if (form.category_id) fd.append("category_id", form.category_id);
         if (form.brand_id) fd.append("brand_id", form.brand_id);
         fd.append("status", form.status);
@@ -169,6 +173,7 @@ export default function AdminProductsPage() {
         const fd = new FormData();
         fd.append("name", form.name);
         if (form.description) fd.append("description", form.description);
+        if (form.price) fd.append("price", form.price);
         if (form.category_id) fd.append("category_id", form.category_id);
         if (form.brand_id) fd.append("brand_id", form.brand_id);
         fd.append("status", form.status);
@@ -261,6 +266,7 @@ export default function AdminProductsPage() {
                   <th className="px-4 py-3 font-medium">Nama</th>
                   <th className="px-4 py-3 font-medium">Kategori</th>
                   <th className="px-4 py-3 font-medium">Brand</th>
+                  <th className="px-4 py-3 font-medium">Harga</th>
                   <th className="px-4 py-3 font-medium">Status</th>
                   <th className="px-4 py-3 font-medium text-right">Aksi</th>
                 </tr>
@@ -294,6 +300,9 @@ export default function AdminProductsPage() {
                       </td>
                       <td className="px-4 py-3 text-ink-soft">{p.category?.name ?? "-"}</td>
                       <td className="px-4 py-3 text-ink-soft">{p.brand?.name ?? "-"}</td>
+                      <td className="px-4 py-3 text-ink">
+                        {p.price ? `Rp ${Number(p.price).toLocaleString('id-ID')}` : "—"}
+                      </td>
                       <td className="px-4 py-3">
                         <Stamp label={meta.label} color={meta.color} bg={meta.bg} className="text-[10px]" />
                       </td>
@@ -399,6 +408,16 @@ export default function AdminProductsPage() {
               </option>
             ))}
           </SelectField>
+          <TextField
+            label="Harga (opsional)"
+            type="number"
+            min="0"
+            step="100"
+            placeholder="Kosongkan jika gratis/swap murni"
+            value={form.price}
+            error={errors.price}
+            onChange={(e) => setForm((f) => ({ ...f, price: e.target.value }))}
+          />
           <SelectField
             label="Status"
             value={form.status}

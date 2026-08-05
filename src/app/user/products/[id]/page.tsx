@@ -172,6 +172,11 @@ export default function ProductDetailPage() {
           <p className="mt-1 text-sm text-ink-soft">
             {product.brand?.name ?? "Brand tidak diketahui"} · {product.category?.name ?? "Tanpa kategori"}
           </p>
+          {product.price != null && (
+            <p className="mt-2 font-display text-2xl font-semibold text-teak">
+              {`Rp ${Number(product.price).toLocaleString('id-ID')}`}
+            </p>
+          )}
           <p className="mt-4 whitespace-pre-line text-sm leading-relaxed text-ink-soft">
             {product.description || "Tidak ada deskripsi untuk produk ini."}
           </p>

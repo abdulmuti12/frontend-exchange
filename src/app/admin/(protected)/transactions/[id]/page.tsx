@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import { toast } from "sonner";
-import { ArrowLeft, Repeat, CheckCircle2, XCircle, PlayCircle } from "lucide-react";
+import { ArrowLeft, Repeat, CheckCircle2, XCircle, PlayCircle, Banknote } from "lucide-react";
 import { apiFor, extractErrorMessage } from "@/lib/api";
 import { firstImage, formatDate, shortId, TRANSACTION_STATUS_META } from "@/lib/utils";
 import type { Transaction } from "@/lib/types";
@@ -12,7 +12,7 @@ import { Spinner, ErrorNote } from "@/components/ui/Misc";
 import { Stamp } from "@/components/ui/Stamp";
 import { Button } from "@/components/ui/Button";
 import { Modal } from "@/components/ui/Modal";
-import { TextareaField } from "@/components/ui/Field";
+import { TextField, TextareaField } from "@/components/ui/Field";
 import { ChatPanel } from "@/components/ChatPanel";
 
 export default function AdminTransactionDetailPage() {
@@ -24,6 +24,14 @@ export default function AdminTransactionDetailPage() {
   const [rejectOpen, setRejectOpen] = useState(false);
   const [rejectReason, setRejectReason] = useState("");
   const [rejectError, setRejectError] = useState<string | null>(null);
+  const [priceOpen, setPriceOpen] = useState(false);
+  const [priceValue, setPriceValue] = useState("");
+  const [priceError, setPriceError] = useState<string | null>(null);
+  const [priceLoading, setPriceLoading] = useState(false);
+
+  function getAdminPrice(): number | null | undefined {
+    return transaction?.user_furniture?.admin_price;
+  }
 
   function load() {
     apiFor("admin")
@@ -61,6 +69,31 @@ export default function AdminTransactionDetailPage() {
     }
   }
 
+  async function openPriceModal() {
+    setPriceValue(transaction?.user_furniture?.admin_price ? String(transaction.user_furniture.admin_price) : "");
+    setPriceError(null);
+    setPriceOpen(true);
+  }
+
+  async function submitPrice() {
+    const parsed = Number(priceValue);
+    if (Number.isNaN(parsed) || parsed < 0) {
+      setPriceError("Harga harus angka positif.");
+      return;
+    }
+    setPriceLoading(true);
+    try {
+      await apiFor("admin").patch(`/admin/transactions/${id}/set-price`, { admin_price: parsed });
+      toast.success("Harga barang pengguna berhasil diatur.");
+      setPriceOpen(false);
+      load();
+    } catch (err) {
+      setPriceError(extractErrorMessage(err, "Gagal menyimpan harga."));
+    } finally {
+      setPriceLoading(false);
+    }
+  }
+
   async function reject() {
     if (rejectReason.trim().length < 3) {
       setRejectError("Alasan minimal 3 karakter.");
@@ -89,6 +122,7 @@ export default function AdminTransactionDetailPage() {
   const canCheck = transaction.status === "pending";
   const canApprove = transaction.status === "checking";
   const canReject = transaction.status === "pending" || transaction.status === "checking";
+  const canSetPrice = !transaction.user_furniture?.admin_price && transaction.status !== "approved" && transaction.status !== "rejected";
 
   return (
     <div className="max-w-3xl">
@@ -127,6 +161,11 @@ export default function AdminTransactionDetailPage() {
               <p className="font-display text-base font-medium text-ink">
                 {transaction.user_furniture?.name ?? "-"}
               </p>
+              {transaction.user_furniture?.admin_price != null && (
+                <p className="text-xs font-medium text-teak mt-0.5">
+                  {`Rp ${Number(transaction.user_furniture.admin_price).toLocaleString('id-ID')}`}
+                </p>
+              )}
             </div>
           </div>
           <Repeat className="mx-auto size-5 text-teak" />
@@ -140,6 +179,11 @@ export default function AdminTransactionDetailPage() {
             <div>
               <p className="text-xs text-ink-soft">Produk katalog</p>
               <p className="font-display text-base font-medium text-ink">{transaction.product?.name ?? "-"}</p>
+              {transaction.product?.price != null && (
+                <p className="text-xs font-medium text-teak mt-0.5">
+                  {`Rp ${Number(transaction.product.price).toLocaleString('id-ID')}`}
+                </p>
+              )}
             </div>
           </div>
         </div>
@@ -160,6 +204,21 @@ export default function AdminTransactionDetailPage() {
         {transaction.status === "rejected" && transaction.reject_reason && (
           <div className="mx-6 mb-5">
             <ErrorNote message={`Alasan penolakan: ${transaction.reject_reason}`} />
+          </div>
+        )}
+
+        {canSetPrice && (
+          <div className="border-t border-line px-6 py-3 flex items-center gap-2">
+            <Banknote className="size-4 text-ink-soft shrink-0" />
+            <span className="text-sm text-ink-soft">Harga barang pengguna</span>
+            <span className="ml-auto text-sm font-medium text-ink">
+              {transaction.user_furniture?.admin_price
+                ? `Rp ${Number(transaction.user_furniture.admin_price).toLocaleString('id-ID')}`
+                : "Belum diatur"}
+            </span>
+            <Button variant="secondary" size="sm" onClick={openPriceModal}>
+              Atur harga
+            </Button>
           </div>
         )}
 
@@ -208,6 +267,32 @@ export default function AdminTransactionDetailPage() {
             </Button>
             <Button variant="danger" onClick={reject} loading={actionLoading === "reject"}>
               Tolak transaksi
+            </Button>
+          </div>
+        </div>
+      </Modal>
+
+      <Modal open={priceOpen} onClose={() => !priceLoading && setPriceOpen(false)} title="Atur harga barang pengguna" width="max-w-sm">
+        <div className="flex flex-col gap-4">
+          <div className="rounded-sm bg-paper-deep/40 p-3 text-xs text-ink-soft">
+            {transaction.user_furniture?.name ?? "Furnitur"} — admin yang menetapkan harga.
+          </div>
+          <TextField
+            label="Harga (Rp)"
+            type="number"
+            min="0"
+            step="100"
+            placeholder="Masukkan harga barang"
+            value={priceValue}
+            error={priceError ?? undefined}
+            onChange={(e) => setPriceValue(e.target.value)}
+          />
+          <div className="flex justify-end gap-2">
+            <Button variant="ghost" onClick={() => setPriceOpen(false)} disabled={priceLoading}>
+              Batal
+            </Button>
+            <Button onClick={submitPrice} loading={priceLoading}>
+              Simpan harga
             </Button>
           </div>
         </div>

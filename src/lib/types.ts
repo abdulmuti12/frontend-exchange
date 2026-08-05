@@ -63,6 +63,7 @@ export interface Product {
   id: string;
   name: string;
   description?: string | null;
+  price?: number | null;
   status: ProductStatus;
   category?: Category | null;
   brand?: Brand | null;
@@ -83,6 +84,7 @@ export interface Furniture {
   user_id: string;
   name: string;
   description?: string | null;
+  admin_price?: number | null;
   status: FurnitureStatus;
   category_id?: string | null;
   category_text?: string | null;
@@ -106,6 +108,10 @@ export interface Transaction {
   product?: Product;
   user_furniture?: Furniture;
   admin?: Admin | null;
+}
+
+export interface SetPricePayload {
+  admin_price: number;
 }
 
 export interface Notification {

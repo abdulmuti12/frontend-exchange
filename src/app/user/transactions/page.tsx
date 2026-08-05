@@ -90,6 +90,11 @@ export default function UserTransactionsPage() {
                       <p className="truncate text-sm font-medium text-ink">
                         {t.user_furniture?.name ?? "-"}
                       </p>
+                      {t.user_furniture?.admin_price != null && (
+                        <p className="mt-0.5 text-[11px] font-medium text-teak">
+                          {`Rp ${Number(t.user_furniture.admin_price).toLocaleString('id-ID')}`}
+                        </p>
+                      )}
                     </div>
                   </div>
                   <Repeat className="size-4 text-teak" />
@@ -97,6 +102,11 @@ export default function UserTransactionsPage() {
                     <div className="min-w-0 text-right">
                       <p className="text-[11px] text-ink-soft">Dari katalog</p>
                       <p className="truncate text-sm font-medium text-ink">{t.product?.name ?? "-"}</p>
+                      {t.product?.price != null && (
+                        <p className="mt-0.5 text-[11px] font-medium text-ink-soft">
+                          {`Rp ${Number(t.product.price).toLocaleString('id-ID')}`}
+                        </p>
+                      )}
                     </div>
                     <div className="size-12 shrink-0 overflow-hidden rounded-sm bg-paper-deep">
                       {theirImg && (

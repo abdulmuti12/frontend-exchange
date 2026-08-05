@@ -120,14 +120,15 @@ export default function FurnituresPage() {
           }
         }
 
-        form.images.forEach((img, i) => {
+        form.images.forEach((img) => {
           if (img.file) {
             fd.append("images[]", img.file, img.file.name);
           }
         });
 
-        if (editing) {
-          response = await apiFor("user").post(`/user/furnitures/${editing.id}`, fd);
+        const editId = editing?.id;
+        if (editId) {
+          response = await apiFor("user").post(`/user/furnitures/${editId}`, fd);
         } else {
           response = await apiFor("user").post("/user/furnitures", fd);
         }
@@ -142,8 +143,10 @@ export default function FurnituresPage() {
         if (form.brandMode === "brand" && form.brand_id) payload.brand_id = form.brand_id;
         else payload.brand_text = form.brand_text;
 
-        if (editing) {
-          response = await apiFor("user").put(`/user/furnitures/${editing.id}`, payload);
+        const current = editing;
+        const editId: string | undefined = current ? current.id : undefined;
+        if (editId) {
+          response = await apiFor("user").put(`/user/furnitures/${editId}`, payload);
         } else {
           response = await apiFor("user").post("/user/furnitures", payload);
         }

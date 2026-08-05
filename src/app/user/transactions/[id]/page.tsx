@@ -63,6 +63,11 @@ export default function UserTransactionDetailPage() {
               <p className="font-display text-base font-medium text-ink">
                 {transaction.user_furniture?.name ?? "-"}
               </p>
+              {transaction.user_furniture?.admin_price != null && (
+                <p className="text-xs font-medium text-teak mt-0.5">
+                  {`Rp ${Number(transaction.user_furniture.admin_price).toLocaleString('id-ID')}`}
+                </p>
+              )}
             </div>
           </div>
           <Repeat className="mx-auto size-5 text-teak" />
@@ -78,6 +83,11 @@ export default function UserTransactionDetailPage() {
               <p className="font-display text-base font-medium text-ink">
                 {transaction.product?.name ?? "-"}
               </p>
+              {transaction.product?.price != null && (
+                <p className="text-xs font-medium text-teak mt-0.5">
+                  {`Rp ${Number(transaction.product.price).toLocaleString('id-ID')}`}
+                </p>
+              )}
             </div>
           </div>
         </div>

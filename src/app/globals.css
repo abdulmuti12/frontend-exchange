@@ -1,0 +1,115 @@
+@import "tailwindcss";
+@import "@fontsource/fraunces/500.css";
+@import "@fontsource/fraunces/600.css";
+@import "@fontsource/fraunces/600-italic.css";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+@import "@fontsource/inter/700.css";
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/500.css";
+
+:root {
+  /* --- Ledger palette --- */
+  --ink: #22251f;
+  --ink-soft: #4a4b3f;
+  --paper: #e9e4d6;
+  --paper-deep: #ded7c3;
+  --surface: #fbf9f3;
+  --line: #d6cfba;
+
+  --teak: #8a5a34;
+  --teak-deep: #6e4527;
+  --moss: #4c5f42;
+  --moss-soft: #dbe4d1;
+  --rust: #a1382c;
+  --rust-soft: #f0dcd4;
+  --brass: #a3781f;
+  --brass-soft: #efe3c0;
+  --denim: #34546e;
+  --denim-soft: #d9e4ea;
+
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-paper: var(--paper);
+  --color-paper-deep: var(--paper-deep);
+  --color-surface: var(--surface);
+  --color-line: var(--line);
+  --color-teak: var(--teak);
+  --color-teak-deep: var(--teak-deep);
+  --color-moss: var(--moss);
+  --color-moss-soft: var(--moss-soft);
+  --color-rust: var(--rust);
+  --color-rust-soft: var(--rust-soft);
+  --color-brass: var(--brass);
+  --color-brass-soft: var(--brass-soft);
+  --color-denim: var(--denim);
+  --color-denim-soft: var(--denim-soft);
+
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-mono: var(--font-mono);
+}
+
+* {
+  border-color: var(--line);
+}
+
+html {
+  color-scheme: light;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+}
+
+::selection {
+  background: var(--brass-soft);
+  color: var(--ink);
+}
+
+/* Perforated divider — the "ticket stub" motif used to separate the two
+   halves of a swap ticket (your furniture ⇄ their product). */
+.perforated {
+  position: relative;
+  background-image: radial-gradient(circle, var(--paper) 2.5px, transparent 2.6px);
+  background-size: 14px 14px;
+  background-repeat: repeat-y;
+  background-position: center;
+}
+
+/* Rubber-stamp status badge */
+.stamp {
+  font-family: var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+  border-width: 1.5px;
+  border-style: solid;
+  border-radius: 3px;
+  display: inline-flex;
+  align-items: center;
+  transform: rotate(-1.2deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Focus ring, visible everywhere */
+:focus-visible {
+  outline: 2px solid var(--teak);
+  outline-offset: 2px;
+}

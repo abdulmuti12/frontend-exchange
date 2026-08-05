@@ -11,7 +11,7 @@ import { Stamp } from "@/components/ui/Stamp";
 import { Button } from "@/components/ui/Button";
 import { Modal } from "@/components/ui/Modal";
 import { TextField, TextareaField, SelectField } from "@/components/ui/Field";
-import { ImageUrlsField } from "@/components/ui/ImageUrlsField";
+import { FileUploadField } from "@/components/ui/FileUploadField";
 
 type Mode = "category" | "brand";
 
@@ -24,7 +24,7 @@ interface FormState {
   brandMode: Mode;
   brand_id: string;
   brand_text: string;
-  images: string[];
+  images: { name: string; preview: string; file: File | null }[];
 }
 
 const emptyForm: FormState = {
@@ -84,7 +84,10 @@ export default function FurnituresPage() {
       brandMode: f.brand_id ? "brand" : "brand",
       brand_id: f.brand_id ?? "",
       brand_text: f.brand_text ?? "",
-      images: (f.images ?? []).map((img) => (typeof img === "string" ? img : img.image_url)),
+      images: (f.images ?? []).map((img) => {
+        const url = typeof img === "string" ? img : img.image_url;
+        return { name: url, preview: url, file: null };
+      }),
     });
     setErrors({});
     setModalOpen(true);
@@ -93,24 +96,60 @@ export default function FurnituresPage() {
   async function onSubmit() {
     setSaving(true);
     setErrors({});
-    const payload: Record<string, unknown> = {
-      name: form.name,
-      description: form.description || undefined,
-      images: form.images,
-    };
-    if (form.categoryMode === "category" && form.category_id) payload.category_id = form.category_id;
-    else payload.category_text = form.category_text;
-    if (form.brandMode === "brand" && form.brand_id) payload.brand_id = form.brand_id;
-    else payload.brand_text = form.brand_text;
+
+    const hasFiles = form.images.some((img) => img.file !== null);
 
     try {
-      if (editing) {
-        await apiFor("user").put(`/user/furnitures/${editing.id}`, payload);
-        toast.success("Furnitur berhasil diperbarui.");
+      let response;
+      if (hasFiles || editing) {
+        const fd = new FormData();
+        fd.append("name", form.name);
+        if (form.description) fd.append("description", form.description);
+        if (form.categoryMode === "category" && form.category_id) fd.append("category_id", form.category_id);
+        else if (form.category_text) fd.append("category_text", form.category_text);
+        if (form.brandMode === "brand" && form.brand_id) fd.append("brand_id", form.brand_id);
+        else if (form.brand_text) fd.append("brand_text", form.brand_text);
+
+        // Track which existing images were removed (only for update)
+        if (editing) {
+          const existingUrls = (editing.images ?? []).map((img) => typeof img === "string" ? img : img.image_url);
+          const currentUrls = form.images.map((img) => img.preview);
+          const removed = existingUrls.filter((url) => !currentUrls.includes(url));
+          if (removed.length > 0) {
+            fd.append("remove_images", JSON.stringify(removed));
+          }
+        }
+
+        form.images.forEach((img, i) => {
+          if (img.file) {
+            fd.append("images[]", img.file, img.file.name);
+          }
+        });
+
+        if (editing) {
+          response = await apiFor("user").post(`/user/furnitures/${editing.id}`, fd);
+        } else {
+          response = await apiFor("user").post("/user/furnitures", fd);
+        }
       } else {
-        await apiFor("user").post("/user/furnitures", payload);
-        toast.success("Furnitur berhasil ditambahkan.");
+        const payload: Record<string, unknown> = {
+          name: form.name,
+          description: form.description || undefined,
+          images: form.images.map((img) => img.preview),
+        };
+        if (form.categoryMode === "category" && form.category_id) payload.category_id = form.category_id;
+        else payload.category_text = form.category_text;
+        if (form.brandMode === "brand" && form.brand_id) payload.brand_id = form.brand_id;
+        else payload.brand_text = form.brand_text;
+
+        if (editing) {
+          response = await apiFor("user").put(`/user/furnitures/${editing.id}`, payload);
+        } else {
+          response = await apiFor("user").post("/user/furnitures", payload);
+        }
       }
+
+      toast.success(editing ? "Furnitur berhasil diperbarui." : "Furnitur berhasil ditambahkan.");
       setModalOpen(false);
       load();
     } catch (err) {
@@ -307,8 +346,8 @@ export default function FurnituresPage() {
             onChange={(e) => setForm((f) => ({ ...f, description: e.target.value }))}
           />
 
-          <ImageUrlsField
-            label="Gambar (URL)"
+          <FileUploadField
+            label="Gambar (File)"
             value={form.images}
             onChange={(images) => setForm((f) => ({ ...f, images }))}
           />

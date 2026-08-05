@@ -65,8 +65,10 @@ src/
 - Notifikasi & badge status menggunakan komponen "stamp" bertema tiket pertukaran sebagai elemen visual khas aplikasi.
 
 
-untuk frontendnya  di folder Downloads/exchange-app
-untuk backendnya di htdocs/exchange-products
+
+untuk frontend di htdocs/frontend-exchange
+untuk backend di htdocs/API-EXCHANGE
+
 
 pebaiki agar gmabar yang di upload tampil di halaman admin/products
 dan bentuk tampilannya dalam bentuk table pagination dan ada fitur pencariannya

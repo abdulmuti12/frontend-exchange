@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { AuthCard } from "@/components/layout/AuthCard";
 import { TextField } from "@/components/ui/Field";
 import { Button } from "@/components/ui/Button";
+import { GoogleAuthButton } from "@/components/GoogleAuthButton";
 import { apiFor, extractErrorMessage, setToken, setStoredProfile } from "@/lib/api";
 
 export default function UserLoginPage() {
@@ -38,21 +39,22 @@ export default function UserLoginPage() {
       eyebrow="Pengguna"
       title="Masuk ke akun Anda"
       description="Lihat katalog, ajukan pertukaran, dan pantau transaksi Anda."
-      footer={
-        <>
-          Belum punya akun?{" "}
-          <Link href="/register" className="font-medium text-teak hover:underline">
-            Daftar sekarang
-          </Link>
-          <div className="mt-2">
-            <Link href="/admin/login" className="text-xs text-ink-soft hover:underline">
-              Masuk sebagai admin →
-            </Link>
-          </div>
-        </>
-      }
+      maxWidth="max-w-md"
     >
-      <form onSubmit={onSubmit} className="flex flex-col gap-4">
+      <GoogleAuthButton
+        onLogin={(token, user) => {
+          setToken("user", token as string);
+          setStoredProfile("user", user);
+          router.push("/user");
+        }}
+        onError={(msg) => setError(msg)}
+      />
+      <div className="mt-6 flex items-center">
+        <div className="flex-1 h-px bg-line"></div>
+        <span className="mx-4 text-xs text-ink-soft font-mono">OR</span>
+        <div className="flex-1 h-px bg-line"></div>
+      </div>
+      <form onSubmit={onSubmit} className="mt-6 flex flex-col gap-4">
         <TextField
           label="Email"
           type="email"
@@ -76,6 +78,17 @@ export default function UserLoginPage() {
           Masuk
         </Button>
       </form>
+      <div className="mt-5 text-center text-sm text-ink-soft">
+        Belum punya akun?{" "}
+        <Link href="/register" className="font-medium text-teak hover:underline">
+          Daftar sekarang
+        </Link>
+        <div className="mt-2">
+          <Link href="/admin/login" className="text-xs text-ink-soft hover:underline">
+            Masuk sebagai admin →
+          </Link>
+        </div>
+      </div>
     </AuthCard>
   );
 }

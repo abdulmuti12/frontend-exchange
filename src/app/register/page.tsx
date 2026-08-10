@@ -1,39 +1,14 @@
 "use client";
 
-import { FormEvent, useState, useEffect, useRef, useCallback } from "react";
+import { FormEvent, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { AuthCard } from "@/components/layout/AuthCard";
 import { TextField } from "@/components/ui/Field";
 import { Button } from "@/components/ui/Button";
+import { GoogleAuthButton } from "@/components/GoogleAuthButton";
 import { apiFor, extractErrorMessage, fieldErrors, setToken, setStoredProfile } from "@/lib/api";
-
-declare global {
-  interface Window {
-    google?: {
-      accounts: {
-        id: {
-          initialize: (config: {
-            client_id: string;
-            callback: (response: { credential: string }) => void;
-            auto_select?: boolean;
-            cancel_on_tap_outside?: boolean;
-          }) => void;
-          renderButton: (
-            container: HTMLElement | null,
-            options: { theme?: string; size?: string; text?: string; shape?: string }
-          ) => void;
-          prompt: (callback: (notification: { getPromptMomentNotification: () => string }) => void) => void;
-          disableAutoSelect: () => void;
-          storeCredential: (credentials: { id: string; password: string }, callback: () => void) => void;
-          cancel: () => void;
-          onGoogleLoad: (callback: () => void) => void;
-        };
-      };
-    };
-  }
-}
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -47,84 +22,6 @@ export default function RegisterPage() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [scriptLoaded, setScriptLoaded] = useState(false);
-  const buttonRef = useRef<HTMLDivElement>(null);
-
-  const handleGoogleCallback = useCallback(async (response: { credential: string }) => {
-    const idToken = response.credential;
-    if (!idToken) {
-      toast.error("Google authentication failed.");
-      return;
-    }
-
-    setLoading(true);
-    setError(null);
-    try {
-      const { data } = await apiFor("user").post("/auth/user/google/callback", {
-        id_token: idToken,
-      });
-      setToken("user", data.data.access_token);
-      setStoredProfile("user", data.data.user);
-      toast.success("Google registration successful.");
-      router.push("/user");
-    } catch (err) {
-      const msg = extractErrorMessage(err, "Google registration failed.");
-      toast.error(msg);
-      setError(msg);
-    } finally {
-      setLoading(false);
-    }
-  }, [router]);
-
-  useEffect(() => {
-    if (window.google?.accounts?.id) {
-      setScriptLoaded(true);
-      return;
-    }
-
-    const script = document.createElement("script");
-    script.src = "https://accounts.google.com/gsi/client";
-    script.async = true;
-    script.defer = true;
-    script.onload = () => {
-      setScriptLoaded(true);
-    };
-    document.body.appendChild(script);
-
-    return () => {
-      // script cleanup handled by browser
-    };
-  }, []);
-
-  useEffect(() => {
-    if (scriptLoaded && window.google?.accounts?.id) {
-      try {
-        window.google.accounts.id.initialize({
-          client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || "",
-          callback: handleGoogleCallback,
-          auto_select: false,
-          cancel_on_tap_outside: true,
-        });
-      } catch (e) {
-        console.error("Google SDK init error:", e);
-      }
-    }
-  }, [scriptLoaded, handleGoogleCallback]);
-
-  useEffect(() => {
-    if (scriptLoaded && buttonRef.current && window.google?.accounts?.id) {
-      try {
-        window.google.accounts.id.renderButton(buttonRef.current, {
-          theme: "outline",
-          size: "large",
-          text: "signup_with",
-          shape: "rectangular",
-        });
-      } catch (e) {
-        console.error("Google button render error:", e);
-      }
-    }
-  }, [scriptLoaded, buttonRef]);
 
   function update<K extends keyof typeof form>(key: K, value: string) {
     setForm((f) => ({ ...f, [key]: value }));
@@ -160,7 +57,7 @@ export default function RegisterPage() {
       eyebrow="Pengguna Baru"
       title="Buat akun"
       description="Daftar untuk mulai menawarkan furnitur dan menukarnya."
-      maxWidth="max-w-2xl"
+      maxWidth="max-w-4xl"
     >
       <div className="flex flex-col md:flex-row divide-y md:divide-y-0 md:divide-x divide-line">
         {/* Left side - Google registration */}
@@ -171,7 +68,15 @@ export default function RegisterPage() {
           <p className="mb-6 text-sm text-ink-soft text-center">
             Quick access without password
           </p>
-          <div ref={buttonRef} className="w-full max-w-xs"></div>
+          <GoogleAuthButton
+            onLogin={(token, user) => {
+              setToken("user", token as string);
+              setStoredProfile("user", user);
+              toast.success("Google registration successful.");
+              router.push("/user");
+            }}
+            onError={(msg) => setError(msg)}
+          />
           <div className="mt-8 flex items-center w-full max-w-xs">
             <div className="flex-1 h-px bg-line"></div>
             <span className="mx-3 text-xs text-ink-soft font-mono">OR</span>

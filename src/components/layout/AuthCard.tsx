@@ -8,16 +8,18 @@ export function AuthCard({
   description,
   children,
   footer,
+  maxWidth = "max-w-md",
 }: {
   eyebrow: string;
   title: string;
   description: string;
   children: ReactNode;
   footer?: ReactNode;
+  maxWidth?: string;
 }) {
   return (
     <main className="flex min-h-screen items-center justify-center bg-paper px-4 py-10">
-      <div className="w-full max-w-md">
+      <div className={`w-full ${maxWidth}`}>
         <Link href="/" className="mb-8 flex items-center justify-center gap-2">
           <Repeat className="size-6 text-teak" />
           <span className="font-display text-xl font-semibold text-ink">Tukar</span>

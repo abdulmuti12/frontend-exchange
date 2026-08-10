@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { Plus, Pencil, Trash2 } from "lucide-react";
 import { apiFor, extractErrorMessage, fieldErrors } from "@/lib/api";
-import { firstImage, FURNITURE_STATUS_META } from "@/lib/utils";
+import { firstImageFromSource, FURNITURE_STATUS_META } from "@/lib/utils";
 import type { Brand, Category, Furniture } from "@/lib/types";
 import { PageHeader, Spinner, EmptyState, useConfirm } from "@/components/ui/Misc";
 import { Stamp } from "@/components/ui/Stamp";
@@ -75,16 +75,17 @@ export default function FurnituresPage() {
 
   function openEdit(f: Furniture) {
     setEditing(f);
+    const imageSources = (f.images && f.images.length > 0 ? f.images : [f.image1, f.image2, f.image3, f.image4, f.image5, f.image6].filter(Boolean)) as Array<string | { id: string; image_url: string; sort_order?: number }>;
     setForm({
       name: f.name,
       description: f.description ?? "",
       categoryMode: f.category_id ? "category" : "brand",
       category_id: f.category_id ?? "",
       category_text: f.category_text ?? "",
-      brandMode: f.brand_id ? "brand" : "brand",
+      brandMode: f.brand_id ? "brand" : "category",
       brand_id: f.brand_id ?? "",
       brand_text: f.brand_text ?? "",
-      images: (f.images ?? []).map((img) => {
+      images: imageSources.map((img) => {
         const url = typeof img === "string" ? img : img.image_url;
         return { name: url, preview: url, file: null };
       }),
@@ -98,10 +99,10 @@ export default function FurnituresPage() {
     setErrors({});
 
     const hasFiles = form.images.some((img) => img.file !== null);
+    const isEditing = Boolean(editing);
 
     try {
-      let response;
-      if (hasFiles || editing) {
+      if (hasFiles || isEditing) {
         const fd = new FormData();
         fd.append("name", form.name);
         if (form.description) fd.append("description", form.description);
@@ -112,9 +113,15 @@ export default function FurnituresPage() {
 
         // Track which existing images were removed (only for update)
         if (editing) {
-          const existingUrls = (editing.images ?? []).map((img) => typeof img === "string" ? img : img.image_url);
+          const existingImages: Array<string | { id: string; image_url: string }> = editing.images ?? [];
           const currentUrls = form.images.map((img) => img.preview);
-          const removed = existingUrls.filter((url) => !currentUrls.includes(url));
+          const removed = existingImages
+            .filter((img) => {
+              const url = typeof img === "string" ? img : img.image_url;
+              return !currentUrls.includes(url);
+            })
+            .map((img) => typeof img === "string" ? "" : img.id)
+            .filter((id): id is string => Boolean(id));
           if (removed.length > 0) {
             fd.append("remove_images", JSON.stringify(removed));
           }
@@ -128,9 +135,9 @@ export default function FurnituresPage() {
 
         const editId = editing?.id;
         if (editId) {
-          response = await apiFor("user").post(`/user/furnitures/${editId}`, fd);
+          await apiFor("user").post(`/user/furnitures/${editId}`, fd);
         } else {
-          response = await apiFor("user").post("/user/furnitures", fd);
+          await apiFor("user").post("/user/furnitures", fd);
         }
       } else {
         const payload: Record<string, unknown> = {
@@ -143,12 +150,11 @@ export default function FurnituresPage() {
         if (form.brandMode === "brand" && form.brand_id) payload.brand_id = form.brand_id;
         else payload.brand_text = form.brand_text;
 
-        const current = editing;
-        const editId: string | undefined = current ? current.id : undefined;
+        const editId = editing?.id;
         if (editId) {
-          response = await apiFor("user").put(`/user/furnitures/${editId}`, payload);
+          await apiFor("user").post(`/user/furnitures/${editId}`, payload);
         } else {
-          response = await apiFor("user").post("/user/furnitures", payload);
+          await apiFor("user").post("/user/furnitures", payload);
         }
       }
 
@@ -197,7 +203,7 @@ export default function FurnituresPage() {
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {furnitures.map((f) => {
             const meta = FURNITURE_STATUS_META[f.status];
-            const img = firstImage(f.images);
+            const img = firstImageFromSource(f);
             const editable = f.status === "available" || f.status === "rejected";
             return (
               <div key={f.id} className="overflow-hidden rounded-md border border-line bg-surface">

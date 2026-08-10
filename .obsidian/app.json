@@ -1,0 +1,12 @@
+{
+  "id": "exchange-frontend",
+  "name": "Exchange Frontend",
+  "created": 1753161600000,
+  "updates": 1753161600000,
+  "vaults": [
+    {
+      "path": "/Applications/XAMPP/xamppfiles/htdocs/frontend-exchange",
+      "name": "exchange-frontend"
+    }
+  ]
+}

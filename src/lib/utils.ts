@@ -2,27 +2,30 @@ import { clsx, type ClassValue } from "clsx";
 import { API_BASE_URL } from "./api";
 import type { ProductImage, TransactionStatus, FurnitureStatus, ProductStatus } from "./types";
 
+type ImageSource = {
+  images?: string[] | ProductImage[];
+  image1?: string | null;
+  image2?: string | null;
+  image3?: string | null;
+  image4?: string | null;
+  image5?: string | null;
+  image6?: string | null;
+};
+
 export function cn(...inputs: ClassValue[]) {
   return clsx(inputs);
 }
 
-/** Resolve a possibly-relative storage path (`/storage/..`) to an absolute URL. */
+/** Resolve a possibly-relative storage path to an absolute URL. */
 export function resolveImage(url?: string | null): string | null {
   if (!url) return null;
-  const origin = API_BASE_URL.replace(/\/api\/?$/, "");
+  if (url.startsWith("data:") || url.startsWith("blob:")) return url;
 
-  // Always re-anchor the URL to the API origin so the browser fetches from
-  // the same host/port the API is actually served from. The API sometimes
-  // returns an absolute URL with a different (or no) port — using that
-  // directly would 404. We extract just the path component and rebuild.
-  let path: string;
   try {
-    // Absolute URL? Take only its pathname + search so the new origin wins.
-    path = new URL(url, "http://placeholder").pathname + new URL(url, "http://placeholder").search;
+    return new URL(url, API_BASE_URL).toString();
   } catch {
     return null;
   }
-  return `${origin}${path.startsWith("/") ? "" : "/"}${path}`;
 }
 
 export function firstImage(images: string[] | ProductImage[] | undefined): string | null {
@@ -35,23 +38,22 @@ export function firstImage(images: string[] | ProductImage[] | undefined): strin
   return null;
 }
 
-export function firstStaticImage(product: {
-  image1?: string | null;
-  image2?: string | null;
-  image3?: string | null;
-  image4?: string | null;
-  image5?: string | null;
-  image6?: string | null;
-  images?: string[] | ProductImage[];
-}): string | null {
-  const fields = [product.image1, product.image2, product.image3, product.image4, product.image5, product.image6];
+export function firstImageFromSource(source?: ImageSource): string | null {
+  const fromImages = firstImage(source?.images);
+  if (fromImages) return fromImages;
+
+  const fields = [source?.image1, source?.image2, source?.image3, source?.image4, source?.image5, source?.image6];
   for (const raw of fields) {
     if (raw) {
       const resolved = resolveImage(raw);
       if (resolved) return resolved;
     }
   }
-  return firstImage(product.images);
+  return null;
+}
+
+export function firstStaticImage(product: ImageSource): string | null {
+  return firstImageFromSource(product);
 }
 
 export function imageList(images: string[] | ProductImage[] | undefined): string[] {

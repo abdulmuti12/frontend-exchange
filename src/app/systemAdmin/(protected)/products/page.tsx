@@ -76,7 +76,7 @@ export default function AdminProductsPage() {
     if (statusFilter) params.status = statusFilter;
     if (page > 1) params.page = page;
     apiFor("admin")
-      .get("/admin/products", { params })
+      .get("/systemAdmin/products", { params })
       .then(({ data }) => {
         const paginated = data.data as Paginated<Product>;
         setProducts(paginated.items);
@@ -101,8 +101,8 @@ export default function AdminProductsPage() {
   }, [page]);
 
   useEffect(() => {
-    apiFor("admin").get("/admin/categories").then(({ data }) => setCategories(data.data.items ?? data.data)).catch(() => {});
-    apiFor("admin").get("/admin/brands").then(({ data }) => setBrands(data.data.items ?? data.data)).catch(() => {});
+    apiFor("admin").get("/systemAdmin/categories").then(({ data }) => setCategories(data.data.items ?? data.data)).catch(() => {});
+    apiFor("admin").get("/systemAdmin/brands").then(({ data }) => setBrands(data.data.items ?? data.data)).catch(() => {});
   }, []);
 
   function openCreate() {
@@ -167,7 +167,7 @@ export default function AdminProductsPage() {
           fd.append("cleared_image_slots", JSON.stringify(removedIndices));
         }
 
-        await apiFor("admin").post(`/admin/products/${editing.id}`, fd);
+        await apiFor("admin").post(`/systemAdmin/products/${editing.id}`, fd);
         toast.success("Produk berhasil diperbarui.");
       } else {
         const fd = new FormData();
@@ -183,7 +183,7 @@ export default function AdminProductsPage() {
           }
         });
 
-        await apiFor("admin").post("/admin/products", fd);
+        await apiFor("admin").post("/systemAdmin/products", fd);
         toast.success("Produk berhasil ditambahkan.");
       }
       setModalOpen(false);
@@ -200,7 +200,7 @@ export default function AdminProductsPage() {
     const ok = await confirm("Hapus produk", `Hapus "${p.name}" dari katalog?`, true);
     if (!ok) return;
     try {
-      await apiFor("admin").delete(`/admin/products/${p.id}`);
+      await apiFor("admin").delete(`/systemAdmin/products/${p.id}`);
       toast.success("Produk dihapus.");
       load();
     } catch (err) {

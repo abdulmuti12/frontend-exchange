@@ -21,11 +21,11 @@ export default function AdminLoginPage() {
     setLoading(true);
     setError(null);
     try {
-      const { data } = await apiFor("admin").post("/auth/admin/login", { email, password });
+      const { data } = await apiFor("admin").post("/auth/systemAdmin/login", { email, password });
       setToken("admin", data.data.access_token);
       setStoredProfile("admin", data.data.admin);
       toast.success(data.message ?? "Login berhasil.");
-      router.push("/admin");
+      router.push("/systemAdmin");
     } catch (err) {
       setError(extractErrorMessage(err, "Email atau password salah."));
     } finally {

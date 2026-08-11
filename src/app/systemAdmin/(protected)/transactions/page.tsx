@@ -25,7 +25,7 @@ export default function AdminTransactionsPage() {
   useEffect(() => {
     setLoading(true);
     apiFor("admin")
-      .get("/admin/transactions", { params: status ? { status } : {} })
+      .get("/systemAdmin/transactions", { params: status ? { status } : {} })
       .then(({ data }) => setTransactions(data.data.items))
       .catch(() => setTransactions([]))
       .finally(() => setLoading(false));
@@ -80,11 +80,11 @@ export default function AdminTransactionsPage() {
                   <tr
                     key={t.id}
                     className="cursor-pointer border-b border-line last:border-0 hover:bg-paper/60"
-                    onClick={() => (window.location.href = `/admin/transactions/${t.id}`)}
+                    onClick={() => (window.location.href = `/systemAdmin/transactions/${t.id}`)}
                   >
                     <td className="px-4 py-3 font-mono text-xs text-ink-soft">#{shortId(t.id)}</td>
                     <td className="px-4 py-3">
-                      <Link href={`/admin/transactions/${t.id}`} className="font-medium text-ink hover:underline">
+                      <Link href={`/systemAdmin/transactions/${t.id}`} className="font-medium text-ink hover:underline">
                         {t.user?.name ?? "-"}
                       </Link>
                     </td>

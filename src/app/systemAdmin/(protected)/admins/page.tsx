@@ -27,7 +27,7 @@ export default function AdminAdminsPage() {
   function load() {
     setLoading(true);
     apiFor("admin")
-      .get("/admin/admins", { params: search ? { search } : {} })
+      .get("/systemAdmin/admins", { params: search ? { search } : {} })
       .then(({ data }) => setAdmins(data.data.items))
       .catch(() => toast.error("Gagal memuat daftar admin."))
       .finally(() => setLoading(false));
@@ -60,10 +60,10 @@ export default function AdminAdminsPage() {
       if (editing) {
         const payload: Record<string, string> = { name: form.name, email: form.email, status: form.status };
         if (form.password) payload.password = form.password;
-        await apiFor("admin").put(`/admin/admins/${editing.id}`, payload);
+        await apiFor("admin").put(`/systemAdmin/admins/${editing.id}`, payload);
         toast.success("Admin berhasil diperbarui.");
       } else {
-        await apiFor("admin").post("/admin/admins", form);
+        await apiFor("admin").post("/systemAdmin/admins", form);
         toast.success("Admin berhasil ditambahkan.");
       }
       setModalOpen(false);
@@ -80,7 +80,7 @@ export default function AdminAdminsPage() {
     const ok = await confirm("Hapus admin", `Hapus akun admin "${a.name}"?`, true);
     if (!ok) return;
     try {
-      await apiFor("admin").delete(`/admin/admins/${a.id}`);
+      await apiFor("admin").delete(`/systemAdmin/admins/${a.id}`);
       toast.success("Admin dihapus.");
       load();
     } catch (err) {

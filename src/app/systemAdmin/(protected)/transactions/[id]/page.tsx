@@ -35,7 +35,7 @@ export default function AdminTransactionDetailPage() {
 
   function load() {
     apiFor("admin")
-      .get(`/admin/transactions/${id}`)
+      .get(`/systemAdmin/transactions/${id}`)
       .then(({ data }) => setTransaction(data.data))
       .catch(() => setError("Transaksi tidak ditemukan."))
       .finally(() => setLoading(false));
@@ -46,7 +46,7 @@ export default function AdminTransactionDetailPage() {
   async function startChecking() {
     setActionLoading("checking");
     try {
-      await apiFor("admin").patch(`/admin/transactions/${id}/checking`);
+      await apiFor("admin").patch(`/systemAdmin/transactions/${id}/checking`);
       toast.success("Transaksi kini dalam tahap pemeriksaan.");
       load();
     } catch (err) {
@@ -59,7 +59,7 @@ export default function AdminTransactionDetailPage() {
   async function approve() {
     setActionLoading("approve");
     try {
-      await apiFor("admin").patch(`/admin/transactions/${id}/approve`);
+      await apiFor("admin").patch(`/systemAdmin/transactions/${id}/approve`);
       toast.success("Transaksi disetujui.");
       load();
     } catch (err) {
@@ -83,7 +83,7 @@ export default function AdminTransactionDetailPage() {
     }
     setPriceLoading(true);
     try {
-      await apiFor("admin").patch(`/admin/transactions/${id}/set-price`, { admin_price: parsed });
+      await apiFor("admin").patch(`/systemAdmin/transactions/${id}/set-price`, { admin_price: parsed });
       toast.success("Harga barang pengguna berhasil diatur.");
       setPriceOpen(false);
       load();
@@ -101,7 +101,7 @@ export default function AdminTransactionDetailPage() {
     }
     setActionLoading("reject");
     try {
-      await apiFor("admin").patch(`/admin/transactions/${id}/reject`, { reject_reason: rejectReason });
+      await apiFor("admin").patch(`/systemAdmin/transactions/${id}/reject`, { reject_reason: rejectReason });
       toast.success("Transaksi ditolak.");
       setRejectOpen(false);
       setRejectReason("");
@@ -127,7 +127,7 @@ export default function AdminTransactionDetailPage() {
   return (
     <div className="max-w-3xl">
       <Link
-        href="/admin/transactions"
+        href="/systemAdmin/transactions"
         className="mb-6 inline-flex items-center gap-1.5 text-sm text-ink-soft hover:text-ink"
       >
         <ArrowLeft className="size-4" />

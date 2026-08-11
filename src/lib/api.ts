@@ -41,7 +41,7 @@ export function setStoredProfile<T>(role: Role, profile: T) {
 
 /** Where to send a user when their session for `role` is no longer valid. */
 function loginPathFor(role: Role) {
-  return role === "admin" ? "/admin/login" : "/login";
+  return role === "admin" ? "/systemAdmin/login" : "/login";
 }
 
 const instances: Record<Role, AxiosInstance> = {

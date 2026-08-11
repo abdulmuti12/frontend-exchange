@@ -84,7 +84,7 @@ export default function UserLoginPage() {
           Daftar sekarang
         </Link>
         <div className="mt-2">
-          <Link href="/admin/login" className="text-xs text-ink-soft hover:underline">
+          <Link href="/systemAdmin/login" className="text-xs text-ink-soft hover:underline">
             Masuk sebagai admin →
           </Link>
         </div>

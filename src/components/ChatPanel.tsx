@@ -22,7 +22,7 @@ export function ChatPanel({
   const [loaded, setLoaded] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
   const open = status === "checking";
-  const prefix = role === "admin" ? "/admin" : "/user";
+  const prefix = role === "admin" ? "/systemAdmin" : "/user";
 
   useEffect(() => {
     if (!open) return;

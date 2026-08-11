@@ -40,13 +40,13 @@ export function AdminAuthProvider({ children }: { children: ReactNode }) {
 
   const logout = async () => {
     try {
-      await apiFor("admin").post("/auth/admin/logout");
+      await apiFor("admin").post("/auth/systemAdmin/logout");
     } catch {
       // ignore network errors on logout — clear local session regardless
     }
     clearSession("admin");
     setProfileState(null);
-    router.push("/admin/login");
+    router.push("/systemAdmin/login");
   };
 
   return (

@@ -41,7 +41,7 @@ export function MasterDataManager({
   function load() {
     setLoading(true);
     apiFor("admin")
-      .get(`/admin/${resource}`, { params: search ? { search } : {} })
+      .get(`/systemAdmin/${resource}`, { params: search ? { search } : {} })
       .then(({ data }) => setItems(data.data.items))
       .catch(() => toast.error(`Gagal memuat ${singular}.`))
       .finally(() => setLoading(false));
@@ -77,10 +77,10 @@ export function MasterDataManager({
     };
     try {
       if (editing) {
-        await apiFor("admin").put(`/admin/${resource}/${editing.id}`, payload);
+        await apiFor("admin").put(`/systemAdmin/${resource}/${editing.id}`, payload);
         toast.success(`${singular} berhasil diperbarui.`);
       } else {
-        await apiFor("admin").post(`/admin/${resource}`, payload);
+        await apiFor("admin").post(`/systemAdmin/${resource}`, payload);
         toast.success(`${singular} berhasil ditambahkan.`);
       }
       setModalOpen(false);
@@ -97,7 +97,7 @@ export function MasterDataManager({
     const ok = await confirm(`Hapus ${singular}`, `Hapus "${item.name}"? Tindakan ini tidak dapat dibatalkan.`, true);
     if (!ok) return;
     try {
-      await apiFor("admin").delete(`/admin/${resource}/${item.id}`);
+      await apiFor("admin").delete(`/systemAdmin/${resource}/${item.id}`);
       toast.success(`${singular} dihapus.`);
       load();
     } catch (err) {

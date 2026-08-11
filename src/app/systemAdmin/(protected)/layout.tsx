@@ -8,12 +8,12 @@ import { Shell, NavItem } from "@/components/layout/Shell";
 import { Spinner } from "@/components/ui/Misc";
 
 const nav: NavItem[] = [
-  { href: "/admin", label: "Dashboard", icon: LayoutDashboard, exact: true },
-  { href: "/admin/products", label: "Produk", icon: Boxes },
-  { href: "/admin/brands", label: "Brand", icon: Tags },
-  { href: "/admin/categories", label: "Kategori", icon: Layers },
-  { href: "/admin/transactions", label: "Transaksi", icon: Repeat2 },
-  { href: "/admin/admins", label: "Admin", icon: Users },
+  { href: "/systemAdmin", label: "Dashboard", icon: LayoutDashboard, exact: true },
+  { href: "/systemAdmin/products", label: "Produk", icon: Boxes },
+  { href: "/systemAdmin/brands", label: "Brand", icon: Tags },
+  { href: "/systemAdmin/categories", label: "Kategori", icon: Layers },
+  { href: "/systemAdmin/transactions", label: "Transaksi", icon: Repeat2 },
+  { href: "/systemAdmin/admins", label: "Admin", icon: Users },
 ];
 
 function Guard({ children }: { children: ReactNode }) {
@@ -23,7 +23,7 @@ function Guard({ children }: { children: ReactNode }) {
   if (!ready) return <Spinner label="Menyiapkan dashboard admin..." />;
 
   if (!isAuthenticated) {
-    router.replace("/admin/login");
+    router.replace("/systemAdmin/login");
     return <Spinner label="Mengalihkan ke halaman login..." />;
   }
 

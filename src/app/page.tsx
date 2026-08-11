@@ -49,7 +49,7 @@ export default function LandingPage() {
                 <ArrowRight className="size-4" />
               </Link>
               <Link
-                href={adminToken ? "/admin" : "/admin/login"}
+                href={adminToken ? "/systemAdmin" : "/systemAdmin/login"}
                 className="inline-flex items-center gap-2 rounded-sm border border-ink/30 px-5 py-3 text-sm font-medium text-ink transition-colors hover:border-ink hover:bg-ink/5"
               >
                 <ShieldCheck className="size-4" />

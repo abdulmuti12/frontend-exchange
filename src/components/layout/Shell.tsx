@@ -37,7 +37,7 @@ export function Shell({
     <div className="min-h-screen bg-paper">
       {/* Mobile top bar */}
       <div className="sticky top-0 z-40 flex items-center justify-between border-b border-line bg-surface px-4 py-3 lg:hidden">
-        <Link href={role === "Admin" ? "/admin" : "/user"} className="flex items-center gap-2">
+        <Link href={role === "Admin" ? "/systemAdmin" : "/user"} className="flex items-center gap-2">
           <Repeat className="size-5 text-teak" />
           <span className="font-display text-lg font-semibold">Tukar</span>
         </Link>
@@ -55,7 +55,7 @@ export function Shell({
           )}
         >
           <div className="flex items-center justify-between px-6 py-6">
-            <Link href={role === "Admin" ? "/admin" : "/user"} className="flex items-center gap-2">
+            <Link href={role === "Admin" ? "/systemAdmin" : "/user"} className="flex items-center gap-2">
               <Repeat className="size-6 text-teak" />
               <div>
                 <p className="font-display text-xl font-semibold leading-none text-ink">Tukar</p>

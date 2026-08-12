@@ -19,6 +19,7 @@ export default function ProductDetailPage() {
   const [product, setProduct] = useState<Product | null>(null);
   const [furnitures, setFurnitures] = useState<Furniture[]>([]);
   const [selectedFurniture, setSelectedFurniture] = useState("");
+  const [userProfile, setUserProfile] = useState<{ address?: string | null } | null>(null);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -31,12 +32,18 @@ export default function ProductDetailPage() {
     Promise.all([
       apiFor("user").get(`/user/products/${id}`),
       apiFor("user").get("/user/furnitures", { params: { status: "available" } }),
+      apiFor("user").get("/user/profile"),
     ])
-      .then(([p, f]) => {
+      .then(([p, f, profile]) => {
         setProduct(p.data.data);
         setFurnitures(f.data.data.items);
+        setUserProfile(profile.data.data);
       })
-      .catch(() => setError("Produk tidak ditemukan."))
+      .catch((err) => {
+        if (!err?.response?.data?.success) {
+          setError("Produk tidak ditemukan.");
+        }
+      })
       .finally(() => setLoading(false));
   }, [id]);
 
@@ -187,6 +194,15 @@ export default function ProductDetailPage() {
               <p className="mt-2 text-sm text-ink-soft">
                 Produk ini sedang tidak tersedia untuk ditukar.
               </p>
+            ) : !userProfile?.address ? (
+              <div className="mt-2 space-y-3">
+                <p className="text-sm text-brass">
+                  Anda belum mengisi alamat. Silakan lengkapi alamat di halaman profil terlebih dahulu sebelum mengajukan tukar.
+                </p>
+                <Link href="/user/profile" className="inline-block text-sm font-medium text-teak hover:underline">
+                  → Lengkapi alamat di profil
+                </Link>
+              </div>
             ) : furnitures.length === 0 ? (
               <p className="mt-2 text-sm text-ink-soft">
                 Anda belum memiliki furnitur berstatus tersedia.{" "}

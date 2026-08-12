@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { apiFor, extractErrorMessage, fieldErrors } from "@/lib/api";
 import { useUserAuth } from "@/lib/auth";
 import { PageHeader, Spinner } from "@/components/ui/Misc";
-import { TextField } from "@/components/ui/Field";
+import { TextField, TextareaField } from "@/components/ui/Field";
 import { Button } from "@/components/ui/Button";
 
 export default function ProfilePage() {
@@ -83,11 +83,12 @@ export default function ProfilePage() {
           error={errors.phone_number}
           onChange={(e) => setForm((f) => ({ ...f, phone_number: e.target.value }))}
         />
-        <TextField
+        <TextareaField
           label="Alamat"
           value={form.address}
           error={errors.address}
           onChange={(e) => setForm((f) => ({ ...f, address: e.target.value }))}
+          rows={3}
         />
         <TextField
           label="Kata sandi baru"

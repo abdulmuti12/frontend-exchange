@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, Repeat } from "lucide-react";
+import { ArrowLeft, Repeat, MessageCircle } from "lucide-react";
 import { apiFor } from "@/lib/api";
 import { firstImage, formatDate, shortId, TRANSACTION_STATUS_META } from "@/lib/utils";
 import type { Transaction } from "@/lib/types";
@@ -31,6 +31,12 @@ export default function UserTransactionDetailPage() {
   const meta = TRANSACTION_STATUS_META[transaction.status];
   const yourImg = firstImage(transaction.user_furniture?.images);
   const theirImg = firstImage(transaction.product?.images);
+
+  const waPhone = "6285174189869";
+  const waMessage = encodeURIComponent(
+    `Halo Admin Tukar, saya butuh bantuan terkait tiket #${shortId(transaction.id)}.`
+  );
+  const waLink = `https://wa.me/${waPhone}?text=${waMessage}`;
 
   return (
     <div className="max-w-3xl">
@@ -121,6 +127,26 @@ export default function UserTransactionDetailPage() {
       <div className="mt-8">
         <h2 className="mb-3 font-display text-lg font-semibold text-ink">Percakapan dengan admin</h2>
         <ChatPanel role="user" transactionId={transaction.id} status={transaction.status} />
+      </div>
+
+      <div className="mt-6 rounded-md border border-line bg-surface p-5">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <p className="font-medium text-ink">Butuh respon cepat?</p>
+            <p className="mt-0.5 text-sm text-ink-soft">
+              Hubungi admin via WhatsApp untuk bantuan langsung di luar jam chat.
+            </p>
+          </div>
+          <a
+            href={waLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 rounded-sm bg-moss px-4 py-2.5 text-sm font-medium text-surface transition-colors hover:bg-moss-deep"
+          >
+            <MessageCircle className="size-4" />
+            Chat via WhatsApp
+          </a>
+        </div>
       </div>
     </div>
   );

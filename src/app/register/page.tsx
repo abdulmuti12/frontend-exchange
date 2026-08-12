@@ -150,6 +150,11 @@ export default function RegisterPage() {
               Already have an account?{" "}
               <span className="font-medium text-teak hover:underline">Log in</span>
             </Link>
+            <div className="mt-2">
+              <Link href="/forgot-password" className="text-xs text-ink-soft hover:underline">
+                Lupa kata sandi?
+              </Link>
+            </div>
           </div>
         </div>
       </div>

@@ -98,6 +98,31 @@ export function extractErrorMessage(err: unknown, fallback = "Terjadi kesalahan.
   return fallback;
 }
 
+export async function sendForgotPasswordOtp(email: string) {
+  const { data } = await apiFor("user").post("/auth/forgot-password/send-otp", { email });
+  return data;
+}
+
+export async function verifyForgotPasswordOtp(email: string, otp: string) {
+  const { data } = await apiFor("user").post("/auth/forgot-password/verify-otp", { email, otp });
+  return data;
+}
+
+export async function resetForgotPassword(
+  email: string,
+  otp: string,
+  password: string,
+  password_confirmation: string
+) {
+  const { data } = await apiFor("user").post("/auth/forgot-password/reset", {
+    email,
+    otp,
+    password,
+    password_confirmation,
+  });
+  return data;
+}
+
 export function fieldErrors(err: unknown): Record<string, string> {
   if (axios.isAxiosError(err)) {
     const data = err.response?.data as { error?: Record<string, string[]> } | undefined;

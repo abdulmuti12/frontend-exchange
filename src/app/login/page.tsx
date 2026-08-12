@@ -78,6 +78,11 @@ export default function UserLoginPage() {
           Masuk
         </Button>
       </form>
+      <div className="mt-4 text-right">
+        <Link href="/forgot-password" className="text-xs text-teak hover:underline">
+          Lupa kata sandi?
+        </Link>
+      </div>
       <div className="mt-5 text-center text-sm text-ink-soft">
         Belum punya akun?{" "}
         <Link href="/register" className="font-medium text-teak hover:underline">

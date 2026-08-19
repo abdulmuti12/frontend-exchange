@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import { toast } from "sonner";
-import { ArrowLeft, Repeat, CheckCircle2, XCircle, PlayCircle, Banknote } from "lucide-react";
+import { ArrowLeft, Repeat, CheckCircle2, XCircle, PlayCircle, Banknote, MessageCircle } from "lucide-react";
 import { apiFor, extractErrorMessage } from "@/lib/api";
 import { firstImage, formatDate, shortId, TRANSACTION_STATUS_META } from "@/lib/utils";
 import type { Transaction } from "@/lib/types";
@@ -123,6 +123,20 @@ export default function AdminTransactionDetailPage() {
   const canApprove = transaction.status === "checking";
   const canReject = transaction.status === "pending" || transaction.status === "checking";
   const canSetPrice = !transaction.user_furniture?.admin_price && transaction.status !== "approved" && transaction.status !== "rejected";
+
+  const waPhone = (() => {
+    const raw = transaction.user?.phone_number;
+    if (raw) {
+      if (raw.startsWith("+62")) return "62" + raw.substring(3);
+      if (raw.startsWith("0")) return "62" + raw.substring(1);
+      return raw;
+    }
+    return "6285174189869";
+  })();
+  const waMessage = encodeURIComponent(
+    `Halo ${transaction.user?.name ?? "User"}, saya admin terkait tiket #${shortId(transaction.id)}.`
+  );
+  const waLink = `https://wa.me/${waPhone}?text=${waMessage}`;
 
   return (
     <div className="max-w-3xl">
@@ -249,6 +263,28 @@ export default function AdminTransactionDetailPage() {
       <div className="mt-8">
         <h2 className="mb-3 font-display text-lg font-semibold text-ink">Percakapan dengan pengguna</h2>
         <ChatPanel role="admin" transactionId={transaction.id} status={transaction.status} />
+      </div>
+
+      <div className="mt-6 rounded-md border border-line bg-surface p-5">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <p className="font-medium text-ink">Hubungi pengguna via WhatsApp</p>
+            <p className="mt-0.5 text-sm text-ink-soft">
+              {transaction.user?.phone_number
+                ? `Kirim pesan langsung ke ${transaction.user.name} untuk koordinasi transaksi.`
+                : `Nomor WhatsApp ${transaction.user?.name ?? "pengguna"} belum tersedia, hubungi via admin Tukar.`}
+            </p>
+          </div>
+          <a
+            href={waLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 rounded-sm bg-moss px-4 py-2.5 text-sm font-medium text-surface transition-colors hover:bg-moss-deep"
+          >
+            <MessageCircle className="size-4" />
+            Chat via WhatsApp
+          </a>
+        </div>
       </div>
 
       <Modal open={rejectOpen} onClose={() => setRejectOpen(false)} title="Tolak transaksi" width="max-w-sm">

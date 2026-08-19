@@ -124,9 +124,10 @@ export default function RegisterPage() {
               onChange={(e) => update("password", e.target.value)}
             />
             <TextField
-              label="Phone Number"
-              placeholder="+62 812 3456 7890"
+              label="Nomor WhatsApp"
+              placeholder="0812 3456 7890"
               autoComplete="tel"
+              hint="Used for WhatsApp contact by admin"
               value={form.phone_number}
               error={errors.phone_number}
               onChange={(e) => update("phone_number", e.target.value)}

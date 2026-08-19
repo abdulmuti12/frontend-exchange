@@ -78,7 +78,10 @@ export default function ProfilePage() {
           onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
         />
         <TextField
-          label="Nomor telepon"
+          label="Nomor WhatsApp"
+          hint="Gunakan format internasional, contoh: 08123456789 atau +628123456789"
+          type="tel"
+          autoComplete="tel"
           value={form.phone_number}
           error={errors.phone_number}
           onChange={(e) => setForm((f) => ({ ...f, phone_number: e.target.value }))}

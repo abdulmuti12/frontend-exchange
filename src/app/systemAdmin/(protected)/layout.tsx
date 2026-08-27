@@ -11,7 +11,7 @@ const nav: NavItem[] = [
   { href: "/systemAdmin", label: "Dashboard", icon: LayoutDashboard, exact: true },
   { href: "/systemAdmin/products", label: "Produk", icon: Boxes },
   { href: "/systemAdmin/brands", label: "Brand", icon: Tags },
-  { href: "/systemAdmin/categories", label: "Kategori", icon: Layers },
+  { href: "/systemAdmin/categories", label: "Categories", icon: Layers },
   { href: "/systemAdmin/transactions", label: "Transaksi", icon: Repeat2 },
   { href: "/systemAdmin/admins", label: "Admin", icon: Users },
 ];

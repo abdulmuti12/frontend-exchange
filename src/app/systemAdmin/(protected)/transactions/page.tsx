@@ -58,17 +58,17 @@ export default function AdminTransactionsPage() {
       {loading ? (
         <Spinner />
       ) : transactions.length === 0 ? (
-        <EmptyState title="Belum ada transaksi" />
+        <EmptyState title="No transactions yet" />
       ) : (
         <div className="overflow-hidden rounded-md border border-line bg-surface">
           <table className="w-full text-left text-sm">
             <thead className="border-b border-line bg-paper-deep/40 text-xs uppercase tracking-wide text-ink-soft">
               <tr>
-                <th className="px-4 py-3 font-display">Tiket</th>
-                <th className="px-4 py-3 font-display">Pengguna</th>
-                <th className="px-4 py-3 font-display">Pertukaran</th>
+                <th className="px-4 py-3 font-display">Ticket</th>
+                <th className="px-4 py-3 font-display">User</th>
+                <th className="px-4 py-3 font-display">Swap</th>
                 <th className="px-4 py-3 font-display">Status</th>
-                <th className="px-4 py-3 font-display">Diajukan</th>
+                <th className="px-4 py-3 font-display">Submitted</th>
               </tr>
             </thead>
             <tbody>

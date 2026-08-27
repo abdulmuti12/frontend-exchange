@@ -262,9 +262,9 @@ export default function AdminProductsPage() {
             <table className="w-full text-left text-sm">
               <thead className="border-b border-line bg-paper-deep/40 text-xs uppercase tracking-wide text-ink-soft">
                 <tr>
-                  <th className="px-4 py-3 font-display">Gambar</th>
+                  <th className="px-4 py-3 font-display">Images</th>
                   <th className="px-4 py-3 font-display">Nama</th>
-                  <th className="px-4 py-3 font-display">Kategori</th>
+                  <th className="px-4 py-3 font-display">Category</th>
                   <th className="px-4 py-3 font-display">Brand</th>
                   <th className="px-4 py-3 font-display">Harga</th>
                   <th className="px-4 py-3 font-display">Status</th>
@@ -383,7 +383,7 @@ export default function AdminProductsPage() {
             onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
           />
           <SelectField
-            label="Kategori"
+            label="Category"
             value={form.category_id}
             error={errors.category_id}
             onChange={(e) => setForm((f) => ({ ...f, category_id: e.target.value }))}
@@ -428,7 +428,7 @@ export default function AdminProductsPage() {
             <option value="inactive">Nonaktif</option>
           </SelectField>
           <TextareaField
-            label="Deskripsi"
+            label="Description"
             hint="Opsional"
             value={form.description}
             error={errors.description}
@@ -440,7 +440,7 @@ export default function AdminProductsPage() {
             </div>
           ) : null}
           <ImageUploadField
-            label="Gambar Produk (Gambar 1–6)"
+            label="Images Produk (Images 1–6)"
             value={form.imageSlots}
             onChange={(slots) => setForm((f) => ({ ...f, imageSlots: slots }))}
             maxSize={6}

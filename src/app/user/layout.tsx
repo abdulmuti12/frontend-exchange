@@ -8,8 +8,8 @@ import { Shell, NavItem } from "@/components/layout/Shell";
 import { Spinner } from "@/components/ui/Misc";
 
 const nav: NavItem[] = [
-  { href: "/user", label: "Katalog", icon: Store, exact: true },
   { href: "/user/furnitures", label: "Furnitur Saya", icon: Sofa },
+  { href: "/user", label: "Katalog", icon: Store, exact: true },
   { href: "/user/transactions", label: "Transaksi", icon: Repeat2 },
   { href: "/user/notifications", label: "Notifikasi", icon: Bell },
   { href: "/user/profile", label: "Profil", icon: UserRound },

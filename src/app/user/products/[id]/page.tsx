@@ -175,12 +175,12 @@ export default function ProductDetailPage() {
 
         <div>
           <Stamp label={statusMeta.label} color={statusMeta.color} bg={statusMeta.bg} />
-          <h1 className="mt-3 font-display text-3xl font-semibold text-ink">{product.name}</h1>
+          <h1 className="mt-3 font-display text-3xl font-baskerville text-ink">{product.name}</h1>
           <p className="mt-1 text-sm text-ink-soft">
             {product.brand?.name ?? "Brand tidak diketahui"} · {product.category?.name ?? "Tanpa kategori"}
           </p>
           {product.price != null && (
-            <p className="mt-2 font-display text-2xl font-semibold text-teak">
+            <p className="mt-2 font-display text-2xl font-baskerville text-teak">
               {`Rp ${Number(product.price).toLocaleString('id-ID')}`}
             </p>
           )}
@@ -189,7 +189,7 @@ export default function ProductDetailPage() {
           </p>
 
           <div className="mt-8 rounded-md border border-line bg-surface p-5">
-            <h2 className="font-display text-lg font-semibold text-ink">Ajukan tukar</h2>
+            <h2 className="font-display text-lg font-baskerville text-ink">Ajukan tukar</h2>
             {!canSwap ? (
               <p className="mt-2 text-sm text-ink-soft">
                 Produk ini sedang tidak tersedia untuk ditukar.

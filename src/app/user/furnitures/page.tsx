@@ -135,7 +135,7 @@ export default function FurnituresPage() {
 
         const editId = editing?.id;
         if (editId) {
-          await apiFor("user").post(`/user/furnitures/${editId}`, fd);
+          await apiFor("user").put(`/user/furnitures/${editId}`, fd);
         } else {
           await apiFor("user").post("/user/furnitures", fd);
         }
@@ -152,7 +152,7 @@ export default function FurnituresPage() {
 
         const editId = editing?.id;
         if (editId) {
-          await apiFor("user").post(`/user/furnitures/${editId}`, payload);
+          await apiFor("user").put(`/user/furnitures/${editId}`, payload);
         } else {
           await apiFor("user").post("/user/furnitures", payload);
         }

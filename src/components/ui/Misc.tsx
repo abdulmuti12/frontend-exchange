@@ -22,7 +22,7 @@ export function PageHeader({
         {eyebrow && (
           <p className="mb-1 font-mono text-xs uppercase tracking-widest text-teak">{eyebrow}</p>
         )}
-        <h1 className="font-display text-2xl font-semibold text-ink sm:text-3xl">{title}</h1>
+        <h1 className="font-display text-2xl font-baskerville text-ink sm:text-3xl">{title}</h1>
         {description && <p className="mt-1.5 max-w-2xl text-sm text-ink-soft">{description}</p>}
       </div>
       {action}
@@ -43,7 +43,7 @@ export function EmptyState({ title, description }: { title: string; description?
   return (
     <div className="flex flex-col items-center justify-center gap-2 rounded-md border border-dashed border-line bg-surface/60 px-6 py-16 text-center">
       <Inbox className="size-8 text-ink-soft/50" />
-      <p className="font-display text-base font-medium text-ink">{title}</p>
+      <p className="font-display text-base font-baskerville text-ink">{title}</p>
       {description && <p className="max-w-sm text-sm text-ink-soft">{description}</p>}
     </div>
   );

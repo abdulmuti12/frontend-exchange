@@ -39,7 +39,7 @@ export function Shell({
       <div className="sticky top-0 z-40 flex items-center justify-between border-b border-line bg-surface px-4 py-3 lg:hidden">
         <Link href={role === "Admin" ? "/systemAdmin" : "/user"} className="flex items-center gap-2">
           <Repeat className="size-5 text-teak" />
-          <span className="font-display text-lg font-semibold">Tukar</span>
+          <span className="font-display text-lg font-baskerville">Tukar</span>
         </Link>
         <button onClick={() => setOpen(true)} aria-label="Buka menu" className="p-1.5 text-ink">
           <Menu className="size-5" />
@@ -58,7 +58,7 @@ export function Shell({
             <Link href={role === "Admin" ? "/systemAdmin" : "/user"} className="flex items-center gap-2">
               <Repeat className="size-6 text-teak" />
               <div>
-                <p className="font-display text-xl font-semibold leading-none text-ink">Tukar</p>
+                <p className="font-display text-xl font-baskerville leading-none text-ink">Tukar</p>
                 <p className="mt-1 font-mono text-[10px] uppercase tracking-widest text-ink-soft">
                   {role}
                 </p>
@@ -79,7 +79,7 @@ export function Shell({
                   href={item.href}
                   onClick={() => setOpen(false)}
                   className={cn(
-                    "flex items-center gap-3 rounded-sm px-3 py-2.5 text-sm font-medium transition-colors",
+                    "flex items-center gap-3 rounded-sm px-3 py-2.5 text-sm font-baskerville transition-colors",
                     active
                       ? "bg-teak text-surface"
                       : "text-ink-soft hover:bg-ink/5 hover:text-ink"
@@ -96,7 +96,7 @@ export function Shell({
             <div className="border-t border-line px-3 py-4">
               <div className="flex items-center justify-between gap-2 rounded-sm px-3 py-2">
                 <div className="min-w-0">
-                  <p className="truncate text-sm font-medium text-ink">{identity.name}</p>
+                  <p className="truncate text-sm font-baskerville text-ink">{identity.name}</p>
                   <p className="truncate text-xs text-ink-soft">{identity.sub}</p>
                 </div>
                 <button

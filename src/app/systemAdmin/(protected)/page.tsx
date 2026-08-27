@@ -44,7 +44,7 @@ export default function AdminDashboardPage() {
         {tiles.map((t) => (
           <div key={t.label} className="rounded-md border border-line bg-surface p-5">
             <t.icon className="size-5 text-teak" />
-            <p className="mt-3 font-display text-3xl font-semibold text-ink">{t.value}</p>
+            <p className="mt-3 font-display text-3xl font-baskerville text-ink">{t.value}</p>
             <p className="mt-1 text-xs text-ink-soft">{t.label}</p>
           </div>
         ))}
@@ -52,7 +52,7 @@ export default function AdminDashboardPage() {
 
       <div className="mt-6 rounded-md border border-line bg-surface p-6">
         <div className="mb-5 flex items-center justify-between">
-          <h2 className="font-display text-lg font-semibold text-ink">
+          <h2 className="font-display text-lg font-baskerville text-ink">
             Transaksi berdasarkan status
           </h2>
           <span className="font-mono text-xs text-ink-soft">Total: {stats.total_transactions}</span>

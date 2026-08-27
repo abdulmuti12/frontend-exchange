@@ -83,7 +83,7 @@ export function ImageUploadField({
 
   return (
     <div className="flex flex-col gap-2">
-      {label && <span className="text-sm font-medium text-ink">{label}</span>}
+      {label && <span className="text-sm font-baskerville text-ink">{label}</span>}
       <div className="grid grid-cols-3 gap-3">
         {displaySlots.map(({ item, idx }) => {
           const isExisting = item && !item.file;
@@ -131,7 +131,7 @@ export function ImageUploadField({
                     className="absolute right-1 top-1 z-10 flex items-center gap-1 rounded-full bg-ink/80 px-2 py-1 text-surface shadow-md transition-opacity hover:bg-ink"
                   >
                     <Trash2 className="size-3" />
-                    <span className="text-[10px] font-medium">Hapus</span>
+                    <span className="text-[10px] font-baskerville">Hapus</span>
                   </button>
                 )}
                 {/* Hover overlay hint */}

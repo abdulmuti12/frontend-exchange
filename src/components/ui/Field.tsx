@@ -15,14 +15,14 @@ function FieldWrapper({ label, hint, error, required, children }: WrapperProps) 
   return (
     <label className="flex flex-col gap-1.5">
       {label && (
-        <span className="text-sm font-medium text-ink">
+        <span className="text-sm font-baskerville text-ink">
           {label}
           {required && <span className="text-rust"> *</span>}
         </span>
       )}
       {children}
       {hint && !error && <span className="text-xs text-ink-soft">{hint}</span>}
-      {error && <span className="text-xs text-rust font-medium">{error}</span>}
+      {error && <span className="text-xs text-rust font-baskerville">{error}</span>}
     </label>
   );
 }

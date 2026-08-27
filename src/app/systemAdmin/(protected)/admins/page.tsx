@@ -121,16 +121,16 @@ export default function AdminAdminsPage() {
           <table className="w-full text-left text-sm">
             <thead className="border-b border-line bg-paper-deep/40 text-xs uppercase tracking-wide text-ink-soft">
               <tr>
-                <th className="px-4 py-3 font-medium">Nama</th>
-                <th className="px-4 py-3 font-medium">Email</th>
-                <th className="px-4 py-3 font-medium">Status</th>
-                <th className="px-4 py-3 font-medium text-right">Aksi</th>
+                <th className="px-4 py-3 font-display">Nama</th>
+                <th className="px-4 py-3 font-display">Email</th>
+                <th className="px-4 py-3 font-display">Status</th>
+                <th className="px-4 py-3 font-display text-right">Aksi</th>
               </tr>
             </thead>
             <tbody>
               {admins.map((a) => (
                 <tr key={a.id} className="border-b border-line last:border-0">
-                  <td className="px-4 py-3 font-medium text-ink">{a.name}</td>
+                  <td className="px-4 py-3 font-display text-ink">{a.name}</td>
                   <td className="px-4 py-3 text-ink-soft">{a.email}</td>
                   <td className="px-4 py-3">
                     <Stamp

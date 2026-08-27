@@ -57,7 +57,7 @@ export default function NotificationsPage() {
                   <Bell className="mt-0.5 size-4 shrink-0 text-ink-soft" />
                 )}
                 <div className="min-w-0 flex-1">
-                  <p className={`text-sm ${unread ? "font-medium text-ink" : "text-ink-soft"}`}>{n.message}</p>
+                  <p className={`text-sm ${unread ? "font-display text-ink" : "text-ink-soft"}`}>{n.message}</p>
                   <p className="mt-1 font-mono text-[11px] text-ink-soft">{formatDate(n.created_at)}</p>
                 </div>
               </div>

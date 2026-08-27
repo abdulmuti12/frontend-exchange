@@ -63,7 +63,7 @@ export default function AdminLoginPage() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        {error && <p className="text-sm font-medium text-rust">{error}</p>}
+        {error && <p className="text-sm font-display text-rust">{error}</p>}
         <Button type="submit" loading={loading} className="mt-2 w-full">
           Masuk sebagai admin
         </Button>

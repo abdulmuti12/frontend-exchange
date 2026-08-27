@@ -140,7 +140,7 @@ export default function RegisterPage() {
               error={errors.address}
               onChange={(e) => update("address", e.target.value)}
             />
-            {error && <p className="text-sm font-medium text-rust">{error}</p>}
+            {error && <p className="text-sm font-display text-rust">{error}</p>}
             <Button type="submit" loading={loading} className="mt-2 w-full">
               Sign Up
             </Button>
@@ -149,7 +149,7 @@ export default function RegisterPage() {
           <div className="mt-5 text-center">
             <Link href="/login" className="text-sm text-ink-soft hover:text-ink">
               Already have an account?{" "}
-              <span className="font-medium text-teak hover:underline">Log in</span>
+              <span className="font-display text-teak hover:underline">Log in</span>
             </Link>
             <div className="mt-2">
               <Link href="/forgot-password" className="text-xs text-ink-soft hover:underline">

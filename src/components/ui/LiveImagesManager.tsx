@@ -73,7 +73,7 @@ export function LiveImagesManager({
 
   return (
     <div className="flex flex-col gap-1.5">
-      <span className="text-sm font-baskerville text-ink">Gambar</span>
+      <span className="text-sm font-display text-ink">Gambar</span>
       <button
         type="button"
         onClick={() => fileInputRef.current?.click()}

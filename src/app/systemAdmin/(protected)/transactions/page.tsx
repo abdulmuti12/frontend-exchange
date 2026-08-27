@@ -44,7 +44,7 @@ export default function AdminTransactionsPage() {
           <button
             key={f.value}
             onClick={() => setStatus(f.value)}
-            className={`rounded-sm border px-3 py-1.5 text-sm font-medium transition-colors ${
+            className={`rounded-sm border px-3 py-1.5 text-sm font-display transition-colors ${
               status === f.value
                 ? "border-teak bg-teak text-surface"
                 : "border-line text-ink-soft hover:border-teak hover:text-teak"
@@ -64,11 +64,11 @@ export default function AdminTransactionsPage() {
           <table className="w-full text-left text-sm">
             <thead className="border-b border-line bg-paper-deep/40 text-xs uppercase tracking-wide text-ink-soft">
               <tr>
-                <th className="px-4 py-3 font-medium">Tiket</th>
-                <th className="px-4 py-3 font-medium">Pengguna</th>
-                <th className="px-4 py-3 font-medium">Pertukaran</th>
-                <th className="px-4 py-3 font-medium">Status</th>
-                <th className="px-4 py-3 font-medium">Diajukan</th>
+                <th className="px-4 py-3 font-display">Tiket</th>
+                <th className="px-4 py-3 font-display">Pengguna</th>
+                <th className="px-4 py-3 font-display">Pertukaran</th>
+                <th className="px-4 py-3 font-display">Status</th>
+                <th className="px-4 py-3 font-display">Diajukan</th>
               </tr>
             </thead>
             <tbody>
@@ -84,7 +84,7 @@ export default function AdminTransactionsPage() {
                   >
                     <td className="px-4 py-3 font-mono text-xs text-ink-soft">#{shortId(t.id)}</td>
                     <td className="px-4 py-3">
-                      <Link href={`/systemAdmin/transactions/${t.id}`} className="font-medium text-ink hover:underline">
+                      <Link href={`/systemAdmin/transactions/${t.id}`} className="font-display text-ink hover:underline">
                         {t.user?.name ?? "-"}
                       </Link>
                     </td>

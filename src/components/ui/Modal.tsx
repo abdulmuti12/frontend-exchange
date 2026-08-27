@@ -43,7 +43,7 @@ export function Modal({
         className={`w-full ${width} rounded-md border border-line bg-surface shadow-xl animate-in`}
       >
         <div className="flex items-center justify-between border-b border-line px-5 py-4">
-          <h2 className="font-display text-lg font-semibold text-ink">{title}</h2>
+          <h2 className="font-display text-lg font-display text-ink">{title}</h2>
           <button
             onClick={onClose}
             aria-label="Tutup"

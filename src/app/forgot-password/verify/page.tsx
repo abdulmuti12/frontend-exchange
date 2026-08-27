@@ -132,11 +132,11 @@ function VerifyOtpContent() {
             value={digit}
             onChange={(e) => handleChange(index, e.target.value)}
             onKeyDown={(e) => handleKeyDown(index, e)}
-            className="w-10 h-12 text-center text-xl font-mono font-semibold border border-line rounded-sm bg-surface text-ink focus:border-teak outline-none transition-colors"
+            className="w-10 h-12 text-center text-xl font-mono font-display border border-line rounded-sm bg-surface text-ink focus:border-teak outline-none transition-colors"
           />
         ))}
       </div>
-      {error && <p className="text-sm font-medium text-rust text-center mb-4">{error}</p>}
+      {error && <p className="text-sm font-display text-rust text-center mb-4">{error}</p>}
       <Button onClick={onSubmit} loading={loading} className="w-full">
         Verifikasi
       </Button>

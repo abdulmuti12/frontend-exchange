@@ -156,7 +156,7 @@ export default function CatalogPage() {
                     )}
                   </div>
                   <div className="p-4">
-                    <p className="font-display text-base font-medium text-ink">{p.name}</p>
+                    <p className="font-display text-base font-display text-ink">{p.name}</p>
                     <p className="mt-1 text-xs text-ink-soft">
                       {p.brand?.name ?? "Brand tidak diketahui"} · {p.category?.name ?? "Tanpa kategori"}
                     </p>

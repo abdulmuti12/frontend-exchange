@@ -138,9 +138,9 @@ export function MasterDataManager({
           <table className="w-full text-left text-sm">
             <thead className="border-b border-line bg-paper-deep/40 text-xs uppercase tracking-wide text-ink-soft">
               <tr>
-                <th className="px-4 py-3 font-baskerville">Nama</th>
-                <th className="px-4 py-3 font-baskerville">Deskripsi</th>
-                <th className="px-4 py-3 font-baskerville text-right">Aksi</th>
+                <th className="px-4 py-3 font-display">Nama</th>
+                <th className="px-4 py-3 font-display">Deskripsi</th>
+                <th className="px-4 py-3 font-display text-right">Aksi</th>
               </tr>
             </thead>
             <tbody>
@@ -156,7 +156,7 @@ export function MasterDataManager({
                           className="size-8 rounded-sm object-cover"
                         />
                       )}
-                      <span className="font-baskerville text-ink">{item.name}</span>
+                      <span className="font-display text-ink">{item.name}</span>
                     </div>
                   </td>
                   <td className="max-w-xs truncate px-4 py-3 text-ink-soft">{item.description || "-"}</td>

@@ -112,7 +112,7 @@ export default function ProductDetailPage() {
             )}
             {/* Image counter */}
             {allImages.length > 1 && (
-              <div className="absolute bottom-2 right-2 rounded-full bg-ink/70 px-2 py-0.5 text-[10px] font-medium text-surface">
+              <div className="absolute bottom-2 right-2 rounded-full bg-ink/70 px-2 py-0.5 text-[10px] font-display text-surface">
                 {activeImgIdx + 1} / {allImages.length}
               </div>
             )}
@@ -175,12 +175,12 @@ export default function ProductDetailPage() {
 
         <div>
           <Stamp label={statusMeta.label} color={statusMeta.color} bg={statusMeta.bg} />
-          <h1 className="mt-3 font-display text-3xl font-baskerville text-ink">{product.name}</h1>
+          <h1 className="mt-3 font-display text-3xl font-display text-ink">{product.name}</h1>
           <p className="mt-1 text-sm text-ink-soft">
             {product.brand?.name ?? "Brand tidak diketahui"} · {product.category?.name ?? "Tanpa kategori"}
           </p>
           {product.price != null && (
-            <p className="mt-2 font-display text-2xl font-baskerville text-teak">
+            <p className="mt-2 font-display text-2xl font-display text-teak">
               {`Rp ${Number(product.price).toLocaleString('id-ID')}`}
             </p>
           )}
@@ -189,7 +189,7 @@ export default function ProductDetailPage() {
           </p>
 
           <div className="mt-8 rounded-md border border-line bg-surface p-5">
-            <h2 className="font-display text-lg font-baskerville text-ink">Ajukan tukar</h2>
+            <h2 className="font-display text-lg font-display text-ink">Ajukan tukar</h2>
             {!canSwap ? (
               <p className="mt-2 text-sm text-ink-soft">
                 Produk ini sedang tidak tersedia untuk ditukar.
@@ -199,14 +199,14 @@ export default function ProductDetailPage() {
                 <p className="text-sm text-brass">
                   Anda belum mengisi alamat. Silakan lengkapi alamat di halaman profil terlebih dahulu sebelum mengajukan tukar.
                 </p>
-                <Link href="/user/profile" className="inline-block text-sm font-medium text-teak hover:underline">
+                <Link href="/user/profile" className="inline-block text-sm font-display text-teak hover:underline">
                   → Lengkapi alamat di profil
                 </Link>
               </div>
             ) : furnitures.length === 0 ? (
               <p className="mt-2 text-sm text-ink-soft">
                 Anda belum memiliki furnitur berstatus tersedia.{" "}
-                <Link href="/user/furnitures" className="font-medium text-teak hover:underline">
+                <Link href="/user/furnitures" className="font-display text-teak hover:underline">
                   Tambah furnitur
                 </Link>{" "}
                 terlebih dahulu.

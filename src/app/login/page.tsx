@@ -73,7 +73,7 @@ export default function UserLoginPage() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        {error && <p className="text-sm font-medium text-rust">{error}</p>}
+        {error && <p className="text-sm font-display text-rust">{error}</p>}
         <Button type="submit" loading={loading} className="mt-2 w-full">
           Masuk
         </Button>
@@ -85,7 +85,7 @@ export default function UserLoginPage() {
       </div>
       <div className="mt-5 text-center text-sm text-ink-soft">
         Belum punya akun?{" "}
-        <Link href="/register" className="font-medium text-teak hover:underline">
+        <Link href="/register" className="font-display text-teak hover:underline">
           Daftar sekarang
         </Link>
         <div className="mt-2">

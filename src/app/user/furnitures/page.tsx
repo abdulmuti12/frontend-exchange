@@ -190,7 +190,7 @@ export default function FurnituresPage() {
         action={
           <Button onClick={openCreate}>
             <Plus className="size-4" />
-            Tambah furnitur
+            Add furniture
           </Button>
         }
       />
@@ -198,7 +198,7 @@ export default function FurnituresPage() {
       {loading ? (
         <Spinner />
       ) : furnitures.length === 0 ? (
-        <EmptyState title="Belum ada furnitur" description="Tambahkan furnitur pertama Anda untuk mulai menukar." />
+        <EmptyState title="No furniture yet" description="Add your first furniture to start swapping." />
       ) : (
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {furnitures.map((f) => {
@@ -219,7 +219,7 @@ export default function FurnituresPage() {
                 </div>
                 <div className="p-4">
                   <div className="flex items-start justify-between gap-2">
-                    <p className="font-display text-base font-medium text-ink">{f.name}</p>
+                    <p className="font-display text-base font-display text-ink">{f.name}</p>
                     <Stamp label={meta.label} color={meta.color} bg={meta.bg} className="text-[10px]" />
                   </div>
                   <p className="mt-1 text-xs text-ink-soft">
@@ -246,11 +246,11 @@ export default function FurnituresPage() {
       <Modal
         open={modalOpen}
         onClose={() => setModalOpen(false)}
-        title={editing ? "Ubah furnitur" : "Tambah furnitur"}
+        title={editing ? "Edit furniture" : "Add furniture"}
       >
         <div className="flex flex-col gap-4">
           <TextField
-            label="Nama furnitur"
+            label="Furniture name"
             required
             value={form.name}
             error={errors.name}
@@ -258,8 +258,8 @@ export default function FurnituresPage() {
           />
 
           <div>
-            <span className="mb-1.5 block text-sm font-medium text-ink">
-              Kategori <span className="text-rust">*</span>
+            <span className="mb-1.5 block text-sm font-display text-ink">
+              K Category <span className="text-rust">*</span>
             </span>
             <div className="mb-2 flex gap-4 text-xs text-ink-soft">
               <label className="flex items-center gap-1.5">
@@ -303,7 +303,7 @@ export default function FurnituresPage() {
           </div>
 
           <div>
-            <span className="mb-1.5 block text-sm font-medium text-ink">
+            <span className="mb-1.5 block text-sm font-display text-ink">
               Brand <span className="text-rust">*</span>
             </span>
             <div className="mb-2 flex gap-4 text-xs text-ink-soft">
@@ -348,7 +348,7 @@ export default function FurnituresPage() {
           </div>
 
           <TextareaField
-            label="Deskripsi"
+            label="Description"
             hint="Opsional"
             value={form.description}
             error={errors.description}
@@ -356,7 +356,7 @@ export default function FurnituresPage() {
           />
 
           <FileUploadField
-            label="Gambar (File)"
+            label="File (File)"
             value={form.images}
             onChange={(images) => setForm((f) => ({ ...f, images }))}
           />

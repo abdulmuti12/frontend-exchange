@@ -46,7 +46,7 @@ export function FileUploadField({
 
   return (
     <div className="flex flex-col gap-1.5">
-      {label && <span className="text-sm font-baskerville text-ink">{label}</span>}
+      {label && <span className="text-sm font-display text-ink">{label}</span>}
       <div className="flex gap-2">
         <input
           ref={inputRef}

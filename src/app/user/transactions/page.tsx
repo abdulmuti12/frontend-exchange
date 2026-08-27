@@ -44,7 +44,7 @@ export default function UserTransactionsPage() {
           <button
             key={f.value}
             onClick={() => setStatus(f.value)}
-            className={`rounded-sm border px-3 py-1.5 text-sm font-medium transition-colors ${
+            className={`rounded-sm border px-3 py-1.5 text-sm font-display transition-colors ${
               status === f.value
                 ? "border-teak bg-teak text-surface"
                 : "border-line text-ink-soft hover:border-teak hover:text-teak"
@@ -87,11 +87,11 @@ export default function UserTransactionsPage() {
                     </div>
                     <div className="min-w-0">
                       <p className="text-[11px] text-ink-soft">Milik Anda</p>
-                      <p className="truncate text-sm font-medium text-ink">
+                      <p className="truncate text-sm font-display text-ink">
                         {t.user_furniture?.name ?? "-"}
                       </p>
                       {t.user_furniture?.admin_price != null && (
-                        <p className="mt-0.5 text-[11px] font-medium text-teak">
+                        <p className="mt-0.5 text-[11px] font-display text-teak">
                           {`Rp ${Number(t.user_furniture.admin_price).toLocaleString('id-ID')}`}
                         </p>
                       )}
@@ -101,9 +101,9 @@ export default function UserTransactionsPage() {
                   <div className="flex items-center gap-2">
                     <div className="min-w-0 text-right">
                       <p className="text-[11px] text-ink-soft">Dari katalog</p>
-                      <p className="truncate text-sm font-medium text-ink">{t.product?.name ?? "-"}</p>
+                      <p className="truncate text-sm font-display text-ink">{t.product?.name ?? "-"}</p>
                       {t.product?.price != null && (
-                        <p className="mt-0.5 text-[11px] font-medium text-ink-soft">
+                        <p className="mt-0.5 text-[11px] font-display text-ink-soft">
                           {`Rp ${Number(t.product.price).toLocaleString('id-ID')}`}
                         </p>
                       )}

@@ -85,7 +85,7 @@ export default function UserLoginPage() {
       </div>
       <div className="mt-5 text-center text-sm text-ink-soft">
         Don't have an account?{" "}
-        <Link href="/register" className="font-display text-teak hover:underline">
+        <Link href="/register" className="text-xs text-teak hover:underline">
           Sign up now
         </Link>
         <div className="mt-2">

@@ -8,7 +8,7 @@ export default function AdminCategoriesPage() {
       resource="categories"
       singular="kategori"
       eyebrow="Master Data"
-      title="Kelola kategori"
+      title="Manage categories"
       description="Kategori membantu pengguna menyaring katalog dan furnitur mereka sendiri."
     />
   );

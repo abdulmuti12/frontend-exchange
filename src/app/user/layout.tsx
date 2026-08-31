@@ -8,27 +8,27 @@ import { Shell, NavItem } from "@/components/layout/Shell";
 import { Spinner } from "@/components/ui/Misc";
 
 const nav: NavItem[] = [
-  { href: "/user/furnitures", label: "Furnitur Saya", icon: Sofa },
-  { href: "/user", label: "Katalog", icon: Store, exact: true },
-  { href: "/user/transactions", label: "Transaksi", icon: Repeat2 },
-  { href: "/user/notifications", label: "Notifikasi", icon: Bell },
-  { href: "/user/profile", label: "Profil", icon: UserRound },
+  { href: "/user/furnitures", label: "My Furniture", icon: Sofa },
+  { href: "/user", label: "Catalog", icon: Store, exact: true },
+  { href: "/user/transactions", label: "Transactions", icon: Repeat2 },
+  { href: "/user/notifications", label: "Notifications", icon: Bell },
+  { href: "/user/profile", label: "Profile", icon: UserRound },
 ];
 
 function Guard({ children }: { children: ReactNode }) {
   const { profile, ready, isAuthenticated, logout } = useUserAuth();
   const router = useRouter();
 
-  if (!ready) return <Spinner label="Menyiapkan akun Anda..." />;
+  if (!ready) return <Spinner label="Setting up your account..." />;
 
   if (!isAuthenticated) {
     router.replace("/login");
-    return <Spinner label="Mengalihkan ke halaman login..." />;
+    return <Spinner label="Redirecting to login page..." />;
   }
 
   return (
     <Shell
-      role="Pengguna"
+      role="User"
       nav={nav}
       identity={profile ? { name: profile.name, sub: profile.email } : null}
       onLogout={logout}

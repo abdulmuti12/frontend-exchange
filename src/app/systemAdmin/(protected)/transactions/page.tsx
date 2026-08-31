@@ -35,7 +35,7 @@ export default function AdminTransactionsPage() {
     <div>
       <PageHeader
         eyebrow="Verifikasi"
-        title="Kelola transaksi"
+        title="Transaction management"
         description="Periksa dan verifikasi pengajuan tukar dari seluruh pengguna."
       />
 

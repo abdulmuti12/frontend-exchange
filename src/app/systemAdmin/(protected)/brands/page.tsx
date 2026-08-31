@@ -8,7 +8,7 @@ export default function AdminBrandsPage() {
       resource="brands"
       singular="brand"
       eyebrow="Master Data"
-      title="Kelola brand"
+      title="Manage brands"
       description="Brand digunakan sebagai referensi saat pengguna maupun admin menambahkan barang."
     />
   );

@@ -202,10 +202,10 @@ export function MasterDataManager({
           />
           <div className="mt-1 flex justify-end gap-2">
             <Button variant="ghost" onClick={() => setModalOpen(false)}>
-              Batal
+              Cancel
             </Button>
             <Button onClick={onSubmit} loading={saving}>
-              Simpan
+              Save
             </Button>
           </div>
         </div>

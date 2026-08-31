@@ -126,7 +126,7 @@ function TrackingTimeline({ transaction }: { transaction: Transaction }) {
       status: "pending",
       time: transaction.created_at,
       icon: ImageIcon,
-      description: "Transaksi berhasil diajukan",
+      description: "Transaction successfully submitted",
     },
     {
       label: "Diperiksa",
@@ -140,14 +140,14 @@ function TrackingTimeline({ transaction }: { transaction: Transaction }) {
       status: "approved",
       time: null,
       icon: ImageIcon,
-      description: "Transaksi disetujui dan ditukar",
+      description: "Transaction approved and swapped",
     },
     {
       label: "Ditolak",
       status: "rejected",
       time: null,
       icon: ImageIcon,
-      description: transaction.reject_reason ?? "Transaksi ditolak",
+      description: transaction.reject_reason ?? "Transaction rejected",
     },
   ];
 
@@ -244,12 +244,12 @@ export default function UserTransactionDetailPage() {
     apiFor("user")
       .get(`/user/transactions/${id}`)
       .then(({ data }) => setTransaction(data.data))
-      .catch(() => setError("Transaksi tidak ditemukan."))
+      .catch(() => setError("Transaction not found."))
       .finally(() => setLoading(false));
   }, [id]);
 
   if (loading) return <Spinner />;
-  if (error || !transaction) return <ErrorNote message={error ?? "Transaksi tidak ditemukan."} />;
+  if (error || !transaction) return <ErrorNote message={error ?? "Transaction not found."} />;
 
   const meta = TRANSACTION_STATUS_META[transaction.status];
   const yourImages = imageList(transaction.user_furniture?.images);
@@ -296,16 +296,16 @@ export default function UserTransactionDetailPage() {
             {/* User Furniture Images */}
             <div>
               <p className="mb-2 text-xs font-display uppercase tracking-wider text-ink-soft">
-                Furnitur Anda ({yourImages.length} foto)
+                Your furniture ({yourImages.length} photos)
               </p>
               <ImageGallery
                 images={yourImages}
-                title={`${transaction.user_furniture?.name ?? "Furnitur"} - Foto`}
-                mainAlt={transaction.user_furniture?.name ?? "Furnitur Anda"}
+                title={`${transaction.user_furniture?.name ?? "Furniture"} - Photos`}
+                mainAlt={transaction.user_furniture?.name ?? "Your furniture"}
               />
               {transaction.user_furniture?.admin_price != null && (
                 <p className="mt-2 text-xs font-display text-teak">
-                  Harga: Rp {Number(transaction.user_furniture.admin_price).toLocaleString('id-ID')}
+                  Value Item: Rp {Number(transaction.user_furniture.admin_price).toLocaleString('id-ID')}
                 </p>
               )}
             </div>
@@ -313,16 +313,16 @@ export default function UserTransactionDetailPage() {
             {/* Catalog Product Images */}
             <div>
               <p className="mb-2 text-xs font-display uppercase tracking-wider text-ink-soft">
-                Produk Katalog ({theirImages.length} foto)
+                Catalog Product ({theirImages.length} photos)
               </p>
               <ImageGallery
                 images={theirAllImages}
-                title={`${transaction.product?.name ?? "Produk"} - Foto`}
+                title={`${transaction.product?.name ?? "Produk"} - Photos`}
                 mainAlt={transaction.product?.name ?? "Produk katalog"}
               />
               {transaction.product?.price != null && (
                 <p className="mt-2 text-xs font-display text-teak">
-                  Harga: Rp {Number(transaction.product.price).toLocaleString('id-ID')}
+                  Value Item: Rp {Number(transaction.product.price).toLocaleString('id-ID')}
                 </p>
               )}
             </div>
@@ -359,7 +359,7 @@ export default function UserTransactionDetailPage() {
       <TrackingTimeline transaction={transaction} />
 
       <div className="mt-8">
-        <h2 className="mb-3 font-display text-lg font-display text-ink">Percakapan dengan admin</h2>
+        <h2 className="mb-3 font-display text-lg font-display text-ink">Conversation with admin</h2>
         <ChatPanel role="user" transactionId={transaction.id} status={transaction.status} />
       </div>
 

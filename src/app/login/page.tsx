@@ -25,10 +25,10 @@ export default function UserLoginPage() {
       const { data } = await apiFor("user").post("/auth/user/login", { email, password });
       setToken("user", data.data.access_token);
       setStoredProfile("user", data.data.user);
-      toast.success(data.message ?? "Login berhasil.");
+      toast.success(data.message ?? "Login successful.");
       router.push("/user");
     } catch (err) {
-      setError(extractErrorMessage(err, "Email atau password salah."));
+      setError(extractErrorMessage(err, "Invalid email or password."));
     } finally {
       setLoading(false);
     }
@@ -36,9 +36,9 @@ export default function UserLoginPage() {
 
   return (
     <AuthCard
-      eyebrow="Pengguna"
-      title="Masuk ke akun Anda"
-      description="Lihat katalog, ajukan pertukaran, dan pantau transaksi Anda."
+      eyebrow="User"
+      title="Login to your account"
+      description="Browse catalog, submit swaps, and track your transactions."
       maxWidth="max-w-md"
     >
       <GoogleAuthButton
@@ -60,12 +60,12 @@ export default function UserLoginPage() {
           type="email"
           required
           autoComplete="email"
-          placeholder="anda@email.com"
+          placeholder="you@email.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
         <TextField
-          label="Kata sandi"
+          label="Password"
           type="password"
           required
           autoComplete="current-password"
@@ -75,22 +75,22 @@ export default function UserLoginPage() {
         />
         {error && <p className="text-sm font-display text-rust">{error}</p>}
         <Button type="submit" loading={loading} className="mt-2 w-full">
-          Masuk
+          Login
         </Button>
       </form>
       <div className="mt-4 text-right">
         <Link href="/forgot-password" className="text-xs text-teak hover:underline">
-          Lupa kata sandi?
+          Forgot password?
         </Link>
       </div>
       <div className="mt-5 text-center text-sm text-ink-soft">
-        Belum punya akun?{" "}
+        Don't have an account?{" "}
         <Link href="/register" className="font-display text-teak hover:underline">
-          Daftar sekarang
+          Sign up now
         </Link>
         <div className="mt-2">
           <Link href="/systemAdmin/login" className="text-xs text-ink-soft hover:underline">
-            Masuk sebagai admin →
+            Login as admin →
           </Link>
         </div>
       </div>

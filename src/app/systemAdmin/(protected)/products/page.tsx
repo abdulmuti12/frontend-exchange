@@ -197,7 +197,7 @@ export default function AdminProductsPage() {
   }
 
   async function onDelete(p: Product) {
-    const ok = await confirm("Hapus produk", `Hapus "${p.name}" dari katalog?`, true);
+    const ok = await confirm("Delete product", `Delete "${p.name}" from catalog?`, true);
     if (!ok) return;
     try {
       await apiFor("admin").delete(`/systemAdmin/products/${p.id}`);
@@ -220,12 +220,12 @@ export default function AdminProductsPage() {
     <div>
       <PageHeader
         eyebrow="Katalog"
-        title="Kelola produk"
+        title="Product management"
         description="Barang yang tersedia bagi pengguna untuk ditukar."
         action={
           <Button onClick={openCreate}>
             <Plus className="size-4" />
-            Tambah produk
+            Add product
           </Button>
         }
       />
@@ -236,7 +236,7 @@ export default function AdminProductsPage() {
           <input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Cari produk..."
+            placeholder="Search products..."
             className="w-full rounded-sm border border-line bg-surface py-2.5 pl-9 pr-3 text-sm outline-none focus:border-teak"
           />
         </div>
@@ -373,10 +373,10 @@ export default function AdminProductsPage() {
         </>
       )}
 
-      <Modal open={modalOpen} onClose={() => setModalOpen(false)} title={editing ? "Ubah produk" : "Tambah produk"}>
+      <Modal open={modalOpen} onClose={() => setModalOpen(false)} title={editing ? "Edit product" : "Add product"}>
         <div className="flex flex-col gap-4">
           <TextField
-            label="Nama produk"
+            label="Product name"
             required
             value={form.name}
             error={errors.name}

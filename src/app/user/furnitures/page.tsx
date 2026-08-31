@@ -158,7 +158,7 @@ export default function FurnituresPage() {
         }
       }
 
-      toast.success(editing ? "Furnitur berhasil diperbarui." : "Furnitur berhasil ditambahkan.");
+      toast.success(editing ? "Furniture updated successfully." : "Furniture added successfully.");
       setModalOpen(false);
       load();
     } catch (err) {
@@ -170,11 +170,11 @@ export default function FurnituresPage() {
   }
 
   async function onDelete(f: Furniture) {
-    const ok = await confirm("Hapus furnitur", `Hapus "${f.name}" dari daftar furnitur Anda?`, true);
+    const ok = await confirm("Delete furniture", `Delete "${f.name}" from your furniture list?`, true);
     if (!ok) return;
     try {
       await apiFor("user").delete(`/user/furnitures/${f.id}`);
-      toast.success("Furnitur dihapus.");
+      toast.success("Furniture deleted.");
       load();
     } catch (err) {
       toast.error(extractErrorMessage(err, "Gagal menghapus furnitur."));
@@ -184,9 +184,9 @@ export default function FurnituresPage() {
   return (
     <div>
       <PageHeader
-        eyebrow="Milik Anda"
-        title="Furnitur saya"
-        description="Kelola furnitur yang bisa Anda tawarkan untuk ditukar."
+        eyebrow="Your items"
+        title="My furniture"
+        description="Manage furniture you can offer for swap."
         action={
           <Button onClick={openCreate}>
             <Plus className="size-4" />
@@ -213,7 +213,7 @@ export default function FurnituresPage() {
                     <img src={img} alt={f.name} className="h-full w-full object-cover" />
                   ) : (
                     <div className="flex h-full items-center justify-center font-mono text-xs text-ink-soft">
-                      Tanpa gambar
+                      No image
                     </div>
                   )}
                 </div>
@@ -223,17 +223,17 @@ export default function FurnituresPage() {
                     <Stamp label={meta.label} color={meta.color} bg={meta.bg} className="text-[10px]" />
                   </div>
                   <p className="mt-1 text-xs text-ink-soft">
-                    {f.brand?.name ?? f.brand_text ?? "Tanpa brand"} ·{" "}
-                    {f.category?.name ?? f.category_text ?? "Tanpa kategori"}
+                    {f.brand?.name ?? f.brand_text ?? "No brand"} ·{" "}
+                    {f.category?.name ?? f.category_text ?? "No category"}
                   </p>
                   <div className="mt-3 flex gap-2">
                     <Button variant="secondary" size="sm" disabled={!editable} onClick={() => openEdit(f)}>
                       <Pencil className="size-3.5" />
-                      Ubah
+                      Edit
                     </Button>
                     <Button variant="ghost" size="sm" disabled={!editable} onClick={() => onDelete(f)}>
                       <Trash2 className="size-3.5" />
-                      Hapus
+                      Delete
                     </Button>
                   </div>
                 </div>
@@ -268,7 +268,7 @@ export default function FurnituresPage() {
                   checked={form.categoryMode === "category"}
                   onChange={() => setForm((f) => ({ ...f, categoryMode: "category" }))}
                 />
-                Pilih dari master
+                Choose from master
               </label>
               <label className="flex items-center gap-1.5">
                 <input
@@ -285,7 +285,7 @@ export default function FurnituresPage() {
                 value={form.category_id}
                 onChange={(e) => setForm((f) => ({ ...f, category_id: e.target.value }))}
               >
-                <option value="">— Pilih kategori —</option>
+                <option value="">— Select category —</option>
                 {categories.map((c) => (
                   <option key={c.id} value={c.id}>
                     {c.name}
@@ -294,7 +294,7 @@ export default function FurnituresPage() {
               </SelectField>
             ) : (
               <TextField
-                placeholder="mis. Kursi"
+                placeholder="e.g. Chair"
                 error={errors.category_text}
                 value={form.category_text}
                 onChange={(e) => setForm((f) => ({ ...f, category_text: e.target.value }))}
@@ -313,7 +313,7 @@ export default function FurnituresPage() {
                   checked={form.brandMode === "brand"}
                   onChange={() => setForm((f) => ({ ...f, brandMode: "brand" }))}
                 />
-                Pilih dari master
+                Choose from master
               </label>
               <label className="flex items-center gap-1.5">
                 <input
@@ -330,7 +330,7 @@ export default function FurnituresPage() {
                 value={form.brand_id}
                 onChange={(e) => setForm((f) => ({ ...f, brand_id: e.target.value }))}
               >
-                <option value="">— Pilih brand —</option>
+                <option value="">— Select brand —</option>
                 {brands.map((b) => (
                   <option key={b.id} value={b.id}>
                     {b.name}
@@ -339,7 +339,7 @@ export default function FurnituresPage() {
               </SelectField>
             ) : (
               <TextField
-                placeholder="mis. Custom"
+                placeholder="e.g. Custom"
                 error={errors.brand_text}
                 value={form.brand_text}
                 onChange={(e) => setForm((f) => ({ ...f, brand_text: e.target.value }))}
@@ -356,17 +356,17 @@ export default function FurnituresPage() {
           />
 
           <FileUploadField
-            label="File (File)"
+            label="Image (File)"
             value={form.images}
             onChange={(images) => setForm((f) => ({ ...f, images }))}
           />
 
           <div className="mt-1 flex justify-end gap-2">
             <Button variant="ghost" onClick={() => setModalOpen(false)}>
-              Batal
+              Cancel
             </Button>
             <Button onClick={onSubmit} loading={saving}>
-              Simpan
+              Save
             </Button>
           </div>
         </div>

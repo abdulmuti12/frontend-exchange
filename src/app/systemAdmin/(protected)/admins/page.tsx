@@ -77,7 +77,7 @@ export default function AdminAdminsPage() {
   }
 
   async function onDelete(a: Admin) {
-    const ok = await confirm("Hapus admin", `Hapus akun admin "${a.name}"?`, true);
+    const ok = await confirm("Delete admin", `Delete admin account "${a.name}"?`, true);
     if (!ok) return;
     try {
       await apiFor("admin").delete(`/systemAdmin/admins/${a.id}`);
@@ -92,12 +92,12 @@ export default function AdminAdminsPage() {
     <div>
       <PageHeader
         eyebrow="Akses"
-        title="Kelola admin"
+        title="Admin management"
         description="Atur siapa saja yang dapat mengelola katalog dan memverifikasi transaksi."
         action={
           <Button onClick={openCreate}>
             <Plus className="size-4" />
-            Tambah admin
+            Add admin
           </Button>
         }
       />
@@ -107,7 +107,7 @@ export default function AdminAdminsPage() {
         <input
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          placeholder="Cari admin..."
+          placeholder="Search admins..."
           className="w-full rounded-sm border border-line bg-surface py-2.5 pl-9 pr-3 text-sm outline-none focus:border-teak"
         />
       </div>
@@ -157,7 +157,7 @@ export default function AdminAdminsPage() {
         </div>
       )}
 
-      <Modal open={modalOpen} onClose={() => setModalOpen(false)} title={editing ? "Ubah admin" : "Tambah admin"}>
+      <Modal open={modalOpen} onClose={() => setModalOpen(false)} title={editing ? "Edit admin" : "Add admin"}>
         <div className="flex flex-col gap-4">
           <TextField
             label="Nama"

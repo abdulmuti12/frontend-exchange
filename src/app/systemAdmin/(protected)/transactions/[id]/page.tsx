@@ -307,17 +307,17 @@ export default function AdminTransactionDetailPage() {
   async function submitPrice() {
     const parsed = Number(priceValue);
     if (Number.isNaN(parsed) || parsed < 0) {
-      setPriceError("Harga harus angka positif.");
+      setPriceError("Value Item harus angka positif.");
       return;
     }
     setPriceLoading(true);
     try {
       await apiFor("admin").patch(`/systemAdmin/transactions/${id}/set-price`, { admin_price: parsed });
-      toast.success("Harga barang pengguna berhasil diatur.");
+      toast.success("Value Item barang pengguna berhasil diatur.");
       setPriceOpen(false);
       load();
     } catch (err) {
-      setPriceError(extractErrorMessage(err, "Gagal menyimpan harga."));
+      setPriceError(extractErrorMessage(err, "Gagal menyimpan Value Item."));
     } finally {
       setPriceLoading(false);
     }
@@ -417,7 +417,7 @@ export default function AdminTransactionDetailPage() {
               />
               {transaction.user_furniture?.admin_price != null && (
                 <p className="mt-2 text-xs font-display text-teak">
-                  Harga: Rp {Number(transaction.user_furniture.admin_price).toLocaleString('id-ID')}
+                  Value Item: Rp {Number(transaction.user_furniture.admin_price).toLocaleString('id-ID')}
                 </p>
               )}
             </div>
@@ -434,7 +434,7 @@ export default function AdminTransactionDetailPage() {
               />
               {transaction.product?.price != null && (
                 <p className="mt-2 text-xs font-display text-teak">
-                  Harga: Rp {Number(transaction.product.price).toLocaleString('id-ID')}
+                  Value Item: Rp {Number(transaction.product.price).toLocaleString('id-ID')}
                 </p>
               )}
             </div>
@@ -457,14 +457,14 @@ export default function AdminTransactionDetailPage() {
         {canSetPrice && (
           <div className="border-t border-line px-6 py-3 flex items-center gap-2">
             <Banknote className="size-4 text-ink-soft shrink-0" />
-            <span className="text-sm text-ink-soft">Harga barang pengguna</span>
+            <span className="text-sm text-ink-soft">Value Item barang pengguna</span>
             <span className="ml-auto text-sm font-display text-ink">
               {transaction.user_furniture?.admin_price
                 ? `Rp ${Number(transaction.user_furniture.admin_price).toLocaleString('id-ID')}`
                 : "Belum diatur"}
             </span>
             <Button variant="secondary" size="sm" onClick={openPriceModal}>
-              Atur harga
+              Atur Value Item
             </Button>
           </div>
         )}
@@ -523,7 +523,7 @@ export default function AdminTransactionDetailPage() {
         </div>
       </div>
 
-      <Modal open={rejectOpen} onClose={() => setRejectOpen(false)} title="Tolak transaksi" width="max-w-sm">
+      <Modal open={rejectOpen} onClose={() => setRejectOpen(false)} title="Reject transaction" width="max-w-sm">
         <div className="flex flex-col gap-4">
           <TextareaField
             label="Alasan penolakan"
@@ -538,23 +538,23 @@ export default function AdminTransactionDetailPage() {
               Batal
             </Button>
             <Button variant="danger" onClick={reject} loading={actionLoading === "reject"}>
-              Tolak transaksi
+              Reject transaction
             </Button>
           </div>
         </div>
       </Modal>
 
-      <Modal open={priceOpen} onClose={() => !priceLoading && setPriceOpen(false)} title="Atur harga barang pengguna" width="max-w-sm">
+      <Modal open={priceOpen} onClose={() => !priceLoading && setPriceOpen(false)} title="Atur Value Item barang pengguna" width="max-w-sm">
         <div className="flex flex-col gap-4">
           <div className="rounded-sm bg-paper-deep/40 p-3 text-xs text-ink-soft">
-            {transaction.user_furniture?.name ?? "Furnitur"} — admin yang menetapkan harga.
+            {transaction.user_furniture?.name ?? "Furnitur"} — admin yang menetapkan Value Item.
           </div>
           <TextField
-            label="Harga (Rp)"
+            label="Value Item (Rp)"
             type="number"
             min="0"
             step="100"
-            placeholder="Masukkan harga barang"
+            placeholder="Masukkan Value Item barang"
             value={priceValue}
             error={priceError ?? undefined}
             onChange={(e) => setPriceValue(e.target.value)}
@@ -564,7 +564,7 @@ export default function AdminTransactionDetailPage() {
               Batal
             </Button>
             <Button onClick={submitPrice} loading={priceLoading}>
-              Simpan harga
+              Save price
             </Button>
           </div>
         </div>

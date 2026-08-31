@@ -42,7 +42,7 @@ export default function RegisterPage() {
       });
       setToken("user", data.data.access_token);
       setStoredProfile("user", data.data.user);
-      toast.success("Akun berhasil dibuat.");
+      toast.success("Account created successfully.");
       router.push("/user");
     } catch (err) {
       setErrors(fieldErrors(err));
@@ -54,9 +54,9 @@ export default function RegisterPage() {
 
   return (
     <AuthCard
-      eyebrow="Pengguna Baru"
-      title="Buat akun"
-      description="Daftar untuk mulai menawarkan furnitur dan menukarnya."
+      eyebrow="New User"
+      title="Create account"
+      description="Register to start offering furniture and swapping."
       maxWidth="max-w-4xl"
     >
       <div className="flex flex-col md:flex-row divide-y md:divide-y-0 md:divide-x divide-line">
@@ -124,7 +124,7 @@ export default function RegisterPage() {
               onChange={(e) => update("password", e.target.value)}
             />
             <TextField
-              label="Nomor WhatsApp"
+              label="WhatsApp Number"
               placeholder="0812 3456 7890"
               autoComplete="tel"
               hint="Used for WhatsApp contact by admin"
@@ -153,7 +153,7 @@ export default function RegisterPage() {
             </Link>
             <div className="mt-2">
               <Link href="/forgot-password" className="text-xs text-ink-soft hover:underline">
-                Lupa kata sandi?
+                Forgot password?
               </Link>
             </div>
           </div>

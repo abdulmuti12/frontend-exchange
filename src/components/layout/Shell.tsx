@@ -21,7 +21,7 @@ export function Shell({
   onLogout,
   children,
 }: {
-  role: "Admin" | "Pengguna";
+  role: "Admin" | "User";
   nav: NavItem[];
   identity: { name: string; sub: string } | null;
   onLogout: () => void;
@@ -39,9 +39,9 @@ export function Shell({
       <div className="sticky top-0 z-40 flex items-center justify-between border-b border-line bg-surface px-4 py-3 lg:hidden">
         <Link href={role === "Admin" ? "/systemAdmin" : "/user"} className="flex items-center gap-2">
           <Repeat className="size-5 text-teak" />
-          <span className="font-display text-lg font-display">Tukar</span>
+          <span className="font-display text-lg font-display">Exchange</span>
         </Link>
-        <button onClick={() => setOpen(true)} aria-label="Buka menu" className="p-1.5 text-ink">
+        <button onClick={() => setOpen(true)} aria-label="Open menu" className="p-1.5 text-ink">
           <Menu className="size-5" />
         </button>
       </div>
@@ -58,7 +58,7 @@ export function Shell({
             <Link href={role === "Admin" ? "/systemAdmin" : "/user"} className="flex items-center gap-2">
               <Repeat className="size-6 text-teak" />
               <div>
-                <p className="font-display text-xl font-display leading-none text-ink">Tukar</p>
+                <p className="font-display text-xl font-display leading-none text-ink">Exchange</p>
                 <p className="mt-1 font-mono text-[10px] uppercase tracking-widest text-ink-soft">
                   {role}
                 </p>

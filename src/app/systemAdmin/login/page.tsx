@@ -37,7 +37,7 @@ export default function AdminLoginPage() {
     <AuthCard
       eyebrow="Admin"
       title="Masuk ke dashboard"
-      description="Kelola katalog, verifikasi transaksi, dan pantau statistik platform."
+      description="Manage catalog, verify transactions, and monitor platform statistics."
       footer={
         <Link href="/login" className="text-xs text-ink-soft hover:underline">
           ← Masuk sebagai pengguna

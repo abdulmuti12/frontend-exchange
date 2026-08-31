@@ -35,8 +35,8 @@ export default function UserTransactionsPage() {
     <div>
       <PageHeader
         eyebrow="Riwayat"
-        title="Transaksi saya"
-        description="Pantau status pengajuan tukar Anda, dari menunggu hingga disetujui."
+        title="My transactions"
+        description="Track your swap request status, from waiting to approved."
       />
 
       <div className="mb-6 flex flex-wrap gap-2">
@@ -58,7 +58,7 @@ export default function UserTransactionsPage() {
       {loading ? (
         <Spinner />
       ) : transactions.length === 0 ? (
-        <EmptyState title="Belum ada transaksi" description="Ajukan tukar dari halaman katalog untuk memulai." />
+        <EmptyState title="No transactions yet" description="Submit a swap from the catalog page to get started." />
       ) : (
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
           {transactions.map((t) => {
@@ -86,7 +86,7 @@ export default function UserTransactionsPage() {
                       )}
                     </div>
                     <div className="min-w-0">
-                      <p className="text-[11px] text-ink-soft">Milik Anda</p>
+                      <p className="text-[11px] text-ink-soft">Your item</p>
                       <p className="truncate text-sm font-display text-ink">
                         {t.user_furniture?.name ?? "-"}
                       </p>

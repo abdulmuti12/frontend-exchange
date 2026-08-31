@@ -78,9 +78,9 @@ export default function CatalogPage() {
   return (
     <div>
       <PageHeader
-        eyebrow="Katalog"
-        title="Jelajahi barang yang tersedia"
-        description="Pilih barang yang ingin Anda tukar dengan salah satu furnitur milik Anda."
+        eyebrow="Catalog"
+        title="Explore Available Items"
+        description="Select an item you want to swap with one of your furniture."
       />
 
       <div className="mb-6 flex flex-wrap gap-3">
@@ -89,7 +89,7 @@ export default function CatalogPage() {
           <input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Cari nama produk..."
+            placeholder="Search product name..."
             className="w-full rounded-sm border border-line bg-surface py-2.5 pl-9 pr-3 text-sm outline-none focus:border-teak"
           />
         </div>
@@ -98,7 +98,7 @@ export default function CatalogPage() {
           onChange={(e) => setCategoryId(e.target.value)}
           className="rounded-sm border border-line bg-surface px-3 py-2.5 text-sm outline-none focus:border-teak"
         >
-          <option value="">Semua kategori</option>
+          <option value="">All Categories</option>
           {categories.map((c) => (
             <option key={c.id} value={c.id}>
               {c.name}
@@ -110,7 +110,7 @@ export default function CatalogPage() {
           onChange={(e) => setBrandId(e.target.value)}
           className="rounded-sm border border-line bg-surface px-3 py-2.5 text-sm outline-none focus:border-teak"
         >
-          <option value="">Semua brand</option>
+          <option value="">All Brands</option>
           {brands.map((b) => (
             <option key={b.id} value={b.id}>
               {b.name}
@@ -122,7 +122,7 @@ export default function CatalogPage() {
       {loading ? (
         <Spinner />
       ) : products.length === 0 ? (
-        <EmptyState title="Belum ada produk" description="Coba ubah kata kunci atau filter pencarian Anda." />
+        <EmptyState title="No products found" description="Try changing keywords or search filters." />
       ) : (
         <>
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -158,7 +158,7 @@ export default function CatalogPage() {
                   <div className="p-4">
                     <p className="font-display text-base font-display text-ink">{p.name}</p>
                     <p className="mt-1 text-xs text-ink-soft">
-                      {p.brand?.name ?? "Brand tidak diketahui"} · {p.category?.name ?? "Tanpa kategori"}
+                      {p.brand?.name ?? "Unknown brand"} · {p.category?.name ?? "No category"}
                     </p>
                   </div>
                 </Link>
@@ -170,7 +170,7 @@ export default function CatalogPage() {
           {meta.last_page > 1 && (
             <div className="mt-6 flex items-center justify-between text-sm text-ink-soft">
               <span>
-                Menampilkan {((meta.current_page - 1) * meta.per_page) + 1}–{Math.min(meta.current_page * meta.per_page, meta.total)} dari {meta.total} produk
+                Showing {((meta.current_page - 1) * meta.per_page) + 1}–{Math.min(meta.current_page * meta.per_page, meta.total)} dari {meta.total} products
               </span>
               <div className="flex items-center gap-1">
                 <Button
@@ -178,7 +178,7 @@ export default function CatalogPage() {
                   size="sm"
                   disabled={meta.current_page <= 1}
                   onClick={() => handlePageChange(1)}
-                  title="Halaman pertama"
+                  title="First page"
                 >
                   <ChevronsLeft className="size-4" />
                 </Button>
@@ -187,7 +187,7 @@ export default function CatalogPage() {
                   size="sm"
                   disabled={meta.current_page <= 1}
                   onClick={() => handlePageChange(meta.current_page - 1)}
-                  title="Halaman sebelumnya"
+                  title="Previous page"
                 >
                   <ChevronLeft className="size-4" />
                 </Button>
@@ -199,7 +199,7 @@ export default function CatalogPage() {
                   size="sm"
                   disabled={meta.current_page >= meta.last_page}
                   onClick={() => handlePageChange(meta.current_page + 1)}
-                  title="Halaman selanjutnya"
+                  title="Next page"
                 >
                   <ChevronRight className="size-4" />
                 </Button>
@@ -208,7 +208,7 @@ export default function CatalogPage() {
                   size="sm"
                   disabled={meta.current_page >= meta.last_page}
                   onClick={() => handlePageChange(meta.last_page)}
-                  title="Halaman terakhir"
+                  title="Last page"
                 >
                   <ChevronsRight className="size-4" />
                 </Button>

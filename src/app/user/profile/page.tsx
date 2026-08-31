@@ -47,7 +47,7 @@ export default function ProfilePage() {
       const { data } = await apiFor("user").put("/user/profile", payload);
       setProfile(data.data);
       setForm((f) => ({ ...f, password: "" }));
-      toast.success("Profil berhasil diperbarui.");
+      toast.success("Profile updated successfully.");
     } catch (err) {
       setErrors(fieldErrors(err));
       toast.error(extractErrorMessage(err, "Gagal memperbarui profil."));
@@ -60,10 +60,10 @@ export default function ProfilePage() {
 
   return (
     <div className="max-w-lg">
-      <PageHeader eyebrow="Akun" title="Profil saya" description="Perbarui data diri dan kata sandi Anda." />
+      <PageHeader eyebrow="Account" title="My profile" description="Update your personal data and password." />
       <form onSubmit={onSubmit} className="flex flex-col gap-4 rounded-md border border-line bg-surface p-6">
         <TextField
-          label="Nama lengkap"
+          label="Full name"
           required
           value={form.name}
           error={errors.name}
@@ -78,8 +78,8 @@ export default function ProfilePage() {
           onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
         />
         <TextField
-          label="Nomor WhatsApp"
-          hint="Gunakan format internasional, contoh: 08123456789 atau +628123456789"
+          label="WhatsApp Number"
+          hint="Use the international format, for example: 08123456789 or +628123456789."
           type="tel"
           autoComplete="tel"
           value={form.phone_number}
@@ -87,22 +87,22 @@ export default function ProfilePage() {
           onChange={(e) => setForm((f) => ({ ...f, phone_number: e.target.value }))}
         />
         <TextareaField
-          label="Alamat"
+          label="Address"
           value={form.address}
           error={errors.address}
           onChange={(e) => setForm((f) => ({ ...f, address: e.target.value }))}
           rows={3}
         />
         <TextField
-          label="Kata sandi baru"
+          label="New password"
           type="password"
-          hint="Kosongkan jika tidak ingin mengganti kata sandi"
+          hint="Leave blank if you do not want to change the password."
           value={form.password}
           error={errors.password}
           onChange={(e) => setForm((f) => ({ ...f, password: e.target.value }))}
         />
         <Button type="submit" loading={saving} className="mt-1 self-start">
-          Simpan perubahan
+          Save changes
         </Button>
       </form>
     </div>

@@ -74,7 +74,7 @@ export function ChatPanel({
       <div className="flex flex-col items-center justify-center gap-2 rounded-md border border-dashed border-line bg-surface/60 px-6 py-10 text-center">
         <MessageCircleOff className="size-6 text-ink-soft/50" />
         <p className="text-sm text-ink-soft">
-          Chat hanya tersedia saat transaksi berstatus <strong>diperiksa</strong>.
+          Chat is only available when the transaction status is <strong>under review</strong>.
         </p>
       </div>
     );
@@ -84,9 +84,9 @@ export function ChatPanel({
     <div className="flex h-[420px] flex-col rounded-md border border-line bg-surface">
       <div className="flex-1 space-y-3 overflow-y-auto px-4 py-4">
         {!loaded ? (
-          <p className="text-center text-xs text-ink-soft">Memuat percakapan...</p>
+          <p className="text-center text-xs text-ink-soft">Loading conversation...</p>
         ) : messages.length === 0 ? (
-          <p className="text-center text-xs text-ink-soft">Belum ada pesan. Mulai percakapan di bawah.</p>
+          <p className="text-center text-xs text-ink-soft">No messages yet. Start a conversation below.</p>
         ) : (
           messages.map((m) => {
             const mine = m.sender_type === role;

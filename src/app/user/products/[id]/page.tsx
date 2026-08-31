@@ -49,7 +49,7 @@ export default function ProductDetailPage() {
 
   async function submitSwap() {
     if (!selectedFurniture) {
-      toast.error("Pilih salah satu furnitur Anda terlebih dahulu.");
+      toast.error("Select one of your furniture first.");
       return;
     }
     setSubmitting(true);
@@ -61,7 +61,7 @@ export default function ProductDetailPage() {
       toast.success("Pengajuan berhasil, menunggu verifikasi admin.");
       router.push(`/user/transactions/${data.data.id}`);
     } catch (err) {
-      toast.error(extractErrorMessage(err, "Gagal mengajukan tukar."));
+      toast.error(extractErrorMessage(err, "Failed Request Exchange."));
     } finally {
       setSubmitting(false);
     }
@@ -130,7 +130,7 @@ export default function ProductDetailPage() {
                         ? "border-teak ring-1 ring-teak/50"
                         : "border-line opacity-60 hover:opacity-100"
                     }`}
-                    aria-label={`Tampilkan gambar ${idx + 1}`}
+                    aria-label={`Toggle image ${idx + 1}`}
                   >
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={src} alt="" className="aspect-square h-14 w-14 object-cover" />
@@ -177,7 +177,7 @@ export default function ProductDetailPage() {
           <Stamp label={statusMeta.label} color={statusMeta.color} bg={statusMeta.bg} />
           <h1 className="mt-3 font-display text-3xl font-display text-ink">{product.name}</h1>
           <p className="mt-1 text-sm text-ink-soft">
-            {product.brand?.name ?? "Brand tidak diketahui"} · {product.category?.name ?? "Tanpa kategori"}
+            {product.brand?.name ?? "Unknown brand"} · {product.category?.name ?? "No category"}
           </p>
           {product.price != null && (
             <p className="mt-2 font-display text-2xl font-display text-teak">
@@ -185,40 +185,40 @@ export default function ProductDetailPage() {
             </p>
           )}
           <p className="mt-4 whitespace-pre-line text-sm leading-relaxed text-ink-soft">
-            {product.description || "Tidak ada deskripsi untuk produk ini."}
+            {product.description || "No description for this product."}
           </p>
 
           <div className="mt-8 rounded-md border border-line bg-surface p-5">
-            <h2 className="font-display text-lg font-display text-ink">Ajukan tukar</h2>
+            <h2 className="font-display text-lg font-display text-ink">Request Exchange</h2>
             {!canSwap ? (
               <p className="mt-2 text-sm text-ink-soft">
-                Produk ini sedang tidak tersedia untuk ditukar.
+                This product is currently not available for exchange.
               </p>
             ) : !userProfile?.address ? (
               <div className="mt-2 space-y-3">
                 <p className="text-sm text-brass">
-                  Anda belum mengisi alamat. Silakan lengkapi alamat di halaman profil terlebih dahulu sebelum mengajukan tukar.
+                  You have not filled in your address. Please complete your address in the profile page before submitting a swap.
                 </p>
                 <Link href="/user/profile" className="inline-block text-sm font-display text-teak hover:underline">
-                  → Lengkapi alamat di profil
+                  → Complete address in profile
                 </Link>
               </div>
             ) : furnitures.length === 0 ? (
               <p className="mt-2 text-sm text-ink-soft">
-                Anda belum memiliki furnitur berstatus tersedia.{" "}
+                You do not have any available furniture yet.{" "}
                 <Link href="/user/furnitures" className="font-display text-teak hover:underline">
-                  Tambah furnitur
+                  Add furniture
                 </Link>{" "}
-                terlebih dahulu.
+                to request an exchange.
               </p>
             ) : (
               <div className="mt-3 flex flex-col gap-3">
                 <SelectField
-                  label="Pilih furnitur Anda"
+                  label="Select your furniture"
                   value={selectedFurniture}
                   onChange={(e) => setSelectedFurniture(e.target.value)}
                 >
-                  <option value="">— Pilih furnitur —</option>
+                  <option value="">— Select furniture —</option>
                   {furnitures.map((f) => (
                     <option key={f.id} value={f.id}>
                       {f.name}
@@ -227,7 +227,7 @@ export default function ProductDetailPage() {
                 </SelectField>
                 <Button onClick={submitSwap} loading={submitting}>
                   <Repeat className="size-4" />
-                  Ajukan tukar sekarang
+                  Request Exchange Now
                 </Button>
               </div>
             )}

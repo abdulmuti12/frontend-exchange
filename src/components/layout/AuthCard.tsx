@@ -22,7 +22,7 @@ export function AuthCard({
       <div className={`w-full ${maxWidth}`}>
         <Link href="/" className="mb-8 flex items-center justify-center gap-2">
           <Repeat className="size-6 text-teak" />
-          <span className="font-display text-xl font-display text-ink">Tukar</span>
+          <span className="font-display text-xl font-display text-ink">Exchange</span>
         </Link>
         <div className="rounded-md border border-line bg-surface px-7 py-8 shadow-sm">
           <p className="mb-1 font-mono text-xs uppercase tracking-widest text-teak">{eyebrow}</p>

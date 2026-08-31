@@ -35,12 +35,12 @@ export default function NotificationsPage() {
 
   return (
     <div className="max-w-2xl">
-      <PageHeader eyebrow="Kotak Masuk" title="Notifikasi" description="Pembaruan status transaksi Anda." />
+      <PageHeader eyebrow="Inbox" title="Notifications" description="Transaction status updates." />
 
       {loading ? (
         <Spinner />
       ) : notifications.length === 0 ? (
-        <EmptyState title="Belum ada notifikasi" />
+        <EmptyState title="No notifications yet" />
       ) : (
         <div className="flex flex-col gap-2">
           {notifications.map((n) => {

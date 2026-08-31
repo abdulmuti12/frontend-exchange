@@ -116,7 +116,7 @@ export function ImageUploadField({
                 ) : (
                   <div className="flex h-full flex-col items-center justify-center gap-1 text-ink-soft/50">
                     <Plus className="size-5" />
-                    <span className="text-[10px]">Gambar {idx + 1}</span>
+                    <span className="text-[10px]">Image {idx + 1}</span>
                   </div>
                 )}
                 {item && (
@@ -140,7 +140,7 @@ export function ImageUploadField({
                 )}
               </div>
               <label className="mt-1 block text-center text-xs text-ink-soft">
-                Gambar {idx + 1}
+                Image {idx + 1}
               </label>
               <input
                 ref={(el) => { inputRefs.current[idx] = el; }}

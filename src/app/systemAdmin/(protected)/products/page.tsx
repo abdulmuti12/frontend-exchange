@@ -221,7 +221,7 @@ export default function AdminProductsPage() {
       <PageHeader
         eyebrow="Katalog"
         title="Product management"
-        description="Barang yang tersedia bagi pengguna untuk ditukar."
+        description="Items available for users to redeem."
         action={
           <Button onClick={openCreate}>
             <Plus className="size-4" />
@@ -245,10 +245,10 @@ export default function AdminProductsPage() {
           onChange={(e) => setStatusFilter(e.target.value)}
           className="rounded-sm border border-line bg-surface px-3 py-2.5 text-sm outline-none focus:border-teak"
         >
-          <option value="">Semua status</option>
-          <option value="available">Tersedia</option>
-          <option value="swapped">Sudah ditukar</option>
-          <option value="inactive">Nonaktif</option>
+          <option value="">All Status</option>
+          <option value="available">Available</option>
+          <option value="swapped">Swapped</option>
+          <option value="inactive">Inactive</option>
         </select>
       </div>
 
@@ -263,10 +263,10 @@ export default function AdminProductsPage() {
               <thead className="border-b border-line bg-paper-deep/40 text-xs uppercase tracking-wide text-ink-soft">
                 <tr>
                   <th className="px-4 py-3 font-display">Images</th>
-                  <th className="px-4 py-3 font-display">Nama</th>
+                  <th className="px-4 py-3 font-display">Name</th>
                   <th className="px-4 py-3 font-display">Category</th>
                   <th className="px-4 py-3 font-display">Brand</th>
-                  <th className="px-4 py-3 font-display">Harga</th>
+                  <th className="px-4 py-3 font-display">Value Item</th>
                   <th className="px-4 py-3 font-display">Status</th>
                   <th className="px-4 py-3 font-display text-right">Aksi</th>
                 </tr>
@@ -334,7 +334,7 @@ export default function AdminProductsPage() {
                 size="sm"
                 disabled={meta.current_page <= 1}
                 onClick={() => handlePageChange(1)}
-                title="Halaman pertama"
+                title="First Page"
               >
                 <ChevronsLeft className="size-4" />
               </Button>
@@ -423,9 +423,9 @@ export default function AdminProductsPage() {
             value={form.status}
             onChange={(e) => setForm((f) => ({ ...f, status: e.target.value as ProductStatus }))}
           >
-            <option value="available">Tersedia</option>
-            <option value="swapped">Sudah ditukar</option>
-            <option value="inactive">Nonaktif</option>
+            <option value="available">Available</option>
+            <option value="swapped">Swapped</option>
+            <option value="inactive">Inactive</option>
           </SelectField>
           <TextareaField
             label="Description"
@@ -436,7 +436,7 @@ export default function AdminProductsPage() {
           />
           {editing ? (
             <div className="rounded-md border border-line bg-paper-deep/40 p-3 text-xs text-ink-soft">
-              ℹ️ Unggah gambar baru akan menggantikan gambar lama di slot tersebut. Slot kosong akan dikosongkan.
+              ℹ️ Uploading a new image will replace the existing image in that slot. Empty slots will be cleared.
             </div>
           ) : null}
           <ImageUploadField
@@ -447,10 +447,10 @@ export default function AdminProductsPage() {
           />
           <div className="mt-1 flex justify-end gap-2">
             <Button variant="ghost" onClick={() => setModalOpen(false)}>
-              Batal
+              Cancel
             </Button>
             <Button onClick={onSubmit} loading={saving}>
-              Simpan
+              Save
             </Button>
           </div>
         </div>

@@ -24,10 +24,10 @@ export default function AdminLoginPage() {
       const { data } = await apiFor("admin").post("/auth/systemAdmin/login", { email, password });
       setToken("admin", data.data.access_token);
       setStoredProfile("admin", data.data.admin);
-      toast.success(data.message ?? "Login berhasil.");
+      toast.success(data.message ?? "Logged in successfully.");
       router.push("/systemAdmin");
     } catch (err) {
-      setError(extractErrorMessage(err, "Email atau password salah."));
+      setError(extractErrorMessage(err, "Incorrect email or password."));
     } finally {
       setLoading(false);
     }
@@ -36,11 +36,11 @@ export default function AdminLoginPage() {
   return (
     <AuthCard
       eyebrow="Admin"
-      title="Masuk ke dashboard"
+      title="Sign in"
       description="Manage catalog, verify transactions, and monitor platform statistics."
       footer={
         <Link href="/login" className="text-xs text-ink-soft hover:underline">
-          ← Masuk sebagai pengguna
+          ← Sign in as user
         </Link>
       }
     >
@@ -55,7 +55,7 @@ export default function AdminLoginPage() {
           onChange={(e) => setEmail(e.target.value)}
         />
         <TextField
-          label="Kata sandi"
+          label="Password"
           type="password"
           required
           autoComplete="current-password"
@@ -63,9 +63,9 @@ export default function AdminLoginPage() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        {error && <p className="text-sm font-display text-rust">{error}</p>}
+        {error && <p className="text-sm text-rust">{error}</p>}
         <Button type="submit" loading={loading} className="mt-2 w-full">
-          Masuk sebagai admin
+          Sign in as admin
         </Button>
       </form>
     </AuthCard>

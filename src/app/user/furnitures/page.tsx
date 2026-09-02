@@ -6,7 +6,7 @@ import { Plus, Pencil, Trash2 } from "lucide-react";
 import { apiFor, extractErrorMessage, fieldErrors } from "@/lib/api";
 import { firstImageFromSource, FURNITURE_STATUS_META } from "@/lib/utils";
 import type { Brand, Category, Furniture } from "@/lib/types";
-import { PageHeader, Spinner, EmptyState, useConfirm } from "@/components/ui/Misc";
+import { Spinner, EmptyState, useConfirm } from "@/components/ui/Misc";
 import { Stamp } from "@/components/ui/Stamp";
 import { Button } from "@/components/ui/Button";
 import { Modal } from "@/components/ui/Modal";
@@ -183,17 +183,17 @@ export default function FurnituresPage() {
 
   return (
     <div>
-      <PageHeader
-        eyebrow="Your items"
-        title="My furniture"
-        description="Manage furniture you can offer for swap."
-        action={
-          <Button onClick={openCreate}>
-            <Plus className="size-4" />
-            Add furniture
-          </Button>
-        }
-      />
+      <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <p className="mb-1 text-xs uppercase tracking-widest text-teak">Your items</p>
+          <h1 className="text-2xl text-ink sm:text-3xl">My furniture</h1>
+          <p className="mt-1.5 max-w-2xl text-sm text-ink-soft">Manage furniture you can offer for swap.</p>
+        </div>
+        <Button onClick={openCreate}>
+          <Plus className="size-4" />
+          Add furniture
+        </Button>
+      </div>
 
       {loading ? (
         <Spinner />
@@ -258,7 +258,7 @@ export default function FurnituresPage() {
           />
 
           <div>
-            <span className="mb-1.5 block text-sm font-display text-ink">
+            <span className="mb-1.5 block text-sm text-ink">
               K Category <span className="text-rust">*</span>
             </span>
             <div className="mb-2 flex gap-4 text-xs text-ink-soft">
@@ -303,7 +303,7 @@ export default function FurnituresPage() {
           </div>
 
           <div>
-            <span className="mb-1.5 block text-sm font-display text-ink">
+            <span className="mb-1.5 block text-sm text-ink">
               Brand <span className="text-rust">*</span>
             </span>
             <div className="mb-2 flex gap-4 text-xs text-ink-soft">

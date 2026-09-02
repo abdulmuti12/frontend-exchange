@@ -43,7 +43,7 @@ export function EmptyState({ title, description }: { title: string; description?
   return (
     <div className="flex flex-col items-center justify-center gap-2 rounded-md border border-dashed border-line bg-surface/60 px-6 py-16 text-center">
       <Inbox className="size-8 text-ink-soft/50" />
-      <p className="font-display text-base font-display text-ink">{title}</p>
+      <p className="text-base text-ink">{title}</p>
       {description && <p className="max-w-sm text-sm text-ink-soft">{description}</p>}
     </div>
   );

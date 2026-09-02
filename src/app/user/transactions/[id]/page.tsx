@@ -26,7 +26,7 @@ function ImageGallery({
     return (
       <div className="flex flex-col items-center gap-2 rounded-sm border border-dashed border-line bg-paper-deep/40 py-8 text-xs text-ink-soft">
         <ImageIcon className="size-6 opacity-40" />
-        <span>Tanpa gambar</span>
+        <span>Without image</span>
       </div>
     );
   }
@@ -161,7 +161,7 @@ function TrackingTimeline({ transaction }: { transaction: Transaction }) {
 
   return (
     <div className="mt-8">
-      <h2 className="mb-4 text-lg text-ink">Riwayat Tracking</h2>
+      <h2 className="mb-4 text-lg text-ink">Tracking History</h2>
       <div className="rounded-md border border-line bg-surface p-5">
         <div className="relative">
           {/* Vertical line */}
@@ -279,7 +279,7 @@ export default function UserTransactionDetailPage() {
         className="mb-6 inline-flex items-center gap-1.5 text-sm text-ink-soft hover:text-ink"
       >
         <ArrowLeft className="size-4" />
-        Kembali ke transaksi
+        Back to transactions
       </Link>
 
       <div className="rounded-md border border-line bg-surface">

@@ -11,10 +11,10 @@ import { Stamp } from "@/components/ui/Stamp";
 
 const FILTERS: { value: TransactionStatus | ""; label: string }[] = [
   { value: "", label: "Semua" },
-  { value: "pending", label: "Menunggu" },
-  { value: "checking", label: "Diperiksa" },
-  { value: "approved", label: "Disetujui" },
-  { value: "rejected", label: "Ditolak" },
+  { value: "pending", label: "Pending" },
+  { value: "checking", label: "Checking" },
+  { value: "approved", label: "Approved" },
+  { value: "rejected", label: "Rejected" },
 ];
 
 export default function AdminTransactionsPage() {

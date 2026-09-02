@@ -82,21 +82,21 @@ export const TRANSACTION_STATUS_META: Record<
   TransactionStatus,
   { label: string; color: string; bg: string }
 > = {
-  pending: { label: "Menunggu", color: "var(--brass)", bg: "var(--brass-soft)" },
-  checking: { label: "Diperiksa", color: "var(--denim)", bg: "var(--denim-soft)" },
-  approved: { label: "Disetujui", color: "var(--moss)", bg: "var(--moss-soft)" },
-  rejected: { label: "Ditolak", color: "var(--rust)", bg: "var(--rust-soft)" },
+  pending: { label: "Pending", color: "var(--brass)", bg: "var(--brass-soft)" },
+  checking: { label: "Checking", color: "var(--denim)", bg: "var(--denim-soft)" },
+  approved: { label: "Approved", color: "var(--moss)", bg: "var(--moss-soft)" },
+  rejected: { label: "Rejected", color: "var(--rust)", bg: "var(--rust-soft)" },
 };
 
 export const FURNITURE_STATUS_META: Record<FurnitureStatus, { label: string; color: string; bg: string }> = {
-  available: { label: "Tersedia", color: "var(--moss)", bg: "var(--moss-soft)" },
-  in_transaction: { label: "Dalam Transaksi", color: "var(--denim)", bg: "var(--denim-soft)" },
-  swapped: { label: "Sudah Ditukar", color: "var(--ink-soft)", bg: "var(--paper-deep)" },
-  rejected: { label: "Ditolak", color: "var(--rust)", bg: "var(--rust-soft)" },
+  available: { label: "Available", color: "var(--moss)", bg: "var(--moss-soft)" },
+  in_transaction: { label: "In Transaction", color: "var(--denim)", bg: "var(--denim-soft)" },
+  swapped: { label: "Swapped", color: "var(--ink-soft)", bg: "var(--paper-deep)" },
+  rejected: { label: "Rejected", color: "var(--rust)", bg: "var(--rust-soft)" },
 };
 
 export const PRODUCT_STATUS_META: Record<ProductStatus, { label: string; color: string; bg: string }> = {
-  available: { label: "Tersedia", color: "var(--moss)", bg: "var(--moss-soft)" },
-  swapped: { label: "Sudah Ditukar", color: "var(--ink-soft)", bg: "var(--paper-deep)" },
-  inactive: { label: "Nonaktif", color: "var(--rust)", bg: "var(--rust-soft)" },
+  available: { label: "Available", color: "var(--moss)", bg: "var(--moss-soft)" },
+  swapped: { label: "Swapped", color: "var(--ink-soft)", bg: "var(--paper-deep)" },
+  inactive: { label: "Inactive", color: "var(--rust)", bg: "var(--rust-soft)" },
 };

@@ -10,7 +10,7 @@ import { PageHeader, Spinner, EmptyState } from "@/components/ui/Misc";
 import { Stamp } from "@/components/ui/Stamp";
 
 const FILTERS: { value: TransactionStatus | ""; label: string }[] = [
-  { value: "", label: "Semua" },
+  { value: "", label: "All" },
   { value: "pending", label: "Pending" },
   { value: "checking", label: "Checking" },
   { value: "approved", label: "Approved" },

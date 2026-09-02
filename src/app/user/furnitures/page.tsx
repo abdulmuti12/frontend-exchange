@@ -219,7 +219,7 @@ export default function FurnituresPage() {
                 </div>
                 <div className="p-4">
                   <div className="flex items-start justify-between gap-2">
-                    <p className="font-display text-base font-display text-ink">{f.name}</p>
+                    <p className="text-base text-ink">{f.name}</p>
                     <Stamp label={meta.label} color={meta.color} bg={meta.bg} className="text-[10px]" />
                   </div>
                   <p className="mt-1 text-xs text-ink-soft">

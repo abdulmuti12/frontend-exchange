@@ -6,7 +6,7 @@ import { Repeat } from "lucide-react";
 import { apiFor } from "@/lib/api";
 import { TRANSACTION_STATUS_META, firstImage, formatDate, shortId } from "@/lib/utils";
 import type { Transaction, TransactionStatus } from "@/lib/types";
-import { PageHeader, Spinner, EmptyState } from "@/components/ui/Misc";
+import { Spinner, EmptyState } from "@/components/ui/Misc";
 import { Stamp } from "@/components/ui/Stamp";
 
 const FILTERS: { value: TransactionStatus | ""; label: string }[] = [
@@ -33,18 +33,20 @@ export default function UserTransactionsPage() {
 
   return (
     <div>
-      <PageHeader
-        eyebrow="Riwayat"
-        title="My transactions"
-        description="Track your swap request status, from waiting to approved."
-      />
+      <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <p className="mb-1 text-xs uppercase tracking-widest text-teak">Riwayat</p>
+          <h1 className="text-2xl text-ink sm:text-3xl">My transactions</h1>
+          <p className="mt-1.5 max-w-2xl text-sm text-ink-soft">Track your swap request status, from waiting to approved.</p>
+        </div>
+      </div>
 
       <div className="mb-6 flex flex-wrap gap-2">
         {FILTERS.map((f) => (
           <button
             key={f.value}
             onClick={() => setStatus(f.value)}
-            className={`rounded-sm border px-3 py-1.5 text-sm font-display transition-colors ${
+            className={`rounded-sm border px-3 py-1.5 text-sm transition-colors ${
               status === f.value
                 ? "border-teak bg-teak text-surface"
                 : "border-line text-ink-soft hover:border-teak hover:text-teak"
@@ -87,11 +89,11 @@ export default function UserTransactionsPage() {
                     </div>
                     <div className="min-w-0">
                       <p className="text-[11px] text-ink-soft">Your item</p>
-                      <p className="truncate text-sm font-display text-ink">
+                      <p className="truncate text-sm text-ink">
                         {t.user_furniture?.name ?? "-"}
                       </p>
                       {t.user_furniture?.admin_price != null && (
-                        <p className="mt-0.5 text-[11px] font-display text-teak">
+                        <p className="mt-0.5 text-[11px] text-teak">
                           {`Rp ${Number(t.user_furniture.admin_price).toLocaleString('id-ID')}`}
                         </p>
                       )}
@@ -101,9 +103,9 @@ export default function UserTransactionsPage() {
                   <div className="flex items-center gap-2">
                     <div className="min-w-0 text-right">
                       <p className="text-[11px] text-ink-soft">Dari katalog</p>
-                      <p className="truncate text-sm font-display text-ink">{t.product?.name ?? "-"}</p>
+                      <p className="truncate text-sm text-ink">{t.product?.name ?? "-"}</p>
                       {t.product?.price != null && (
-                        <p className="mt-0.5 text-[11px] font-display text-ink-soft">
+                        <p className="mt-0.5 text-[11px] text-ink-soft">
                           {`Rp ${Number(t.product.price).toLocaleString('id-ID')}`}
                         </p>
                       )}

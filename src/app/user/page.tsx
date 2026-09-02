@@ -6,7 +6,7 @@ import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, Search } from "
 import { apiFor } from "@/lib/api";
 import { firstImage, resolveImage } from "@/lib/utils";
 import type { Brand, Category, Paginated, Product } from "@/lib/types";
-import { PageHeader, Spinner, EmptyState } from "@/components/ui/Misc";
+import { Spinner, EmptyState } from "@/components/ui/Misc";
 import { Button } from "@/components/ui/Button";
 
 const PAGE_SIZE = 9;
@@ -77,11 +77,13 @@ export default function CatalogPage() {
 
   return (
     <div>
-      <PageHeader
-        eyebrow="Catalog"
-        title="Explore Available Items"
-        description="Select an item you want to swap with one of your furniture."
-      />
+      <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <p className="mb-1 text-xs uppercase tracking-widest text-teak">Catalog</p>
+          <h1 className="text-2xl text-ink sm:text-3xl">Explore Available Items</h1>
+          <p className="mt-1.5 max-w-2xl text-sm text-ink-soft">Select an item you want to swap with one of your furniture.</p>
+        </div>
+      </div>
 
       <div className="mb-6 flex flex-wrap gap-3">
         <div className="relative flex-1 min-w-[220px]">
@@ -156,7 +158,7 @@ export default function CatalogPage() {
                     )}
                   </div>
                   <div className="p-4">
-                    <p className="font-display text-base font-display text-ink">{p.name}</p>
+                    <p className="text-base text-ink">{p.name}</p>
                     <p className="mt-1 text-xs text-ink-soft">
                       {p.brand?.name ?? "Unknown brand"} · {p.category?.name ?? "No category"}
                     </p>

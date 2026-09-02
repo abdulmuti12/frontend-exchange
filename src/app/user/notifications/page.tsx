@@ -6,7 +6,7 @@ import { Bell, BellRing } from "lucide-react";
 import { apiFor } from "@/lib/api";
 import { formatDate } from "@/lib/utils";
 import type { Notification } from "@/lib/types";
-import { PageHeader, Spinner, EmptyState } from "@/components/ui/Misc";
+import { Spinner, EmptyState } from "@/components/ui/Misc";
 
 export default function NotificationsPage() {
   const [notifications, setNotifications] = useState<Notification[]>([]);
@@ -35,7 +35,13 @@ export default function NotificationsPage() {
 
   return (
     <div className="max-w-2xl">
-      <PageHeader eyebrow="Inbox" title="Notifications" description="Transaction status updates." />
+      <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <p className="mb-1 text-xs uppercase tracking-widest text-teak">Inbox</p>
+          <h1 className="text-2xl text-ink sm:text-3xl">Notifications</h1>
+          <p className="mt-1.5 max-w-2xl text-sm text-ink-soft">Transaction status updates.</p>
+        </div>
+      </div>
 
       {loading ? (
         <Spinner />
@@ -57,7 +63,7 @@ export default function NotificationsPage() {
                   <Bell className="mt-0.5 size-4 shrink-0 text-ink-soft" />
                 )}
                 <div className="min-w-0 flex-1">
-                  <p className={`text-sm ${unread ? "font-display text-ink" : "text-ink-soft"}`}>{n.message}</p>
+                  <p className={`text-sm ${unread ? "text-ink" : "text-ink-soft"}`}>{n.message}</p>
                   <p className="mt-1 font-mono text-[11px] text-ink-soft">{formatDate(n.created_at)}</p>
                 </div>
               </div>

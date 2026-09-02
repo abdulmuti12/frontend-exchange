@@ -112,7 +112,7 @@ export default function ProductDetailPage() {
             )}
             {/* Image counter */}
             {allImages.length > 1 && (
-              <div className="absolute bottom-2 right-2 rounded-full bg-ink/70 px-2 py-0.5 text-[10px] font-display text-surface">
+              <div className="absolute bottom-2 right-2 rounded-full bg-ink/70 px-2 py-0.5 text-[10px] text-surface">
                 {activeImgIdx + 1} / {allImages.length}
               </div>
             )}
@@ -175,12 +175,12 @@ export default function ProductDetailPage() {
 
         <div>
           <Stamp label={statusMeta.label} color={statusMeta.color} bg={statusMeta.bg} />
-          <h1 className="mt-3 font-display text-3xl font-display text-ink">{product.name}</h1>
+          <h1 className="mt-3 text-3xl text-ink">{product.name}</h1>
           <p className="mt-1 text-sm text-ink-soft">
             {product.brand?.name ?? "Unknown brand"} · {product.category?.name ?? "No category"}
           </p>
           {product.price != null && (
-            <p className="mt-2 font-display text-2xl font-display text-teak">
+            <p className="mt-2 text-2xl text-teak">
               {`Rp ${Number(product.price).toLocaleString('id-ID')}`}
             </p>
           )}
@@ -189,7 +189,7 @@ export default function ProductDetailPage() {
           </p>
 
           <div className="mt-8 rounded-md border border-line bg-surface p-5">
-            <h2 className="font-display text-lg font-display text-ink">Request Exchange</h2>
+            <h2 className="text-lg text-ink">Request Exchange</h2>
             {!canSwap ? (
               <p className="mt-2 text-sm text-ink-soft">
                 This product is currently not available for exchange.
@@ -199,14 +199,14 @@ export default function ProductDetailPage() {
                 <p className="text-sm text-brass">
                   You have not filled in your address. Please complete your address in the profile page before submitting a swap.
                 </p>
-                <Link href="/user/profile" className="inline-block text-sm font-display text-teak hover:underline">
+                <Link href="/user/profile" className="inline-block text-sm text-teak hover:underline">
                   → Complete address in profile
                 </Link>
               </div>
             ) : furnitures.length === 0 ? (
               <p className="mt-2 text-sm text-ink-soft">
                 You do not have any available furniture yet.{" "}
-                <Link href="/user/furnitures" className="font-display text-teak hover:underline">
+                <Link href="/user/furnitures" className="text-teak hover:underline">
                   Add furniture
                 </Link>{" "}
                 to request an exchange.

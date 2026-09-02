@@ -4,7 +4,7 @@ import { FormEvent, useEffect, useState } from "react";
 import { toast } from "sonner";
 import { apiFor, extractErrorMessage, fieldErrors } from "@/lib/api";
 import { useUserAuth } from "@/lib/auth";
-import { PageHeader, Spinner } from "@/components/ui/Misc";
+import { Spinner } from "@/components/ui/Misc";
 import { TextField, TextareaField } from "@/components/ui/Field";
 import { Button } from "@/components/ui/Button";
 
@@ -60,7 +60,13 @@ export default function ProfilePage() {
 
   return (
     <div className="max-w-lg">
-      <PageHeader eyebrow="Account" title="My profile" description="Update your personal data and password." />
+      <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <p className="mb-1 text-xs uppercase tracking-widest text-teak">Account</p>
+          <h1 className="text-2xl text-ink sm:text-3xl">My profile</h1>
+          <p className="mt-1.5 max-w-2xl text-sm text-ink-soft">Update your personal data and password.</p>
+        </div>
+      </div>
       <form onSubmit={onSubmit} className="flex flex-col gap-4 rounded-md border border-line bg-surface p-6">
         <TextField
           label="Full name"

@@ -6,7 +6,7 @@ import { Repeat } from "lucide-react";
 import { apiFor } from "@/lib/api";
 import { TRANSACTION_STATUS_META, firstImage, formatDate, shortId } from "@/lib/utils";
 import type { Transaction, TransactionStatus } from "@/lib/types";
-import { PageHeader, Spinner, EmptyState } from "@/components/ui/Misc";
+import { Spinner, EmptyState } from "@/components/ui/Misc";
 import { Stamp } from "@/components/ui/Stamp";
 
 const FILTERS: { value: TransactionStatus | ""; label: string }[] = [
@@ -33,18 +33,20 @@ export default function AdminTransactionsPage() {
 
   return (
     <div>
-      <PageHeader
-        eyebrow="Verifikasi"
-        title="Transaction management"
-        description="Periksa dan verifikasi pengajuan tukar dari seluruh pengguna."
-      />
+      <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <p className="mb-1 text-xs uppercase tracking-widest text-teak">Verifikasi</p>
+          <h1 className="text-2xl text-ink sm:text-3xl">Transaction management</h1>
+          <p className="mt-1.5 max-w-2xl text-sm text-ink-soft">Periksa dan verifikasi pengajuan tukar dari seluruh pengguna.</p>
+        </div>
+      </div>
 
       <div className="mb-6 flex flex-wrap gap-2">
         {FILTERS.map((f) => (
           <button
             key={f.value}
             onClick={() => setStatus(f.value)}
-            className={`rounded-sm border px-3 py-1.5 text-sm font-display transition-colors ${
+            className={`rounded-sm border px-3 py-1.5 text-sm transition-colors ${
               status === f.value
                 ? "border-teak bg-teak text-surface"
                 : "border-line text-ink-soft hover:border-teak hover:text-teak"
@@ -64,11 +66,11 @@ export default function AdminTransactionsPage() {
           <table className="w-full text-left text-sm">
             <thead className="border-b border-line bg-paper-deep/40 text-xs uppercase tracking-wide text-ink-soft">
               <tr>
-                <th className="px-4 py-3 font-display">Ticket</th>
-                <th className="px-4 py-3 font-display">User</th>
-                <th className="px-4 py-3 font-display">Swap</th>
-                <th className="px-4 py-3 font-display">Status</th>
-                <th className="px-4 py-3 font-display">Submitted</th>
+                <th className="px-4 py-3">Ticket</th>
+                <th className="px-4 py-3">User</th>
+                <th className="px-4 py-3">Swap</th>
+                <th className="px-4 py-3">Status</th>
+                <th className="px-4 py-3">Submitted</th>
               </tr>
             </thead>
             <tbody>
@@ -82,9 +84,9 @@ export default function AdminTransactionsPage() {
                     className="cursor-pointer border-b border-line last:border-0 hover:bg-paper/60"
                     onClick={() => (window.location.href = `/systemAdmin/transactions/${t.id}`)}
                   >
-                    <td className="px-4 py-3 font-mono text-xs text-ink-soft">#{shortId(t.id)}</td>
+                    <td className="px-4 py-3 text-xs text-ink-soft">#{shortId(t.id)}</td>
                     <td className="px-4 py-3">
-                      <Link href={`/systemAdmin/transactions/${t.id}`} className="font-display text-ink hover:underline">
+                      <Link href={`/systemAdmin/transactions/${t.id}`} className="text-ink hover:underline">
                         {t.user?.name ?? "-"}
                       </Link>
                     </td>

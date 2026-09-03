@@ -6,7 +6,7 @@ import { Plus, Pencil, Trash2, Search, ChevronLeft, ChevronRight, ChevronsLeft, 
 import { apiFor, extractErrorMessage, fieldErrors } from "@/lib/api";
 import { PRODUCT_STATUS_META, resolveImage } from "@/lib/utils";
 import type { Brand, Category, Product, ProductImage, ProductStatus, Paginated } from "@/lib/types";
-import { PageHeader, Spinner, EmptyState, useConfirm } from "@/components/ui/Misc";
+import { Spinner, EmptyState, useConfirm } from "@/components/ui/Misc";
 import { Stamp } from "@/components/ui/Stamp";
 import { Button } from "@/components/ui/Button";
 import { Modal } from "@/components/ui/Modal";
@@ -218,17 +218,17 @@ export default function AdminProductsPage() {
 
   return (
     <div>
-      <PageHeader
-        eyebrow="Katalog"
-        title="Product management"
-        description="Items available for users to redeem."
-        action={
-          <Button onClick={openCreate}>
-            <Plus className="size-4" />
-            Add product
-          </Button>
-        }
-      />
+      <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <p className="mb-1 text-xs uppercase tracking-widest text-teak">Katalog</p>
+          <h1 className="text-2xl text-ink sm:text-3xl">Product management</h1>
+          <p className="mt-1.5 max-w-2xl text-sm text-ink-soft">Items available for users to redeem.</p>
+        </div>
+        <Button onClick={openCreate}>
+          <Plus className="size-4" />
+          Add product
+        </Button>
+      </div>
 
       <div className="mb-5 flex flex-wrap gap-3">
         <div className="relative max-w-sm flex-1 min-w-[220px]">
@@ -262,13 +262,13 @@ export default function AdminProductsPage() {
             <table className="w-full text-left text-sm">
               <thead className="border-b border-line bg-paper-deep/40 text-xs uppercase tracking-wide text-ink-soft">
                 <tr>
-                  <th className="px-4 py-3 font-display">Images</th>
-                  <th className="px-4 py-3 font-display">Name</th>
-                  <th className="px-4 py-3 font-display">Category</th>
-                  <th className="px-4 py-3 font-display">Brand</th>
-                  <th className="px-4 py-3 font-display">Value Item</th>
-                  <th className="px-4 py-3 font-display">Status</th>
-                  <th className="px-4 py-3 font-display text-right">Aksi</th>
+                  <th className="px-4 py-3">Images</th>
+                  <th className="px-4 py-3">Name</th>
+                  <th className="px-4 py-3">Category</th>
+                  <th className="px-4 py-3">Brand</th>
+                  <th className="px-4 py-3">Value Item</th>
+                  <th className="px-4 py-3">Status</th>
+                  <th className="px-4 py-3 text-right">Aksi</th>
                 </tr>
               </thead>
               <tbody>
@@ -296,7 +296,7 @@ export default function AdminProductsPage() {
                         )}
                       </td>
                       <td className="px-4 py-3 max-w-xs truncate">
-                        <div className="font-display text-ink">{p.name}</div>
+                        <div className="text-ink">{p.name}</div>
                       </td>
                       <td className="px-4 py-3 text-ink-soft">{p.category?.name ?? "-"}</td>
                       <td className="px-4 py-3 text-ink-soft">{p.brand?.name ?? "-"}</td>

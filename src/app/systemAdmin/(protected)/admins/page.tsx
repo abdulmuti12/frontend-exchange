@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { Plus, Pencil, Trash2, Search } from "lucide-react";
 import { apiFor, extractErrorMessage, fieldErrors } from "@/lib/api";
 import type { Admin, AdminStatus } from "@/lib/types";
-import { PageHeader, Spinner, EmptyState, useConfirm } from "@/components/ui/Misc";
+import { Spinner, EmptyState, useConfirm } from "@/components/ui/Misc";
 import { Stamp } from "@/components/ui/Stamp";
 import { Button } from "@/components/ui/Button";
 import { Modal } from "@/components/ui/Modal";
@@ -90,17 +90,17 @@ export default function AdminAdminsPage() {
 
   return (
     <div>
-      <PageHeader
-        eyebrow="Akses"
-        title="Admin management"
-        description="Atur siapa saja yang dapat mengelola katalog dan memverifikasi transaksi."
-        action={
-          <Button onClick={openCreate}>
-            <Plus className="size-4" />
-            Add admin
-          </Button>
-        }
-      />
+      <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <p className="mb-1 text-xs uppercase tracking-widest text-teak">Akses</p>
+          <h1 className="text-2xl text-ink sm:text-3xl">Admin management</h1>
+          <p className="mt-1.5 max-w-2xl text-sm text-ink-soft">Atur siapa saja yang dapat mengelola katalog dan memverifikasi transaksi.</p>
+        </div>
+        <Button onClick={openCreate}>
+          <Plus className="size-4" />
+          Add admin
+        </Button>
+      </div>
 
       <div className="relative mb-5 max-w-sm">
         <Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-ink-soft" />
@@ -121,16 +121,16 @@ export default function AdminAdminsPage() {
           <table className="w-full text-left text-sm">
             <thead className="border-b border-line bg-paper-deep/40 text-xs uppercase tracking-wide text-ink-soft">
               <tr>
-                <th className="px-4 py-3 font-display">Nama</th>
-                <th className="px-4 py-3 font-display">Email</th>
-                <th className="px-4 py-3 font-display">Status</th>
-                <th className="px-4 py-3 font-display text-right">Aksi</th>
+                <th className="px-4 py-3">Nama</th>
+                <th className="px-4 py-3">Email</th>
+                <th className="px-4 py-3">Status</th>
+                <th className="px-4 py-3 text-right">Aksi</th>
               </tr>
             </thead>
             <tbody>
               {admins.map((a) => (
                 <tr key={a.id} className="border-b border-line last:border-0">
-                  <td className="px-4 py-3 font-display text-ink">{a.name}</td>
+                  <td className="px-4 py-3 text-ink">{a.name}</td>
                   <td className="px-4 py-3 text-ink-soft">{a.email}</td>
                   <td className="px-4 py-3">
                     <Stamp

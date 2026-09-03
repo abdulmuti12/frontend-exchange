@@ -6,7 +6,7 @@ import { Plus, Pencil, Trash2, Search } from "lucide-react";
 import { apiFor, extractErrorMessage, fieldErrors } from "@/lib/api";
 import { resolveImage } from "@/lib/utils";
 import type { Brand, Category } from "@/lib/types";
-import { PageHeader, Spinner, EmptyState, useConfirm } from "@/components/ui/Misc";
+import { Spinner, EmptyState, useConfirm } from "@/components/ui/Misc";
 import { Button } from "@/components/ui/Button";
 import { Modal } from "@/components/ui/Modal";
 import { TextField, TextareaField } from "@/components/ui/Field";
@@ -107,17 +107,17 @@ export function MasterDataManager({
 
   return (
     <div>
-      <PageHeader
-        eyebrow={eyebrow}
-        title={title}
-        description={description}
-        action={
-          <Button onClick={openCreate}>
-            <Plus className="size-4" />
-            Tambah {singular}
-          </Button>
-        }
-      />
+      <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <p className="mb-1 text-xs uppercase tracking-widest text-teak">{eyebrow}</p>
+          <h1 className="text-2xl text-ink sm:text-3xl">{title}</h1>
+          <p className="mt-1.5 max-w-2xl text-sm text-ink-soft">{description}</p>
+        </div>
+        <Button onClick={openCreate}>
+          <Plus className="size-4" />
+          Tambah {singular}
+        </Button>
+      </div>
 
       <div className="relative mb-5 max-w-sm">
         <Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-ink-soft" />
@@ -138,9 +138,9 @@ export function MasterDataManager({
           <table className="w-full text-left text-sm">
             <thead className="border-b border-line bg-paper-deep/40 text-xs uppercase tracking-wide text-ink-soft">
               <tr>
-                <th className="px-4 py-3 font-display">Nama</th>
-                <th className="px-4 py-3 font-display">Deskripsi</th>
-                <th className="px-4 py-3 font-display text-right">Aksi</th>
+                <th className="px-4 py-3">Nama</th>
+                <th className="px-4 py-3">Deskripsi</th>
+                <th className="px-4 py-3 text-right">Aksi</th>
               </tr>
             </thead>
             <tbody>
@@ -156,7 +156,7 @@ export function MasterDataManager({
                           className="size-8 rounded-sm object-cover"
                         />
                       )}
-                      <span className="font-display text-ink">{item.name}</span>
+                      <span className="text-ink">{item.name}</span>
                     </div>
                   </td>
                   <td className="max-w-xs truncate px-4 py-3 text-ink-soft">{item.description || "-"}</td>

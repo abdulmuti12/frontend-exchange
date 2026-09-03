@@ -54,7 +54,7 @@ function ImageGallery({
           className="h-64 w-full object-cover transition-opacity sm:h-80 md:h-96"
         />
         {images.length > 1 && (
-          <div className="absolute bottom-2 right-2 rounded-full bg-ink/70 px-2 py-0.5 text-[10px] font-display text-surface">
+          <div className="absolute bottom-2 right-2 rounded-full bg-ink/70 px-2 py-0.5 text-[10px] text-surface">
             {activeIdx + 1} / {images.length}
           </div>
         )}
@@ -170,7 +170,7 @@ function TrackingTimeline({ transaction }: { transaction: Transaction }) {
 
   return (
     <div className="mt-8">
-      <h2 className="mb-4 font-display text-lg font-display text-ink">Riwayat Tracking</h2>
+      <h2 className="mb-4 text-lg text-ink">Riwayat Tracking</h2>
       <div className="rounded-md border border-line bg-surface p-5">
         <div className="relative">
           {/* Vertical line */}
@@ -207,7 +207,7 @@ function TrackingTimeline({ transaction }: { transaction: Transaction }) {
                   {/* Content */}
                   <div className="flex-1 pt-1">
                     <div className="flex flex-wrap items-center gap-2">
-                      <span className={`text-sm font-display ${
+                      <span className={`text-sm ${
                         current ? "text-ink" : completed ? "text-moss" : "text-ink-soft"
                       }`}>
                         {step.label}
@@ -218,12 +218,12 @@ function TrackingTimeline({ transaction }: { transaction: Transaction }) {
                     </div>
                     <p className="mt-0.5 text-xs text-ink-soft">{step.description}</p>
                     {completed && step.time && (
-                      <p className="mt-1 font-mono text-[11px] text-ink-soft/70">
+                      <p className="mt-1 text-[11px] text-ink-soft/70">
                         {formatDate(step.time)}
                       </p>
                     )}
                     {current && currentTime && (
-                      <p className="mt-1 font-mono text-[11px] text-teak">
+                      <p className="mt-1 text-[11px] text-teak">
                         {formatDate(currentTime)}
                       </p>
                     )}
@@ -391,11 +391,11 @@ export default function AdminTransactionDetailPage() {
       <div className="rounded-md border border-line bg-surface">
         <div className="flex flex-wrap items-center justify-between gap-2 px-6 pt-5">
           <div>
-            <span className="font-mono text-xs uppercase tracking-widest text-ink-soft">
+            <span className="text-xs uppercase tracking-widest text-ink-soft">
               Tiket #{shortId(transaction.id)}
             </span>
             <p className="mt-0.5 text-sm text-ink-soft">
-              Diajukan oleh <span className="font-display text-ink">{transaction.user?.name ?? "-"}</span>{" "}
+              Diajukan oleh <span className="text-ink">{transaction.user?.name ?? "-"}</span>{" "}
               ({transaction.user?.email})
             </p>
           </div>
@@ -407,7 +407,7 @@ export default function AdminTransactionDetailPage() {
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             {/* User Furniture Images */}
             <div>
-              <p className="mb-2 text-xs font-display uppercase tracking-wider text-ink-soft">
+              <p className="mb-2 text-xs uppercase tracking-wider text-ink-soft">
                 Furnitur Pengguna ({yourImages.length} foto)
               </p>
               <ImageGallery
@@ -416,7 +416,7 @@ export default function AdminTransactionDetailPage() {
                 mainAlt={transaction.user_furniture?.name ?? "Furnitur pengguna"}
               />
               {transaction.user_furniture?.admin_price != null && (
-                <p className="mt-2 text-xs font-display text-teak">
+                <p className="mt-2 text-xs text-teak">
                   Value Item: Rp {Number(transaction.user_furniture.admin_price).toLocaleString('id-ID')}
                 </p>
               )}
@@ -424,7 +424,7 @@ export default function AdminTransactionDetailPage() {
 
             {/* Catalog Product Images */}
             <div>
-              <p className="mb-2 text-xs font-display uppercase tracking-wider text-ink-soft">
+              <p className="mb-2 text-xs uppercase tracking-wider text-ink-soft">
                 Produk Katalog ({theirAllImages.length} foto)
               </p>
               <ImageGallery
@@ -433,7 +433,7 @@ export default function AdminTransactionDetailPage() {
                 mainAlt={transaction.product?.name ?? "Produk katalog"}
               />
               {transaction.product?.price != null && (
-                <p className="mt-2 text-xs font-display text-teak">
+                <p className="mt-2 text-xs text-teak">
                   Value Item: Rp {Number(transaction.product.price).toLocaleString('id-ID')}
                 </p>
               )}
@@ -446,11 +446,11 @@ export default function AdminTransactionDetailPage() {
         <div className="grid grid-cols-2 gap-4 px-6 py-5 text-sm sm:grid-cols-4">
           <div>
             <p className="text-xs text-ink-soft">Diajukan</p>
-            <p className="mt-0.5 font-display text-ink">{formatDate(transaction.created_at)}</p>
+            <p className="mt-0.5 text-ink">{formatDate(transaction.created_at)}</p>
           </div>
           <div>
             <p className="text-xs text-ink-soft">Diperbarui</p>
-            <p className="mt-0.5 font-display text-ink">{formatDate(transaction.updated_at)}</p>
+            <p className="mt-0.5 text-ink">{formatDate(transaction.updated_at)}</p>
           </div>
         </div>
 
@@ -458,7 +458,7 @@ export default function AdminTransactionDetailPage() {
           <div className="border-t border-line px-6 py-3 flex items-center gap-2">
             <Banknote className="size-4 text-ink-soft shrink-0" />
             <span className="text-sm text-ink-soft">Value Item barang pengguna</span>
-            <span className="ml-auto text-sm font-display text-ink">
+            <span className="ml-auto text-sm text-ink">
               {transaction.user_furniture?.admin_price
                 ? `Rp ${Number(transaction.user_furniture.admin_price).toLocaleString('id-ID')}`
                 : "Belum diatur"}
@@ -497,14 +497,14 @@ export default function AdminTransactionDetailPage() {
       <TrackingTimeline transaction={transaction} />
 
       <div className="mt-8">
-        <h2 className="mb-3 font-display text-lg font-display text-ink">Percakapan dengan pengguna</h2>
+        <h2 className="mb-3 text-lg text-ink">Percakapan dengan pengguna</h2>
         <ChatPanel role="admin" transactionId={transaction.id} status={transaction.status} />
       </div>
 
       <div className="mt-6 rounded-md border border-line bg-surface p-5">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="font-display text-ink">Hubungi pengguna via WhatsApp</p>
+            <p className="text-ink">Hubungi pengguna via WhatsApp</p>
             <p className="mt-0.5 text-sm text-ink-soft">
               {transaction.user?.phone_number
                 ? `Kirim pesan langsung ke ${transaction.user.name} untuk koordinasi transaksi.`
@@ -515,7 +515,7 @@ export default function AdminTransactionDetailPage() {
             href={waLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 rounded-sm bg-moss px-4 py-2.5 text-sm font-display text-surface transition-colors hover:bg-moss-deep"
+            className="inline-flex items-center justify-center gap-2 rounded-sm bg-moss px-4 py-2.5 text-sm text-surface transition-colors hover:bg-moss-deep"
           >
             <MessageCircle className="size-4" />
             Chat via WhatsApp

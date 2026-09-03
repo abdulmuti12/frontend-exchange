@@ -9,7 +9,7 @@ export default function AdminBrandsPage() {
       singular="brand"
       eyebrow="Master Data"
       title="Manage brands"
-      description="Brand digunakan sebagai referensi saat pengguna maupun admin menambahkan barang."
+      description="Brands serve as references when users or administrators add items."
     />
   );
 }

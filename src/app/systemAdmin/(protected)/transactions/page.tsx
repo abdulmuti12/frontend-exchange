@@ -37,7 +37,7 @@ export default function AdminTransactionsPage() {
         <div>
           <p className="mb-1 text-xs uppercase tracking-widest text-teak">Verifikasi</p>
           <h1 className="text-2xl text-ink sm:text-3xl">Transaction management</h1>
-          <p className="mt-1.5 max-w-2xl text-sm text-ink-soft">Periksa dan verifikasi pengajuan tukar dari seluruh pengguna.</p>
+          <p className="mt-1.5 max-w-2xl text-sm text-ink-soft">Review and verify exchange requests submitted by all users.</p>
         </div>
       </div>
 

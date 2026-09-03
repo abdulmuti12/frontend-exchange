@@ -134,7 +134,7 @@ export default function AdminAdminsPage() {
                   <td className="px-4 py-3 text-ink-soft">{a.email}</td>
                   <td className="px-4 py-3">
                     <Stamp
-                      label={a.status === "active" ? "Aktif" : "Nonaktif"}
+                      label={a.status === "active" ? "Active" : "inactive"}
                       color={a.status === "active" ? "var(--moss)" : "var(--rust)"}
                       bg={a.status === "active" ? "var(--moss-soft)" : "var(--rust-soft)"}
                       className="text-[10px]"

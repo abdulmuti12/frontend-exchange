@@ -9,7 +9,7 @@ import { Spinner } from "@/components/ui/Misc";
 
 const nav: NavItem[] = [
   { href: "/systemAdmin", label: "Dashboard", icon: LayoutDashboard, exact: true },
-  { href: "/systemAdmin/products", label: "Produk", icon: Boxes },
+  { href: "/systemAdmin/products", label: "Product", icon: Boxes },
   { href: "/systemAdmin/brands", label: "Brand", icon: Tags },
   { href: "/systemAdmin/categories", label: "Categories", icon: Layers },
   { href: "/systemAdmin/transactions", label: "Transaksi", icon: Repeat2 },

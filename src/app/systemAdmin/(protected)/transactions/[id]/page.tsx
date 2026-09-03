@@ -35,7 +35,7 @@ function ImageGallery({
     return (
       <div className="flex flex-col items-center gap-2 rounded-sm border border-dashed border-line bg-paper-deep/40 py-8 text-xs text-ink-soft">
         <ImageIcon className="size-6 opacity-40" />
-        <span>Tanpa gambar</span>
+        <span>No image</span>
       </div>
     );
   }
@@ -75,7 +75,7 @@ function ImageGallery({
                   ? "border-teak ring-1 ring-teak/50"
                   : "border-line opacity-60 hover:opacity-100"
               }`}
-              aria-label={`Tampilkan gambar ${idx + 1}`}
+              aria-label={`Show image ${idx + 1}`}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={src} alt="" className="aspect-square h-14 w-14 object-cover" />
@@ -131,32 +131,32 @@ type TimelineStep = {
 function TrackingTimeline({ transaction }: { transaction: Transaction }) {
   const steps: TimelineStep[] = [
     {
-      label: "Diajukan",
+      label: "Submitted",
       status: "pending",
       time: transaction.created_at,
       icon: Clock,
-      description: "Transaksi berhasil diajukan oleh pengguna",
+      description: "Transaction successfully submitted by user",
     },
     {
-      label: "Diperiksa",
+      label: "Under Review",
       status: "checking",
       time: null,
       icon: Eye,
-      description: "Admin sedang memeriksa furnitur",
+      description: "Admin is reviewing the furniture",
     },
     {
-      label: "Disetujui",
+      label: "Approved",
       status: "approved",
       time: null,
       icon: CheckCircle2,
-      description: "Transaksi disetujui dan ditukar",
+      description: "Transaction approved and swapped",
     },
     {
-      label: "Ditolak",
+      label: "Rejected",
       status: "rejected",
       time: null,
       icon: XCircle,
-      description: transaction.reject_reason ?? "Transaksi ditolak",
+      description: transaction.reject_reason ?? "Transaction rejected",
     },
   ];
 
@@ -236,7 +236,7 @@ function TrackingTimeline({ transaction }: { transaction: Transaction }) {
 
         {transaction.status === "rejected" && transaction.reject_reason && (
           <div className="mt-4">
-            <ErrorNote message={`Alasan penolakan: ${transaction.reject_reason}`} />
+            <ErrorNote message={`Rejection reason: ${transaction.reject_reason}`} />
           </div>
         )}
       </div>
@@ -266,7 +266,7 @@ export default function AdminTransactionDetailPage() {
     apiFor("admin")
       .get(`/systemAdmin/transactions/${id}`)
       .then(({ data }) => setTransaction(data.data))
-      .catch(() => setError("Transaksi tidak ditemukan."))
+      .catch(() => setError("Transaction not found."))
       .finally(() => setLoading(false));
   }
 
@@ -276,10 +276,10 @@ export default function AdminTransactionDetailPage() {
     setActionLoading("checking");
     try {
       await apiFor("admin").patch(`/systemAdmin/transactions/${id}/checking`);
-      toast.success("Transaksi kini dalam tahap pemeriksaan.");
+      toast.success("Transaction is now under review.");
       load();
     } catch (err) {
-      toast.error(extractErrorMessage(err, "Gagal memulai pemeriksaan."));
+      toast.error(extractErrorMessage(err, "Failed to start review."));
     } finally {
       setActionLoading(null);
     }
@@ -289,10 +289,10 @@ export default function AdminTransactionDetailPage() {
     setActionLoading("approve");
     try {
       await apiFor("admin").patch(`/systemAdmin/transactions/${id}/approve`);
-      toast.success("Transaksi disetujui.");
+      toast.success("Transaction approved.");
       load();
     } catch (err) {
-      toast.error(extractErrorMessage(err, "Gagal menyetujui transaksi."));
+      toast.error(extractErrorMessage(err, "Failed to approve transaction."));
     } finally {
       setActionLoading(null);
     }
@@ -307,17 +307,17 @@ export default function AdminTransactionDetailPage() {
   async function submitPrice() {
     const parsed = Number(priceValue);
     if (Number.isNaN(parsed) || parsed < 0) {
-      setPriceError("Value Item harus angka positif.");
+      setPriceError("Value Item must be a positive number.");
       return;
     }
     setPriceLoading(true);
     try {
       await apiFor("admin").patch(`/systemAdmin/transactions/${id}/set-price`, { admin_price: parsed });
-      toast.success("Value Item barang pengguna berhasil diatur.");
+      toast.success("User's item Value Item has been set.");
       setPriceOpen(false);
       load();
     } catch (err) {
-      setPriceError(extractErrorMessage(err, "Gagal menyimpan Value Item."));
+      setPriceError(extractErrorMessage(err, "Failed to save Value Item."));
     } finally {
       setPriceLoading(false);
     }
@@ -325,25 +325,25 @@ export default function AdminTransactionDetailPage() {
 
   async function reject() {
     if (rejectReason.trim().length < 3) {
-      setRejectError("Alasan minimal 3 karakter.");
+      setRejectError("Reason must be at least 3 characters.");
       return;
     }
     setActionLoading("reject");
     try {
       await apiFor("admin").patch(`/systemAdmin/transactions/${id}/reject`, { reject_reason: rejectReason });
-      toast.success("Transaksi ditolak.");
+      toast.success("Transaction rejected.");
       setRejectOpen(false);
       setRejectReason("");
       load();
     } catch (err) {
-      setRejectError(extractErrorMessage(err, "Gagal menolak transaksi."));
+      setRejectError(extractErrorMessage(err, "Failed to reject transaction."));
     } finally {
       setActionLoading(null);
     }
   }
 
   if (loading) return <Spinner />;
-  if (error || !transaction) return <ErrorNote message={error ?? "Transaksi tidak ditemukan."} />;
+  if (error || !transaction) return <ErrorNote message={error ?? "Transaction not found."} />;
 
   const meta = TRANSACTION_STATUS_META[transaction.status];
   const yourImages = imageList(transaction.user_furniture?.images);
@@ -374,7 +374,7 @@ export default function AdminTransactionDetailPage() {
     return "6285174189869";
   })();
   const waMessage = encodeURIComponent(
-    `Halo ${transaction.user?.name ?? "User"}, saya admin terkait tiket #${shortId(transaction.id)}.`
+    `Hello ${transaction.user?.name ?? "User"}, I am an admin regarding ticket #${shortId(transaction.id)}.`
   );
   const waLink = `https://wa.me/${waPhone}?text=${waMessage}`;
 
@@ -385,17 +385,17 @@ export default function AdminTransactionDetailPage() {
         className="mb-6 inline-flex items-center gap-1.5 text-sm text-ink-soft hover:text-ink"
       >
         <ArrowLeft className="size-4" />
-        Kembali ke daftar transaksi
+        Back to transaction list
       </Link>
 
       <div className="rounded-md border border-line bg-surface">
         <div className="flex flex-wrap items-center justify-between gap-2 px-6 pt-5">
           <div>
             <span className="text-xs uppercase tracking-widest text-ink-soft">
-              Tiket #{shortId(transaction.id)}
+              Ticket #{shortId(transaction.id)}
             </span>
             <p className="mt-0.5 text-sm text-ink-soft">
-              Diajukan oleh <span className="text-ink">{transaction.user?.name ?? "-"}</span>{" "}
+              Submitted by <span className="text-ink">{transaction.user?.name ?? "-"}</span>{" "}
               ({transaction.user?.email})
             </p>
           </div>
@@ -408,12 +408,12 @@ export default function AdminTransactionDetailPage() {
             {/* User Furniture Images */}
             <div>
               <p className="mb-2 text-xs uppercase tracking-wider text-ink-soft">
-                Furnitur Pengguna ({yourImages.length} foto)
+                User Furniture ({yourImages.length} photos)
               </p>
               <ImageGallery
                 images={yourImages}
-                title={`${transaction.user_furniture?.name ?? "Furnitur"} - Foto`}
-                mainAlt={transaction.user_furniture?.name ?? "Furnitur pengguna"}
+                title={`${transaction.user_furniture?.name ?? "Furniture"} - Photos`}
+                mainAlt={transaction.user_furniture?.name ?? "User Furniture"}
               />
               {transaction.user_furniture?.admin_price != null && (
                 <p className="mt-2 text-xs text-teak">
@@ -425,12 +425,12 @@ export default function AdminTransactionDetailPage() {
             {/* Catalog Product Images */}
             <div>
               <p className="mb-2 text-xs uppercase tracking-wider text-ink-soft">
-                Produk Katalog ({theirAllImages.length} foto)
+                Catalog Product ({theirAllImages.length} photos)
               </p>
               <ImageGallery
                 images={theirAllImages}
-                title={`${transaction.product?.name ?? "Produk"} - Foto`}
-                mainAlt={transaction.product?.name ?? "Produk katalog"}
+                title={`${transaction.product?.name ?? "Product"} - Photos`}
+                mainAlt={transaction.product?.name ?? "Catalog product"}
               />
               {transaction.product?.price != null && (
                 <p className="mt-2 text-xs text-teak">
@@ -445,11 +445,11 @@ export default function AdminTransactionDetailPage() {
 
         <div className="grid grid-cols-2 gap-4 px-6 py-5 text-sm sm:grid-cols-4">
           <div>
-            <p className="text-xs text-ink-soft">Diajukan</p>
+            <p className="text-xs text-ink-soft">Submitted</p>
             <p className="mt-0.5 text-ink">{formatDate(transaction.created_at)}</p>
           </div>
           <div>
-            <p className="text-xs text-ink-soft">Diperbarui</p>
+            <p className="text-xs text-ink-soft">Updated</p>
             <p className="mt-0.5 text-ink">{formatDate(transaction.updated_at)}</p>
           </div>
         </div>
@@ -457,14 +457,14 @@ export default function AdminTransactionDetailPage() {
         {canSetPrice && (
           <div className="border-t border-line px-6 py-3 flex items-center gap-2">
             <Banknote className="size-4 text-ink-soft shrink-0" />
-            <span className="text-sm text-ink-soft">Value Item barang pengguna</span>
+            <span className="text-sm text-ink-soft">User's item Value Item</span>
             <span className="ml-auto text-sm text-ink">
               {transaction.user_furniture?.admin_price
                 ? `Rp ${Number(transaction.user_furniture.admin_price).toLocaleString('id-ID')}`
-                : "Belum diatur"}
+                : "Not set"}
             </span>
             <Button variant="secondary" size="sm" onClick={openPriceModal}>
-              Atur Value Item
+              Set Value Item
             </Button>
           </div>
         )}
@@ -474,19 +474,19 @@ export default function AdminTransactionDetailPage() {
             {canCheck && (
               <Button onClick={startChecking} loading={actionLoading === "checking"}>
                 <PlayCircle className="size-4" />
-                Mulai cek
+                Start review
               </Button>
             )}
             {canApprove && (
               <Button onClick={approve} loading={actionLoading === "approve"}>
                 <CheckCircle2 className="size-4" />
-                Setujui
+                Approve
               </Button>
             )}
             {canReject && (
               <Button variant="danger" onClick={() => setRejectOpen(true)}>
                 <XCircle className="size-4" />
-                Tolak
+                Reject
               </Button>
             )}
           </div>
@@ -497,18 +497,18 @@ export default function AdminTransactionDetailPage() {
       <TrackingTimeline transaction={transaction} />
 
       <div className="mt-8">
-        <h2 className="mb-3 text-lg text-ink">Percakapan dengan pengguna</h2>
+        <h2 className="mb-3 text-lg text-ink">Chat with user</h2>
         <ChatPanel role="admin" transactionId={transaction.id} status={transaction.status} />
       </div>
 
       <div className="mt-6 rounded-md border border-line bg-surface p-5">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="text-ink">Hubungi pengguna via WhatsApp</p>
+            <p className="text-ink">Contact user via WhatsApp</p>
             <p className="mt-0.5 text-sm text-ink-soft">
               {transaction.user?.phone_number
-                ? `Kirim pesan langsung ke ${transaction.user.name} untuk koordinasi transaksi.`
-                : `Nomor WhatsApp ${transaction.user?.name ?? "pengguna"} belum tersedia, hubungi via admin Tukar.`}
+                ? `Send a direct message to ${transaction.user.name} to coordinate the transaction.`
+                : `WhatsApp number for ${transaction.user?.name ?? "user"} is not available yet. Contact via admin Tukar.`}
             </p>
           </div>
           <a
@@ -526,16 +526,16 @@ export default function AdminTransactionDetailPage() {
       <Modal open={rejectOpen} onClose={() => setRejectOpen(false)} title="Reject transaction" width="max-w-sm">
         <div className="flex flex-col gap-4">
           <TextareaField
-            label="Alasan penolakan"
+            label="Rejection reason"
             required
-            placeholder="mis. Kondisi furnitur tidak sesuai deskripsi."
+            placeholder="e.g. Furniture condition doesn't match description."
             value={rejectReason}
             error={rejectError ?? undefined}
             onChange={(e) => setRejectReason(e.target.value)}
           />
           <div className="flex justify-end gap-2">
             <Button variant="ghost" onClick={() => setRejectOpen(false)}>
-              Batal
+              Cancel
             </Button>
             <Button variant="danger" onClick={reject} loading={actionLoading === "reject"}>
               Reject transaction
@@ -544,24 +544,24 @@ export default function AdminTransactionDetailPage() {
         </div>
       </Modal>
 
-      <Modal open={priceOpen} onClose={() => !priceLoading && setPriceOpen(false)} title="Atur Value Item barang pengguna" width="max-w-sm">
+      <Modal open={priceOpen} onClose={() => !priceLoading && setPriceOpen(false)} title="Set User's Item Value" width="max-w-sm">
         <div className="flex flex-col gap-4">
           <div className="rounded-sm bg-paper-deep/40 p-3 text-xs text-ink-soft">
-            {transaction.user_furniture?.name ?? "Furnitur"} — admin yang menetapkan Value Item.
+            {transaction.user_furniture?.name ?? "Furniture"} — admin sets the Value Item.
           </div>
           <TextField
             label="Value Item (Rp)"
             type="number"
             min="0"
             step="100"
-            placeholder="Masukkan Value Item barang"
+            placeholder="Enter item value"
             value={priceValue}
             error={priceError ?? undefined}
             onChange={(e) => setPriceValue(e.target.value)}
           />
           <div className="flex justify-end gap-2">
             <Button variant="ghost" onClick={() => setPriceOpen(false)} disabled={priceLoading}>
-              Batal
+              Cancel
             </Button>
             <Button onClick={submitPrice} loading={priceLoading}>
               Save price

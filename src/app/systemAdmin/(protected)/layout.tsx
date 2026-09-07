@@ -12,7 +12,7 @@ const nav: NavItem[] = [
   { href: "/systemAdmin/products", label: "Product", icon: Boxes },
   { href: "/systemAdmin/brands", label: "Brand", icon: Tags },
   { href: "/systemAdmin/categories", label: "Categories", icon: Layers },
-  { href: "/systemAdmin/transactions", label: "Transaksi", icon: Repeat2 },
+  { href: "/systemAdmin/transactions", label: "Transaction", icon: Repeat2 },
   { href: "/systemAdmin/admins", label: "Admin", icon: Users },
 ];
 

@@ -58,7 +58,7 @@ export default function ProductDetailPage() {
         user_furniture_id: selectedFurniture,
         product_id: id,
       });
-      toast.success("Pengajuan berhasil, menunggu verifikasi admin.");
+      toast.success("Submission successful. Awaiting admin verification.");
       router.push(`/user/transactions/${data.data.id}`);
     } catch (err) {
       toast.error(extractErrorMessage(err, "Failed Request Exchange."));
@@ -107,7 +107,7 @@ export default function ProductDetailPage() {
             ) : (
               <div className="flex h-full flex-col items-center justify-center gap-2 font-mono text-xs text-ink-soft">
                 <ImageOff className="size-6 opacity-40" />
-                Tanpa gambar
+                No image available
               </div>
             )}
             {/* Image counter */}

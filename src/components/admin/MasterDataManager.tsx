@@ -180,7 +180,7 @@ export function MasterDataManager({
       <Modal open={modalOpen} onClose={() => setModalOpen(false)} title={editing ? `Ubah ${singular}` : `Tambah ${singular}`}>
         <div className="flex flex-col gap-4">
           <TextField
-            label="Nama"
+            label="Name"
             required
             value={form.name}
             error={errors.name}

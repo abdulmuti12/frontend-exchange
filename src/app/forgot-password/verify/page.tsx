@@ -138,7 +138,7 @@ function VerifyOtpContent() {
       </div>
       {error && <p className="text-sm font-display text-rust text-center mb-4">{error}</p>}
       <Button onClick={onSubmit} loading={loading} className="w-full">
-        Verifikasi
+        Verification
       </Button>
     </AuthCard>
   );

@@ -3,8 +3,8 @@ import { Toaster } from "sonner";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Exchange — Barter Furnitur",
-  description: "Exchange furnitur lama Anda dengan koleksi baru, diverifikasi oleh admin.",
+title: "Exchange — Furniture Trade-In",
+description: "Trade in your old furniture for a new collection, subject to admin verification.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

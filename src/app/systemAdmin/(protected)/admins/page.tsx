@@ -92,7 +92,7 @@ export default function AdminAdminsPage() {
     <div>
       <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p className="mb-1 text-xs uppercase tracking-widest text-teak">Akses</p>
+          <p className="mb-1 text-xs uppercase tracking-widest text-teak">Access</p>
           <h1 className="text-2xl text-ink sm:text-3xl">Admin management</h1>
           <p className="mt-1.5 max-w-2xl text-sm text-ink-soft">Manage access permissions for catalog management and transaction verification.</p>
         </div>
@@ -115,13 +115,13 @@ export default function AdminAdminsPage() {
       {loading ? (
         <Spinner />
       ) : admins.length === 0 ? (
-        <EmptyState title="Belum ada admin" />
+        <EmptyState title="No admin available" />
       ) : (
         <div className="overflow-hidden rounded-md border border-line bg-surface">
           <table className="w-full text-left text-sm">
             <thead className="border-b border-line bg-paper-deep/40 text-xs uppercase tracking-wide text-ink-soft">
               <tr>
-                <th className="px-4 py-3">Nama</th>
+                <th className="px-4 py-3">Name</th>
                 <th className="px-4 py-3">Email</th>
                 <th className="px-4 py-3">Status</th>
                 <th className="px-4 py-3 text-right">Aksi</th>
@@ -160,7 +160,7 @@ export default function AdminAdminsPage() {
       <Modal open={modalOpen} onClose={() => setModalOpen(false)} title={editing ? "Edit admin" : "Add admin"}>
         <div className="flex flex-col gap-4">
           <TextField
-            label="Nama"
+            label="Name"
             required
             value={form.name}
             error={errors.name}
@@ -193,10 +193,10 @@ export default function AdminAdminsPage() {
           </SelectField>
           <div className="mt-1 flex justify-end gap-2">
             <Button variant="ghost" onClick={() => setModalOpen(false)}>
-              Batal
+              Cancel
             </Button>
             <Button onClick={onSubmit} loading={saving}>
-              Simpan
+              Save
             </Button>
           </div>
         </div>

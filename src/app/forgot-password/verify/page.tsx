@@ -57,9 +57,9 @@ function VerifyOtpContent() {
     try {
       const response = await verifyForgotPasswordOtp(email, otpValue);
       setSent(true);
-      toast.success(response.message ?? "OTP berhasil diverifikasi.");
+      toast.success(response.message ?? "OTP successfully verified.");
     } catch (err) {
-      setError(extractErrorMessage(err, "Kode OTP salah atau telah kedaluwarsa."));
+      setError(extractErrorMessage(err, "OTP verification Expired or invalid."));
       setOtp(["", "", "", "", "", ""]);
       document.getElementById("otp-0")?.focus();
     } finally {
@@ -82,9 +82,9 @@ function VerifyOtpContent() {
   if (sent) {
     return (
       <AuthCard
-        eyebrow="Lupa Kata Sandi"
-        title="OTP Berhasil Diverifikasi"
-        description="Silakan buat kata sandi baru untuk akun Anda."
+        eyebrow="Forgot Password"
+        title="OTP Successfully Verified"
+        description="Please create a new password for your account."
         maxWidth="max-w-md"
       >
         <div className="text-center py-4">
@@ -94,7 +94,7 @@ function VerifyOtpContent() {
             </svg>
           </div>
           <Button className="w-full" onClick={() => router.push(`/forgot-password/reset?email=${encodeURIComponent(email)}`)}>
-            Buat Kata Sandi Baru →
+            Create New Password →
           </Button>
         </div>
       </AuthCard>

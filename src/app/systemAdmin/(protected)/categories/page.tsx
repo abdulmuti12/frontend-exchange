@@ -6,7 +6,7 @@ export default function AdminCategoriesPage() {
   return (
     <MasterDataManager
       resource="categories"
-      singular="kategori"
+      singular="Category"
       eyebrow="Master Data"
       title="Manage categories"
       description="Categories help users filter their own catalog and furniture."

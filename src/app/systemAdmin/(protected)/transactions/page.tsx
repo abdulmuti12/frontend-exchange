@@ -35,7 +35,7 @@ export default function AdminTransactionsPage() {
     <div>
       <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p className="mb-1 text-xs uppercase tracking-widest text-teak">Verifikasi</p>
+          <p className="mb-1 text-xs uppercase tracking-widest text-teak">Verification</p>
           <h1 className="text-2xl text-ink sm:text-3xl">Transaction management</h1>
           <p className="mt-1.5 max-w-2xl text-sm text-ink-soft">Review and verify exchange requests submitted by all users.</p>
         </div>

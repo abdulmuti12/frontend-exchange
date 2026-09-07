@@ -115,7 +115,7 @@ export function MasterDataManager({
         </div>
         <Button onClick={openCreate}>
           <Plus className="size-4" />
-          Tambah {singular}
+          Add {singular}
         </Button>
       </div>
 
@@ -132,15 +132,15 @@ export function MasterDataManager({
       {loading ? (
         <Spinner />
       ) : items.length === 0 ? (
-        <EmptyState title={`Belum ada ${singular}`} />
+        <EmptyState title={`No ${singular} available yet`} />
       ) : (
         <div className="overflow-hidden rounded-md border border-line bg-surface">
           <table className="w-full text-left text-sm">
             <thead className="border-b border-line bg-paper-deep/40 text-xs uppercase tracking-wide text-ink-soft">
               <tr>
-                <th className="px-4 py-3">Nama</th>
-                <th className="px-4 py-3">Deskripsi</th>
-                <th className="px-4 py-3 text-right">Aksi</th>
+                <th className="px-4 py-3">Name</th>
+                <th className="px-4 py-3">Description</th>
+                <th className="px-4 py-3 text-right">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -177,7 +177,7 @@ export function MasterDataManager({
         </div>
       )}
 
-      <Modal open={modalOpen} onClose={() => setModalOpen(false)} title={editing ? `Ubah ${singular}` : `Tambah ${singular}`}>
+      <Modal open={modalOpen} onClose={() => setModalOpen(false)} title={editing ? `Change ${singular}` : `Add ${singular}`}>
         <div className="flex flex-col gap-4">
           <TextField
             label="Name"
@@ -187,15 +187,15 @@ export function MasterDataManager({
             onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
           />
           <TextareaField
-            label="Deskripsi"
-            hint="Opsional"
+            label="Description"
+            hint="Optional"
             value={form.description}
             error={errors.description}
             onChange={(e) => setForm((f) => ({ ...f, description: e.target.value }))}
           />
           <TextField
-            label="URL gambar"
-            hint="Opsional"
+            label="Image URL"
+            hint="Optional"
             value={form.image}
             error={errors.image}
             onChange={(e) => setForm((f) => ({ ...f, image: e.target.value }))}

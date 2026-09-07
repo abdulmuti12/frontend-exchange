@@ -90,7 +90,7 @@ export default function ProductDetailPage() {
     <div className="max-w-4xl">
       <Link href="/user" className="mb-6 inline-flex items-center gap-1.5 text-sm text-ink-soft hover:text-ink">
         <ArrowLeft className="size-4" />
-        Kembali ke katalog
+        Back to Catalog
       </Link>
 
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">

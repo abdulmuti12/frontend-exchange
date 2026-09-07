@@ -51,9 +51,9 @@ export function LiveImagesManager({
         const { data } = await apiFor(role).post(`${basePath}/images`, formData);
         onChange([...images, data.data]);
       }
-      toast.success(`${files.length} gambar berhasil ditambahkan.`);
+      toast.success(`${files.length} Image Succcessfully Added.`);
     } catch (err) {
-      toast.error(extractErrorMessage(err, "Gagal menambah gambar."));
+      toast.error(extractErrorMessage(err, "Failed to add image."));
     } finally {
       setBusy(false);
     }

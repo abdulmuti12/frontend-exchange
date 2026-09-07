@@ -255,7 +255,7 @@ export default function AdminProductsPage() {
       {loading ? (
         <Spinner />
       ) : products.length === 0 ? (
-        <EmptyState title="Belum ada produk" />
+        <EmptyState title="No products available yet" />
       ) : (
         <>
           <div className="overflow-hidden rounded-md border border-line bg-surface">
@@ -326,7 +326,7 @@ export default function AdminProductsPage() {
           {/* Pagination */}
           <div className="mt-4 flex items-center justify-between text-sm text-ink-soft">
             <span>
-              Menampilkan {((meta.current_page - 1) * meta.per_page) + 1}–{Math.min(meta.current_page * meta.per_page, meta.total)} dari {meta.total} produk
+              Showing {((meta.current_page - 1) * meta.per_page) + 1}–{Math.min(meta.current_page * meta.per_page, meta.total)} of {meta.total} products
             </span>
             <div className="flex items-center gap-1">
               <Button
@@ -401,7 +401,7 @@ export default function AdminProductsPage() {
             error={errors.brand_id}
             onChange={(e) => setForm((f) => ({ ...f, brand_id: e.target.value }))}
           >
-            <option value="">— Pilih brand —</option>
+            <option value="">— Select Brand —</option>
             {brands.map((b) => (
               <option key={b.id} value={b.id}>
                 {b.name}
@@ -409,7 +409,7 @@ export default function AdminProductsPage() {
             ))}
           </SelectField>
           <TextField
-            label="Harga (opsional)"
+            label="Price (opsional)"
             type="number"
             min="0"
             step="100"

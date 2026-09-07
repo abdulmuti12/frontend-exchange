@@ -102,7 +102,7 @@ export default function UserTransactionsPage() {
                   <Repeat className="size-4 text-teak" />
                   <div className="flex items-center gap-2">
                     <div className="min-w-0 text-right">
-                      <p className="text-[11px] text-ink-soft">Dari katalog</p>
+                      <p className="text-[11px] text-ink-soft">From Catalog</p>
                       <p className="truncate text-sm text-ink">{t.product?.name ?? "-"}</p>
                       {t.product?.price != null && (
                         <p className="mt-0.5 text-[11px] text-ink-soft">
@@ -120,7 +120,7 @@ export default function UserTransactionsPage() {
                 </div>
                 <div className="perforated h-2.5 border-y border-dashed border-line" />
                 <div className="px-5 py-3 font-mono text-[11px] text-ink-soft">
-                  Diajukan {formatDate(t.created_at)}
+                  Submited {formatDate(t.created_at)}
                 </div>
               </Link>
             );

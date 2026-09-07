@@ -44,7 +44,7 @@ export default function ForgotPasswordPage() {
       footer={
         <div className="text-center">
           <Link href="/login" className="text-sm text-ink-soft hover:text-ink">
-            ← Kembali ke halaman login
+            ← Back to Login
           </Link>
         </div>
       }
@@ -57,22 +57,22 @@ export default function ForgotPasswordPage() {
             </svg>
           </div>
           <p className="text-sm text-ink-soft mb-2">
-            Kode OTP telah dikirim ke <strong className="text-ink">{email}</strong>
+            OTP code has been sent to <strong className="text-ink">{email}</strong>
           </p>
-          <p className="text-xs text-ink-soft">Kode berlaku selama 10 menit</p>
+          <p className="text-xs text-ink-soft">Code is valid for 10 minutes</p>
           <Button
             variant="secondary"
             className="mt-6 w-full"
             onClick={() => router.push(`/forgot-password/verify?email=${encodeURIComponent(email)}`)}
           >
-            Lanjut Verifikasi OTP →
+            Continoue Verification  OTP →
           </Button>
           <button
             type="button"
             className="mt-3 text-sm text-ink-soft hover:text-ink underline"
             onClick={() => setSent(false)}
           >
-            Kirim ulang OTP
+            Resend OTP
           </button>
         </div>
       ) : (
@@ -88,7 +88,7 @@ export default function ForgotPasswordPage() {
           />
           {error && <p className="text-sm font-display text-rust">{error}</p>}
           <Button type="submit" loading={loading} className="mt-2 w-full">
-            Kirim Kode OTP
+            Send OTP
           </Button>
         </form>
       )}

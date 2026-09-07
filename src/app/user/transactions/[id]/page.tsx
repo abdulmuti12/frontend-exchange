@@ -317,8 +317,8 @@ export default function UserTransactionDetailPage() {
               </p>
               <ImageGallery
                 images={theirAllImages}
-                title={`${transaction.product?.name ?? "Produk"} - Photos`}
-                mainAlt={transaction.product?.name ?? "Produk katalog"}
+                title={`${transaction.product?.name ?? "Product"} - Photos`}
+                mainAlt={transaction.product?.name ?? "Catalog product"}
               />
               {transaction.product?.price != null && (
                 <p className="mt-2 text-xs text-teak">

@@ -45,7 +45,7 @@ export default function LandingPage() {
                 className="inline-flex items-center gap-2 rounded-sm border border-teak bg-teak px-5 py-3 text-sm text-surface transition-colors hover:bg-teak-deep"
               >
                 <Users className="size-4" />
-                {userToken ? "Go to my account" : "Login as user"}
+                {userToken ? "Go to my account" : "Login"}
                 <ArrowRight className="size-4" />
               </Link>
               {/* <Link

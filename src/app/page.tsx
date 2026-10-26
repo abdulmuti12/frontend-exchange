@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Repeat, ArrowRight, ShieldCheck, Users } from "lucide-react";
+import { ArrowRight, Users } from "lucide-react";
 import { getToken } from "@/lib/api";
 
 export default function LandingPage() {
@@ -19,8 +19,9 @@ export default function LandingPage() {
     <main className="relative min-h-screen overflow-hidden bg-paper">
       <div className="mx-auto flex min-h-screen max-w-5xl flex-col px-6 py-10 sm:px-10">
         <div className="flex items-center gap-2">
-          <Repeat className="size-6 text-teak" />
-          <span className="text-xl text-ink">Exchange</span>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/icons/tradein.svg" alt="TradeIN" className="size-7" />
+          <span className="text-xl text-ink">TradeIN</span>
         </div>
 
         <div className="flex flex-1 flex-col items-start justify-center gap-10 py-16 lg:flex-row lg:items-center lg:justify-between lg:gap-6">
@@ -47,47 +48,20 @@ export default function LandingPage() {
                 {userToken ? "Go to my account" : "Login as user"}
                 <ArrowRight className="size-4" />
               </Link>
-              <Link
+              {/* <Link
                 href={adminToken ? "/systemAdmin" : "/systemAdmin/login"}
                 className="inline-flex items-center gap-2 rounded-sm border border-ink/30 px-5 py-3 text-sm text-ink transition-colors hover:border-ink hover:bg-ink/5"
               >
                 <ShieldCheck className="size-4" />
                 {adminToken ? "Open admin dashboard" : "Login as admin"}
-              </Link>
+              </Link> */}
             </div>
           </div>
 
-          {/* Signature: a stamped swap ticket */}
-          <div className="w-full max-w-sm shrink-0 rounded-md border border-line bg-surface shadow-sm">
-            <div className="flex items-center justify-between px-5 pt-5">
-              <span className="text-[11px] uppercase tracking-widest text-ink-soft">
-                Exchange Ticket
-              </span>
-              <span className="stamp border-moss bg-moss-soft px-2 py-0.5 text-[10px] text-moss">
-                Approved
-              </span>
-            </div>
-            <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-3 px-5 py-6">
-              <div>
-                <p className="text-[11px] text-ink-soft">Your item</p>
-                <p className="text-sm text-ink">Teak Wood Chair</p>
-              </div>
-              <Repeat className="size-4 text-teak" />
-              <div className="text-right">
-                <p className="text-[11px] text-ink-soft">From catalog</p>
-                <p className="text-sm text-ink">Sofa Homelogy</p>
-              </div>
-            </div>
-            <div className="perforated h-3 border-y border-dashed border-line" />
-            <div className="flex items-center justify-between px-5 py-4 text-[11px] text-ink-soft">
-              <span>NO. 00A1B2C3</span>
-              <span>14 JUL 2026</span>
-            </div>
-          </div>
         </div>
 
         <footer className="border-t border-line pt-6 text-xs text-ink-soft">
-          User &amp; admin dashboard for the Exchange furniture barter platform.
+          User &amp; admin dashboard for the TradeIN furniture barter platform.
         </footer>
       </div>
     </main>

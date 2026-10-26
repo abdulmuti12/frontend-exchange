@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ReactNode, useState } from "react";
-import { LogOut, Menu, X, Repeat } from "lucide-react";
+import { LogOut, Menu, X } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -38,8 +38,9 @@ export function Shell({
       {/* Mobile top bar */}
       <div className="sticky top-0 z-40 flex items-center justify-between border-b border-line bg-surface px-4 py-3 lg:hidden">
         <Link href={role === "Admin" ? "/systemAdmin" : "/user"} className="flex items-center gap-2">
-          <Repeat className="size-5 text-teak" />
-          <span className="font-body text-lg">Exchange</span>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/icons/tradein.svg" alt="TradeIN" className="size-5" />
+          <span className="font-body text-lg">TradeIN</span>
         </Link>
         <button onClick={() => setOpen(true)} aria-label="Open menu" className="p-1.5 text-ink">
           <Menu className="size-5" />
@@ -56,9 +57,10 @@ export function Shell({
         >
           <div className="flex items-center justify-between px-6 py-6">
             <Link href={role === "Admin" ? "/systemAdmin" : "/user"} className="flex items-center gap-2">
-              <Repeat className="size-6 text-teak" />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/icons/tradein.svg" alt="TradeIN" className="size-7" />
               <div>
-                <p className="text-xl leading-none text-ink">Exchange</p>
+                <p className="text-xl leading-none text-ink">TradeIN</p>
                 <p className="mt-1 font-mono text-[10px] uppercase tracking-widest text-ink-soft">
                   {role}
                 </p>

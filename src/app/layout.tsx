@@ -3,7 +3,8 @@ import { Toaster } from "sonner";
 import "./globals.css";
 
 export const metadata: Metadata = {
-title: "Exchange — Furniture Trade-In",
+title: "TradeIN — Furniture Trade-In",
+icons: { icon: "/icons/tradein.svg" },
 description: "Trade in your old furniture for a new collection, subject to admin verification.",
 };
 

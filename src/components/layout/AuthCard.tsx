@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { ReactNode } from "react";
-import { Repeat } from "lucide-react";
 
 export function AuthCard({
   eyebrow,
@@ -21,8 +20,9 @@ export function AuthCard({
     <main className="flex min-h-screen items-center justify-center bg-paper px-4 py-10">
       <div className={`w-full ${maxWidth}`}>
         <Link href="/" className="mb-8 flex items-center justify-center gap-2">
-          <Repeat className="size-6 text-teak" />
-          <span className="text-xl text-ink">Exchange</span>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/icons/tradein.svg" alt="TradeIN" className="size-7" />
+          <span className="text-xl text-ink">TradeIN</span>
         </Link>
         <div className="rounded-md border border-line bg-surface px-7 py-8 shadow-sm">
           <p className="mb-1 text-xs uppercase tracking-widest text-teak">{eyebrow}</p>

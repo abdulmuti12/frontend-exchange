@@ -40,7 +40,7 @@ export default function AdminLoginPage() {
       description="Manage catalog, verify transactions, and monitor platform statistics."
       footer={
         <Link href="/login" className="text-xs text-ink-soft hover:underline">
-          ← Sign in as user
+          ← Sign
         </Link>
       }
     >

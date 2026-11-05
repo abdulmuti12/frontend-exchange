@@ -88,11 +88,11 @@ export default function UserLoginPage() {
         <Link href="/register" className="text-xs text-teak hover:underline">
           Sign up now
         </Link>
-        <div className="mt-2">
+        {/* <div className="mt-2">
           <Link href="/systemAdmin/login" className="text-xs text-ink-soft hover:underline">
             Login as admin →
           </Link>
-        </div>
+        </div> */}
       </div>
     </AuthCard>
   );

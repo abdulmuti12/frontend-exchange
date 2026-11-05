@@ -20,8 +20,8 @@ export default function LandingPage() {
       <div className="mx-auto flex min-h-screen max-w-5xl flex-col px-6 py-10 sm:px-10">
         <div className="flex items-center gap-2">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/icons/tradein.svg" alt="TradeIN" className="size-7" />
-          <span className="text-xl text-ink">TradeIN</span>
+          {/* <img src="/icons/tradein.svg" alt="TradeIN" className="size-9" />
+          <span className="text-2xl text-ink">TradeIN</span> */}
         </div>
 
         <div className="flex flex-1 flex-col items-start justify-center gap-10 py-16 lg:flex-row lg:items-center lg:justify-between lg:gap-6">
@@ -32,9 +32,11 @@ export default function LandingPage() {
             <h1 className="text-4xl leading-[1.1] text-ink sm:text-5xl">
               Your old furniture,
               <br />
-              <span className="italic text-teak">ticket enters</span> into the new collection.
+              <span className="italic text-teak">ticket enters</span> into the new
+              <br />
+              collection.
             </h1>
-            <p className="mt-5 text-base leading-relaxed text-ink-soft">
+            <p className="text-base leading-relaxed text-ink-soft">
               Submit your furniture to swap with catalog items. Each request is
               reviewed directly by an admin — from <em>waiting</em> to{" "}
               <em>approved</em> — complete with a chat space during review.
@@ -61,7 +63,7 @@ export default function LandingPage() {
         </div>
 
         <footer className="border-t border-line pt-6 text-xs text-ink-soft">
-          User &amp; admin dashboard for the TradeIN furniture barter platform.
+          {/* User &amp; admin dashboard for the TradeIN furniture barter platform. */}
         </footer>
       </div>
     </main>

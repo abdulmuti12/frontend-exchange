@@ -1,11 +1,6 @@
 @import "tailwindcss";
-@import "@fontsource/libre-baskerville/400.css";
-@import "@fontsource/libre-baskerville/700.css";
-@import "@fontsource/anton/400.css";
-@import "@fontsource/inter/400.css";
-@import "@fontsource/inter/500.css";
-@import "@fontsource/inter/600.css";
-@import "@fontsource/inter/700.css";
+@import "@fontsource/old-standard-tt/400.css";
+@import "@fontsource/old-standard-tt/700.css";
 @import "@fontsource/ibm-plex-mono/400.css";
 @import "@fontsource/ibm-plex-mono/500.css";
 
@@ -28,11 +23,12 @@
   --brass-soft: #efe3c0;
   --denim: #34546e;
   --denim-soft: #d9e4ea;
+  --espresso: #412F20;
 
-  --font-display: "Anton", ui-sans-serif, system-ui, sans-serif;
-  --font-body: "Libre Baskerville", ui-serif, Georgia, serif;
+  --font-display: "Old Standard TT", ui-serif, Georgia, serif;
+  --font-body: "Old Standard TT", ui-serif, Georgia, serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
-  --font-bold: "Anton", ui-sans-serif, system-ui, sans-serif;
+  --font-bold: "Old Standard TT", ui-serif, Georgia, serif;
 }
 
 @theme inline {
@@ -52,6 +48,7 @@
   --color-brass-soft: var(--brass-soft);
   --color-denim: var(--denim);
   --color-denim-soft: var(--denim-soft);
+  --color-espresso: var(--espresso);
 
   --font-display: var(--font-display);
   --font-body: var(--font-body);

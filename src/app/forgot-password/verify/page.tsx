@@ -93,7 +93,7 @@ function VerifyOtpContent() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
           </div>
-          <Button className="w-full" onClick={() => router.push(`/forgot-password/reset?email=${encodeURIComponent(email)}`)}>
+          <Button className="w-full" onClick={() => router.push(`/forgot-password/reset?email=${encodeURIComponent(email)}&otp=${encodeURIComponent(otp.join(""))}`)}>
             Create New Password →
           </Button>
         </div>

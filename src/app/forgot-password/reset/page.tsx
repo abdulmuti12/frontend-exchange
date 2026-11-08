@@ -12,6 +12,7 @@ function ResetPasswordContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const email = searchParams.get("email") || "";
+  const otp = searchParams.get("otp") || "";
 
   const [form, setForm] = useState({
     password: "",
@@ -23,10 +24,10 @@ function ResetPasswordContent() {
   const [success, setSuccess] = useState(false);
 
   useEffect(() => {
-    if (!email) {
+    if (!email || !otp) {
       router.push("/forgot-password");
     }
-  }, [email, router]);
+  }, [email, otp, router]);
 
   function update(key: keyof typeof form, value: string) {
     setForm((f) => ({ ...f, [key]: value }));
@@ -50,7 +51,7 @@ function ResetPasswordContent() {
     setErrors({});
 
     try {
-      const response = await resetForgotPassword(email, "", form.password, form.password_confirmation);
+      const response = await resetForgotPassword(email, otp, form.password, form.password_confirmation);
       setSuccess(true);
       toast.success(response.message ?? "Kata sandi berhasil diubah.");
     } catch (err) {
